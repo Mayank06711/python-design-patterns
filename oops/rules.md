@@ -24,6 +24,16 @@
 5. Review: edge cases, SOLID violations, extensibility
 6. Update `../things_completed_so_far.md`
 
+## Transfer Building
+- After every concept (pillar, pattern, principle), user MUST give their OWN real-world example
+- Do NOT move to the next topic until user proves they can apply the concept independently
+- User's own examples get stored in tracker for interview recall
+
+## Exercise Format (11+)
+- Problem description + tests ONLY — no skeleton code, no class structure hints
+- User designs the solution from scratch
+- Exercises 01-10 used skeleton code (legacy format)
+
 ## File Conventions
 - Language: **Python**
 - Questions are in `questions.md`

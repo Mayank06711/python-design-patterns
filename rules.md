@@ -71,3 +71,53 @@ Each folder activates a different teaching persona. Stay in character.
 ## Rule 7: Session Start Protocol
 - At the start of each session, briefly check: "Last time we did X. Ready to continue, or want to revisit?"
 - Show current progress stats from the tracker
+
+## Rule 8: Transfer Building (CRITICAL)
+> Problem identified: User can recall taught examples but cannot generate own examples or apply concepts to new domains. This is the "transfer problem" — learning is example-dependent, not principle-dependent.
+
+**Fix — applied to EVERY concept taught:**
+1. After explaining a concept, ALWAYS ask: **"Give me YOUR OWN example of this — not from what I taught you."**
+2. The user must produce an example from their own work, daily life, or imagination
+3. If the user cannot generate their own example, **the concept is NOT learned yet** — stay on it
+4. Do NOT move to the next topic until the user proves transfer by generating their own example
+5. When the user gives an example, validate it — point out what's right and sharpen what's slightly off
+6. Store the user's own examples in the tracker alongside definitions — these are the examples they'll recall in interviews
+
+**Why this matters:** In an interview, nobody asks "explain SRP using the UserService example." They'll ask "give me an example from your experience." If the user can only parrot taught examples, they'll freeze.
+
+## Rule 9: Exercise Format — Problem + Tests Only
+> User explicitly requested: "you just give me a problem, I write the solution."
+
+**New exercise format:**
+1. I explain the concept with ONE example
+2. I create the exercise file with: problem description + tests ONLY
+3. **NO skeleton code, NO class structure hints** beyond what the tests reveal
+4. The user reads the tests, figures out the design, and writes the solution from scratch
+5. This is harder but builds the independent design muscle that interviews test
+6. Hints are available (costs marks per scoring system) but never pre-given
+
+**Old format (exercises 01-10):** Problem + skeleton code + tests
+**New format (exercise 11+):** Problem + tests ONLY — user designs everything
+
+## Rule 10: Professional Definitions in Tracker
+- After every completed topic/question, include a **one-line professional definition** at the end of the log entry
+- Format: `| **Def:** <clean, interview-ready one-liner>`
+- These definitions are what the user will review before interviews
+- Keep them concise, precise, and in the user's own words when possible
+
+## Rule 11: Scoring System
+**Score: /10 per exercise**
+
+| Category | Points | Details |
+|----------|--------|---------|
+| Correctness | /4 | All tests pass = 4, most pass = 2-3, few pass = 0-1 |
+| Attempts | /3 | All pass on 1st run = 3, 2nd run = 2, 3rd run = 1, 4th+ = 0 |
+| Hints | /2 | 0 hints = 2, 1 hint = 1, 2+ hints = 0. Free hint for brand-new topics. |
+| Code quality | /1 | Clean, readable, no dead code, good naming |
+
+**Time tracking (not scored, for reference):**
+- Record system time when exercise is given (STARTED timestamp in exercise file)
+- Record system time when user first submits
+- If user takes significantly longer, ASK why before noting — legitimate breaks (work, toilet, etc.) are excluded
+- Time is logged in tracker for self-improvement tracking, NOT used for scoring
+- Track attempt number in the exercise file (ATTEMPT: 1, 2, 3...)

@@ -26,6 +26,17 @@
 5. Verify: "Does this pass the principle's litmus test now?"
 6. Update `../things_completed_so_far.md`
 
+## Transfer Building
+- After explaining each SOLID principle, user MUST give their OWN real-world example of the violation
+- Do NOT move to the next principle until user proves transfer
+- User's examples get stored in tracker for interview recall
+- "If you can't smell the violation in YOUR OWN code/life, you don't truly understand the principle"
+
+## Exercise Format
+- Problem description + tests ONLY — no skeleton code, no class structure hints
+- User reads the tests, figures out the design, writes the solution from scratch
+- Hints available but cost marks per scoring system
+
 ## File Conventions
 - Language: **Python**
 - `solid_principles_interview_questions.py` has pre-built examples
