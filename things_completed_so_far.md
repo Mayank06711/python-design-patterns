@@ -9,7 +9,7 @@
 | Topic | Total Qs | Done | Remaining | Status |
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
-| SOLID Principles | 26 | 1 | 25 | In progress |
+| SOLID Principles | 26 | 6 | 20 | In progress |
 | Closures/HOF/Decorators | 33 | 0 | 33 | Not started |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **21** | **305** | |
+| **TOTAL** | **326** | **26** | **300** | |
 
 ---
 
@@ -67,4 +67,13 @@
 
 **SOLID Principles — SRP:**
 - [x] Q1: SRP User Registration (exercise 01) | SOLID | Mid | Solved | **8/10** — 5 classes: UserValidator, UserRepository, EmailService, EventLogger, RegistrationService (orchestrator). 3 attempts. Bugs: named attribute `validate` shadowing method, called object as function instead of calling method on object (`self.validate()` vs `self.validator.validate()`), same bug with logger. Own example: Bicycle class handling brakes + chain + wheels = 3 reasons to change. | **Def:** SRP = a class should have only one reason to change. If you can't describe its job without "and", it has too many responsibilities.
+- [x] Q2: SRP Invoice Manager (exercise 02) | SOLID | Advanced | Solved | **7/10** — 5 classes: TaxCalculator, DiscountApplier, InvoiceGenerator, EmailSender, InvoiceService (orchestrator). 3 attempts. Bugs: missing return statement (recurring), confused discounted price with discount value, tax on original instead of discounted amount, missing dict key, `//` floor division instead of `/`. 1 hint. Fixed: no more "calling object as function" bug. | **Def:** SRP in practice = split a God class into focused classes, connect them via an orchestrator that delegates but doesn't DO the work.
+
+### Day 3 — Mar 16, 2026
+
+**SOLID Principles — OCP, LSP, ISP, DIP (conceptual):**
+- [x] Q3: OCP Conceptual | SOLID | Mid | Taught | Understood: OCP = open for extension (new classes), closed for modification (no touching if/elif). Config changes (rate 18%→20%) are NOT violations. Adding new VARIANTS is where OCP matters. Solved via inheritance, strategy/composition, or registry. OCP + LSP work together. Own example: AI model — chat → image → file attachments = new classes extending base, not modifying. | **Def:** OCP = add new behavior via new classes/strategies, never modify existing working code. if/elif chains for types = violation; polymorphism/strategy = fix.
+- [x] Q4: LSP (already covered in OOP Q11) | SOLID | Advanced | Cross-ref | Rectangle-Square exercise. Subclass must honor parent's contract. Already scored 8/10. | **Def:** LSP = any subclass must be substitutable for its parent without breaking behavior. If it can't, make them siblings, not parent-child.
+- [x] Q5: ISP Conceptual | SOLID | Mid | Taught | Understood: ISP = don't force clients to implement methods they don't use. If you write `pass` or `raise NotImplementedError`, it's ISP violation. Fix: split fat interfaces into focused ones. Self-corrected from SRP to ISP during example. Own example: Feedback ABC forcing OrderFeedback to implement rate_delivery_partner() — split into ProductRatable, OrderReviewable, DeliveryRatable. | **Def:** ISP = split fat interfaces into small, focused ones. No client should depend on methods it doesn't use. `pass` in abstract method = ISP smell.
+- [x] Q6: DIP (already covered in OOP Q15) | SOLID | Mid | Cross-ref | DI exercise with NotificationService. Already scored 8/10. DI = technique (how), DIP = principle (why: depend on abstractions, not concretions). | **Def:** DIP = high-level modules should not depend on low-level modules; both should depend on abstractions. DI is the technique that implements DIP.
 

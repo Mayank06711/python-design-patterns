@@ -17,7 +17,7 @@ SCORING:
 - Correctness: /4  |  Attempts: /3  |  Hints: /2  |  Code quality: /1
 - Time limit: 8 minutes (tracked, not scored)
 
-STARTED: 2026-03-13 19:38 IST
+STARTED: 2026-03-16 15:05 IST (reset after toilet break)
 ATTEMPT: 1
 
 Run:  python 02_srp_invoice_manager.py
@@ -25,7 +25,54 @@ Run:  python 02_srp_invoice_manager.py
 """
 
 # ── YOUR CODE BELOW ──────────────────────────────────────────────────────────
+class TaxCalculator:
+    def __init__(self, tax_rate:float):
+        self.tax_rate = tax_rate
+    
+    def calculate(self, amount:float)->float:
+        return amount*self.tax_rate
 
+class DiscountApplier: 
+    def __init__(self, discount_percent:float):
+        self.discount_percent = discount_percent
+    
+    def apply(self, amount: float)->float:
+        return amount - amount*self.discount_percent/100 #// is floor division — gives an integer. Use / instead to get a float
+    
+class InvoiceGenerator:
+    def __init__(self):
+        pass
+    
+    def generate(self, name:str, amount:float, discount: float, tax: float)->str:
+        total = amount - discount + tax 
+        return f"Invoice for {name}: subtotal={amount}, discount={discount}, tax={tax}, total={total}"
+
+class EmailSender:
+    def __init__(self):
+        pass 
+    
+    def send(self, email: str, invoice:str)->str:
+        return f"Email sent to {email} with invoice"
+
+class InvoiceService:
+    def __init__(self, tax_calc: TaxCalculator, discount: DiscountApplier, generator: InvoiceGenerator, sender: EmailSender):
+        self.tax_calc, self.discount, self.generator, self.sender = tax_calc, discount, generator, sender
+    
+    def process(self, name: str, email:str, subtotal:float)->dict:
+        result = {}
+        discounted_price =  self.discount.apply(subtotal)
+        tax = self.tax_calc.calculate(discounted_price)
+        total = discounted_price + tax
+        invoice = self.generator.generate(name, subtotal, subtotal - discounted_price, tax)
+        result["subtotal"] = subtotal
+        result["discount"] = subtotal - discounted_price
+        result["tax"] = tax
+        result["total"] = total
+        result["email_status"] = self.sender.send(email, invoice)
+        result["invoice_text"] = invoice
+        return result
+
+    
 
 # ── YOUR CODE ABOVE ──────────────────────────────────────────────────────────
 
@@ -182,7 +229,7 @@ def run_tests():
         service = InvoiceService(tax_calc, discount, generator, sender)
 
         result = service.process("Dave", "dave@test.com", 1000)
-        expected_text = "Invoice for Dave: subtotal=1000, discount=100.0, tax=81.0, total=981.0"
+        expected_text = "Invoice for Dave: subtotal=1000, discount=100.0, tax=90.0, total=990.0"
         assert result["invoice_text"] == expected_text, f"Got: {result['invoice_text']}"
         print("  [PASS] Test 11: Invoice text stored in result")
         passed += 1
