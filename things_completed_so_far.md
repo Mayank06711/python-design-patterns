@@ -9,7 +9,7 @@
 | Topic | Total Qs | Done | Remaining | Status |
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
-| SOLID Principles | 26 | 6 | 20 | In progress |
+| SOLID Principles | 26 | 8 | 18 | In progress |
 | Closures/HOF/Decorators | 33 | 0 | 33 | Not started |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **26** | **300** | |
+| **TOTAL** | **326** | **28** | **298** | |
 
 ---
 
@@ -76,4 +76,10 @@
 - [x] Q4: LSP (already covered in OOP Q11) | SOLID | Advanced | Cross-ref | Rectangle-Square exercise. Subclass must honor parent's contract. Already scored 8/10. | **Def:** LSP = any subclass must be substitutable for its parent without breaking behavior. If it can't, make them siblings, not parent-child.
 - [x] Q5: ISP Conceptual | SOLID | Mid | Taught | Understood: ISP = don't force clients to implement methods they don't use. If you write `pass` or `raise NotImplementedError`, it's ISP violation. Fix: split fat interfaces into focused ones. Self-corrected from SRP to ISP during example. Own example: Feedback ABC forcing OrderFeedback to implement rate_delivery_partner() — split into ProductRatable, OrderReviewable, DeliveryRatable. | **Def:** ISP = split fat interfaces into small, focused ones. No client should depend on methods it doesn't use. `pass` in abstract method = ISP smell.
 - [x] Q6: DIP (already covered in OOP Q15) | SOLID | Mid | Cross-ref | DI exercise with NotificationService. Already scored 8/10. DI = technique (how), DIP = principle (why: depend on abstractions, not concretions). | **Def:** DIP = high-level modules should not depend on low-level modules; both should depend on abstractions. DI is the technique that implements DIP.
+
+**SOLID Capstone — Full Application:**
+- [x] Q7: SOLID Capstone — Payment Processing System (exercise 03) | SOLID | Advanced | Solved | **9/10** — 7 classes: PaymentProcessor ABC, CreditCardProcessor, PayPalProcessor, CryptoProcessor, PaymentValidator, TransactionLogger, PaymentService (orchestrator). 2 attempts. Bug: `>= 0` instead of `> 0` in validator (boundary condition). 0 hints. All 5 SOLID principles applied: SRP (each class = one job), OCP (UPIProcessor works with zero changes), LSP (all processors are proper subtypes), ISP (focused interfaces — PaymentProcessor only has process()), DIP (PaymentService depends on abstractions). | **Def:** SOLID in practice = ABC defines the contract, concrete classes extend it, orchestrator depends on abstractions and delegates to focused single-responsibility classes. New behavior = new class, zero modifications.
+
+**SOLID Quiz — 50 Questions (Conceptual Verification):**
+- [x] Q8: SOLID Quiz — 50 MCQ + Written | SOLID | Advanced | Scored **48.5/60** (34/40 MCQ + 14.5/20 written). Weak spots identified: (1) OCP vs ISP confusion — OCP = extending system with new types, ISP = interface bloat; (2) DIP mechanics shallow — can't draw dependency arrows correctly, doesn't understand duck typing as DIP; (3) LSP exceptions — raising ValueError breaks parent contract even if return type is correct when no exception. Strengths: SRP rock-solid, OCP+LSP combo understood, orchestrator pattern clear, transfer to new domains (notification system) excellent. | **Def:** Knowing SOLID definitions is not enough — you must identify which principle applies in ambiguous scenarios and explain dependency direction.
 
