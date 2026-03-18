@@ -54,6 +54,27 @@
   - `../things_completed_so_far.md` (master tracker)
   - `./things_completed_so_far.md` (DSA-specific with LC# details)
 
+## Revision System (Spaced Re-attempts)
+
+### How It Works
+- Any problem scored **≤ 6/10** gets flagged for revision
+- Revision happens **3-5 days later** (not immediately — you need to forget the specifics)
+- On revision day: same problem, fresh file, new timer — scored from scratch
+- You DON'T re-read your old code. You solve it again from memory + understanding
+- If revision score ≥ 8/10 → cleared, no more revisits
+- If revision score < 8/10 → flagged again, revisit in 3 more days
+
+### Revision Tracker
+- Maintained in `./revision_queue.md`
+- Format: Problem | Original Score | Due Date | Revision Score
+- I check the queue at the start of every session and assign due revisions FIRST
+
+### Why This Works
+- First attempt tests learning. Revision tests **retention**
+- If you understood the pattern (not memorized the code), revision should score higher
+- 3-5 day gap is enough to forget implementation details but retain the intuition
+- Problems that keep failing revision expose genuine weak spots in understanding
+
 ## Transfer Building
 - After teaching a pattern (two-pointer, sliding window, etc.), user MUST identify where ELSE this pattern applies
 - "Give me another problem where you'd use this same technique" — before moving to next problem

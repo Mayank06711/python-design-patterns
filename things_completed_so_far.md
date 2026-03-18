@@ -14,7 +14,7 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 2 | 13 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 3 | 12 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **30** | **296** | |
+| **TOTAL** | **326** | **31** | **295** | |
 
 ---
 
@@ -82,4 +82,9 @@
 
 **SOLID Quiz — 50 Questions (Conceptual Verification):**
 - [x] Q8: SOLID Quiz — 50 MCQ + Written | SOLID | Advanced | Scored **48.5/60** (34/40 MCQ + 14.5/20 written). Weak spots identified: (1) OCP vs ISP confusion — OCP = extending system with new types, ISP = interface bloat; (2) DIP mechanics shallow — can't draw dependency arrows correctly, doesn't understand duck typing as DIP; (3) LSP exceptions — raising ValueError breaks parent contract even if return type is correct when no exception. Strengths: SRP rock-solid, OCP+LSP combo understood, orchestrator pattern clear, transfer to new domains (notification system) excellent. | **Def:** Knowing SOLID definitions is not enough — you must identify which principle applies in ambiguous scenarios and explain dependency direction.
+
+### Day 5 — Mar 18, 2026
+
+**DSA — Arrays & Two Pointers:**
+- [x] 3Sum (LC #15) | Two Pointers | Medium | **5/10** | Solved in Python | Fix i, two-pointer j/k on sorted subarray. 4 attempts, multiple Python-level bugs (hashable types, dict KeyError, abs() trap, if/elif fall-through). Approach correct from start. | **Def:** 3Sum = fix one element + 2Sum on remainder. Sort first, compare total against 0 directly.
 

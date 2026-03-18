@@ -18,7 +18,18 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        // Your solution here
+        int i=0, j = numbers.size()-1;
+        while(i < j){
+            int temp_sum = numbers[i] + numbers[j];
+            if (temp_sum == target){
+                break;
+            }
+            else if (temp_sum < target){
+                i++;
+            }
+            else j--;
+        }
+        return {i+1, j+1};
     }
 };
 
