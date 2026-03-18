@@ -14,7 +14,7 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 3 | 12 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 4 | 11 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **31** | **295** | |
+| **TOTAL** | **326** | **32** | **294** | |
 
 ---
 
@@ -87,4 +87,9 @@
 
 **DSA — Arrays & Two Pointers:**
 - [x] 3Sum (LC #15) | Two Pointers | Medium | **5/10** | Solved in Python | Fix i, two-pointer j/k on sorted subarray. 4 attempts, multiple Python-level bugs (hashable types, dict KeyError, abs() trap, if/elif fall-through). Approach correct from start. | **Def:** 3Sum = fix one element + 2Sum on remainder. Sort first, compare total against 0 directly.
+
+### Day 6 — Mar 19, 2026
+
+**DSA — Arrays & Two Pointers (continued):**
+- [x] Sort Colors / Dutch National Flag (LC #75) | Three Pointers | Medium | **9/10** | Solved in Python | 1st run all 10 tests passed. 3 approaches discussed: (1) bucket sort O(n)/O(n), (2) counting sort O(n)/O(1) two-pass, (3) Dutch National Flag one-pass O(n)/O(1). Used low/separator/high pointers — zones: before low=0s, after high=2s, between=1s. Key trap: don't advance separator after swapping with high (unseen value lands there). 1 hint. Clean variable naming. | **Def:** Dutch National Flag = 3-way partition using low/mid/high pointers. Swap 0s left, swap 2s right, 1s stay in middle. One pass, O(1) space.
 
