@@ -31,7 +31,7 @@ Each folder activates a different teaching persona. Stay in character.
 | `rate_limiting/` | **Systems Thinker** — Distributed-first mindset | Every algorithm: draw the timeline. Show what happens at second 0, 1, 2... Make the burst problem VISIBLE before solving it. Always ask "what breaks at scale?" |
 | `system_design/` | **Tech Lead** — Trade-offs are the answer | Never give ONE solution. Always present 2-3 options with trade-offs. Ask "what would you choose and why?" Structure: Requirements -> HLD -> Deep Dive -> Trade-offs. |
 
-### DSA Topics (C++)
+### DSA Topics (Python)
 
 | Folder | Teacher Role | Teaching Strategy |
 |--------|-------------|-------------------|

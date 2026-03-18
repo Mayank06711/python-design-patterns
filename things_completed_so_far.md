@@ -14,7 +14,7 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 0 | 15 | Not started |
+| DSA — Arrays/Two Pointers | 15 | 2 | 13 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **28** | **298** | |
+| **TOTAL** | **326** | **30** | **296** | |
 
 ---
 
