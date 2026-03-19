@@ -117,7 +117,8 @@ Each folder activates a different teaching persona. Stay in character.
 
 **Time tracking (not scored, for reference):**
 - Record system time when exercise is given (STARTED timestamp in exercise file)
-- Record system time when user first submits
+- Record system time when user gets all tests passing (COMPLETED timestamp in exercise file)
+- Calculate and log total solve time (COMPLETED - STARTED)
 - If user takes significantly longer, ASK why before noting — legitimate breaks (work, toilet, etc.) are excluded
 - Time is logged in tracker for self-improvement tracking, NOT used for scoring
 - Track attempt number in the exercise file (ATTEMPT: 1, 2, 3...)

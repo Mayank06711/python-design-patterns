@@ -8,7 +8,7 @@
 
 | Category | Total | Done | Remaining |
 |----------|-------|------|-----------|
-| Arrays/Two Pointers | 15 | 3 | 12 |
+| Arrays/Two Pointers | 15 | 4 | 11 |
 | Binary Search | 10 | 0 | 10 |
 | Linked List | 12 | 0 | 12 |
 | Stacks/Queues | 10 | 0 | 10 |
@@ -20,7 +20,7 @@
 | Dynamic Programming | 30 | 0 | 30 |
 | Graphs | 20 | 0 | 20 |
 | Bits/Tries | 5 | 0 | 5 |
-| **TOTAL** | **153** | **3** | **150** |
+| **TOTAL** | **153** | **4** | **149** |
 
 ---
 
@@ -36,4 +36,9 @@
 
 **Arrays & Two Pointers:**
 - [x] 3Sum (LC #15) | Two Pointers | Medium | **5/10** | Solved in Python | Fix i, two-pointer j/k on sorted subarray, target = -nums[i]. O(n²) time, O(n) space (hashmap dedup). 4 attempts: Run 1 (2/10) k not reset + abs() logic, Run 2 (1/10) unhashable list in dict, Run 3 (5/10) abs() comparison + if/elif fall-through, Run 4 (10/10). Multiple hints on Python fundamentals (hashable types, dict KeyError) + abs() trap. Approach logic correct from start — all bugs were Python implementation. | **Def:** 3Sum reduces to 2Sum — fix one element, two-pointer the rest. Sort first for O(1) dedup via pointer skipping (optimal) or tuple-in-dict (user's approach). Key: compare total against 0 directly, don't use abs().
+
+### Day 6 — Mar 19, 2026
+
+**Arrays & Two Pointers:**
+- [x] Sort Colors / Dutch National Flag (LC #75) | Three Pointers | Medium | **9/10** | Solved in Python | 1st run all 10 tests passed. 3 approaches: (1) bucket sort O(n)/O(n), (2) counting sort O(n)/O(1) two-pass, (3) Dutch National Flag one-pass O(n)/O(1). low/separator/high pointers — zones: before low=0s, after high=2s, between=1s. Key trap: don't advance separator after swapping with high. 1 hint. | **Def:** Dutch National Flag = 3-way partition using low/mid/high pointers. Swap 0s left, swap 2s right, 1s stay in middle. One pass, O(1) space.
 
