@@ -86,14 +86,42 @@
 - Hints available but cost marks per scoring system
 
 ## Daily Graph Exposure (CRITICAL — starts immediately)
-- Even while working on Arrays/Two Pointers/etc., solve **1 easy graph problem per day**
-- Before graph coding starts, teach graph THEORY first:
-  - What is a graph? Nodes, edges, directed vs undirected
-  - Representations: adjacency list vs adjacency matrix
-  - BFS vs DFS — when to use which and WHY
-  - Connected components, cycles, topological sort (conceptual)
-- Oral questions to build graph intuition alongside daily problems
-- This ensures graph familiarity is built gradually, not crammed later
+
+### Goal
+Build graph intuition gradually alongside main DSA topics. By the time we reach the Graphs chapter, the concepts should already feel familiar.
+
+### Teaching Rules (DO NOT dump everything at once)
+- Teach ONE micro-concept per session — never more
+- Each micro-concept must include: explanation + real-world analogy + user gives own example
+- User MUST prove understanding before moving to next micro-concept
+- If user can't give their own example, the concept is NOT learned — stay on it
+- NO coding until all theory micro-concepts are covered
+
+### Graph Theory Micro-Concepts (teach in this order, one per session)
+
+| # | Micro-Concept | What to Cover | Check Question |
+|---|--------------|---------------|----------------|
+| 1 | What is a graph? | Nodes = things, Edges = connections. That's it. | "Give me YOUR example of nodes and edges from real life" |
+| 2 | Undirected vs Directed | Undirected = two-way (friendship). Directed = one-way (follows). | "Is [user's example] directed or undirected? Why?" |
+| 3 | How to store a graph | Adjacency list (dict of lists). When/why. | "Write an adjacency list for this small graph on paper" |
+| 4 | Adjacency matrix | 2D grid, O(1) lookup. When to use vs list. | "Same graph — write the matrix. Which wastes more space here?" |
+| 5 | Degree of a node | Undirected = degree. Directed = in-degree + out-degree. | "What's the degree of node X in your example?" |
+| 6 | BFS — concept only | Level-by-level, uses queue. Like ripples in water. | "Trace BFS on this 5-node graph by hand" |
+| 7 | DFS — concept only | Go deep, backtrack. Uses stack/recursion. | "Trace DFS on the same graph. Different order?" |
+| 8 | BFS vs DFS — when which | Shortest path = BFS. Explore all paths / detect cycles = DFS. | "Min bus transfers A→F: BFS or DFS? Why?" |
+| 9 | Connected components | Groups of nodes that can reach each other. | "How many components in this graph?" |
+| 10 | Cycles | Path that returns to start. Trees = graphs with no cycles. | "Does this graph have a cycle? Trace it." |
+| 11 | DAG + Topological sort | Directed + no cycles. Task ordering. | "Course prerequisites — why must it be a DAG?" |
+| 12 | Weighted graphs | Edges have costs. Shortest path changes meaning. | "Your city roads — what would weights represent?" |
+
+### After All 12 Micro-Concepts → Start Easy Graph Coding
+- First problem: simple BFS/DFS traversal
+- Then: connected components, cycle detection, etc.
+- Graph problems use `dsa/11_graphs/` folder
+
+### Progress Tracking
+- Track which micro-concept was covered each session in the DSA tracker
+- Format: `Graph Theory #X: [topic] — [passed/needs-revisit]`
 
 ## Problem Sources
 - **Primary:** Striver's SDE Sheet (Take U Forward) — 79 core problems covering all patterns
