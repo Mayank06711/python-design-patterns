@@ -14,7 +14,7 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 4 | 11 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 5 | 10 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **32** | **294** | |
+| **TOTAL** | **326** | **33** | **293** | |
 
 ---
 
@@ -93,3 +93,7 @@
 **DSA — Arrays & Two Pointers (continued):**
 - [x] Sort Colors / Dutch National Flag (LC #75) | Three Pointers | Medium | **9/10** | Solved in Python | 1st run all 10 tests passed. 3 approaches discussed: (1) bucket sort O(n)/O(n), (2) counting sort O(n)/O(1) two-pass, (3) Dutch National Flag one-pass O(n)/O(1). Used low/separator/high pointers — zones: before low=0s, after high=2s, between=1s. Key trap: don't advance separator after swapping with high (unseen value lands there). 1 hint. Clean variable naming. | **Def:** Dutch National Flag = 3-way partition using low/mid/high pointers. Swap 0s left, swap 2s right, 1s stay in middle. One pass, O(1) space.
 
+### Day 7 — Mar 22, 2026
+
+**DSA — Arrays & Two Pointers (continued):**
+- [x] Product of Array Except Self (LC #238) | Prefix/Suffix Product | Medium | **5/10** | Solved in Python | 4+ attempts. Approaches: (1) total product + division — disqualified (no division allowed), (2) brute force O(n²), (3) prefix-suffix product O(n)/O(n), (4) **optimized O(1) space** — use output array for left products + single running variable for right product. Key bugs: building right_prod with append in left-to-right loop, computing answer before arrays fully built, infinite loop from i++ inside else. Lesson: build data structures completely before using them. | **Def:** Product Except Self = for each index, answer = (product of all elements left of i) × (product of all elements right of i). Optimal: store left in output array, compute right with a running variable in reverse pass.
