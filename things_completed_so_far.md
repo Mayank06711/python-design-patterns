@@ -14,7 +14,7 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 5 | 10 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 6 | 9 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **33** | **293** | |
+| **TOTAL** | **326** | **34** | **292** | |
 
 ---
 
@@ -97,3 +97,4 @@
 
 **DSA — Arrays & Two Pointers (continued):**
 - [x] Product of Array Except Self (LC #238) | Prefix/Suffix Product | Medium | **5/10** | Solved in Python | 4+ attempts. Approaches: (1) total product + division — disqualified (no division allowed), (2) brute force O(n²), (3) prefix-suffix product O(n)/O(n), (4) **optimized O(1) space** — use output array for left products + single running variable for right product. Key bugs: building right_prod with append in left-to-right loop, computing answer before arrays fully built, infinite loop from i++ inside else. Lesson: build data structures completely before using them. | **Def:** Product Except Self = for each index, answer = (product of all elements left of i) × (product of all elements right of i). Optimal: store left in output array, compute right with a running variable in reverse pass.
+- [x] Maximum Subarray / Kadane's (LC #53) | Kadane's Algorithm | Medium | **9/10** | Solved in Python | 1st run all 10 tests passed. 2 approaches: (1) brute force O(n²), (2) Kadane's O(n)/O(1). Running sum + reset to 0 when negative. 1 hint (explained WHY Kadane's works with traced walkthrough). Minor: used `sum` shadowing built-in. Solve time: ~42 min (including intuition discussion). | **Def:** Kadane's = running sum, reset when negative. A negative prefix can never help a future subarray. Track global max as you go. O(n) time, O(1) space.

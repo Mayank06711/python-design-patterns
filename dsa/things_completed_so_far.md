@@ -8,7 +8,7 @@
 
 | Category | Total | Done | Remaining |
 |----------|-------|------|-----------|
-| Arrays/Two Pointers | 15 | 4 | 11 |
+| Arrays/Two Pointers | 15 | 6 | 9 |
 | Binary Search | 10 | 0 | 10 |
 | Linked List | 12 | 0 | 12 |
 | Stacks/Queues | 10 | 0 | 10 |
@@ -20,7 +20,7 @@
 | Dynamic Programming | 30 | 0 | 30 |
 | Graphs | 20 | 0 | 20 |
 | Bits/Tries | 5 | 0 | 5 |
-| **TOTAL** | **153** | **4** | **149** |
+| **TOTAL** | **153** | **6** | **147** |
 
 ---
 
@@ -41,4 +41,10 @@
 
 **Arrays & Two Pointers:**
 - [x] Sort Colors / Dutch National Flag (LC #75) | Three Pointers | Medium | **9/10** | Solved in Python | 1st run all 10 tests passed. 3 approaches: (1) bucket sort O(n)/O(n), (2) counting sort O(n)/O(1) two-pass, (3) Dutch National Flag one-pass O(n)/O(1). low/separator/high pointers — zones: before low=0s, after high=2s, between=1s. Key trap: don't advance separator after swapping with high. 1 hint. | **Def:** Dutch National Flag = 3-way partition using low/mid/high pointers. Swap 0s left, swap 2s right, 1s stay in middle. One pass, O(1) space.
+
+### Day 7 — Mar 22, 2026
+
+**Arrays & Two Pointers:**
+- [x] Product of Array Except Self (LC #238) | Prefix/Suffix | Medium | **5/10** | Solved in Python | 4+ attempts. Prefix-suffix product + O(1) space optimization.
+- [x] Maximum Subarray / Kadane's (LC #53) | Kadane's | Medium | **9/10** | Solved in Python | 1st run pass. Running sum + reset when negative. 1 hint.
 
