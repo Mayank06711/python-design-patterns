@@ -55,12 +55,17 @@ ATTEMPT: 1
 def max_subarray(nums):
     maxi = float('-inf')
     cur_sum = 0
+    start = 0
+    end = 0
     for i in range(len(nums)):
         cur_sum += nums[i]
         if cur_sum > maxi:
             maxi = cur_sum
+            end = i
         if cur_sum < 0:
             cur_sum = 0
+            start = i + 1
+    print(start, end)
     return maxi
 
 
