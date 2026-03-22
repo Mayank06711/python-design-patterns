@@ -6,5 +6,5 @@
 
 | # | Problem | LC# | Original Score | Original Date | Due Date | Revision Score | Status |
 |---|---------|-----|---------------|---------------|----------|---------------|--------|
-| 1 | 3Sum | 15 | 5/10 | Mar 18, 2026 | Mar 22, 2026 | — | Pending |
+| 1 | 3Sum | 15 | 5/10 | Mar 18, 2026 | Mar 22, 2026 | **10/10** | ✅ Cleared |
 | 2 | Product of Array Except Self | 238 | 5/10 | Mar 22, 2026 | Mar 25, 2026 | — | Pending |
