@@ -1,155 +1,153 @@
-# Google Interview Prep — Complete Study Plan
+# Interview Prep: Structured Study Plan
 
-> Target: Mid-level engineer -> Google-ready
-> Time: 2-3 hours/day | Style: Interactive, intuition-first
-> Languages: Python + JS (concepts) | C++ (DSA)
+> **READ THIS FIRST** — Every AI on every laptop reads this file at session start.
+> Target: Google-level interview readiness
+> Languages: Python (concepts + DSA local), C++ (DSA on LeetCode)
 > Total: 326 questions (173 concept + 153 DSA)
 
 ---
 
-## How It Works
+## How Every Session Works (2-3 hours)
 
-**Two parallel tracks running simultaneously:**
+**3 slots. Never skip a slot. Never let one topic eat the whole session.**
 
-- **Concept Track** — One topic per day (OOP -> SOLID -> ... -> System Design)
-- **DSA Track** — 2-3 problems daily alongside concepts, progressing by difficulty
+| Slot | Duration | What | Rule |
+|------|----------|------|------|
+| **Slot 1: Core Concept** | 45-60 min | Current concept topic (see Phase below) | Always comes FIRST. Teach concept → exercise → user gives own example. |
+| **Slot 2: DSA** | 60-90 min | 2-3 problems from current DSA chapter | Check `dsa/revision_queue.md` first — due revisions replace one new problem. |
+| **Slot 3: Graph Micro** | 10-15 min | One micro-concept from `dsa/rules.md` graph table | Last thing in session. ONE concept only. User gives own example to pass. |
 
-You don't finish all concepts THEN do DSA. They run together.
-
----
-
-## Week 1: Foundations + DSA Warm-up
-
-### Concept Track
-
-| Day | Topic | Focus | Questions |
-|-----|-------|-------|-----------|
-| **Day 1** | Foundations Blitz | Quick refresher across all 6 topics | 5 per topic |
-| **Day 2** | OOP Deep Dive | 4 pillars, design patterns, OOP design problems | Q1-Q25 |
-| **Day 3** | SOLID Principles | Violation -> Pain -> Refactor for each principle | Q1-Q26 |
-| **Day 4** | Closures/HOF/Decorators | Scope tracing, HOF from scratch, decorator stacking | Q1-Q33 |
-| **Day 5** | SQL & Indexing | Window functions, CTEs, EXPLAIN plans, B-trees | Q1-Q35 |
-| **Day 6** | Rate Limiting | All 5 algorithms implemented, distributed challenges | Q1-Q27 |
-| **Day 7** | System Design | Framework + 4-5 full designs, mock interview | Q1-Q27 |
-
-### DSA Track (daily alongside concepts)
-
-| Days | DSA Folder | Problems | Why |
-|------|-----------|----------|-----|
-| Day 1-3 | `01_arrays_two_pointers/` | 15 problems | Your strength — build momentum |
-| Day 3-4 | `02_binary_search/` | 10 problems | Sharpen precision |
-| Day 5-6 | `03_linked_list/` | 12 problems | Pointer fundamentals |
-| Day 7 | `04_stacks_queues/` | 10 problems | Monotonic patterns |
+**Session start checklist:**
+1. Pull latest branch
+2. Check revision queue — do due revisions in Slot 2 before new problems
+3. Check which **Phase + Session** we're in (see below)
+4. Follow the 3-slot structure
 
 ---
 
-## Week 2: Depth + DSA Core
+## Phase 1: Closures + Arrays/Binary Search (Sessions 8-15)
 
-> Concept track is done (revisit weak areas as needed). DSA becomes the main focus.
+> **Concept Track:** Closures / HOF / Decorators (33 questions)
+> **DSA Track:** Finish Arrays (8 left) → Start Binary Search (10)
+> **Graph Track:** Micro-concepts #1 through #6
 
-| Days | DSA Folder | Problems | Why |
-|------|-----------|----------|-----|
-| Day 8-9 | `05_sorting/` | 8 problems | Algorithm foundations |
-| Day 9-11 | `06_trees_bst/` | 15 problems | You're comfortable — go deep |
-| Day 11-12 | `07_heaps/` | 8 problems | Priority queue patterns |
-| Day 12-14 | `08_recursion_backtracking/` | 12 problems | Attack weakness #1 — decision trees |
+**We are currently HERE. Session 8 is next.**
 
----
-
-## Week 3: Weakness Attack
-
-| Days | DSA Folder | Problems | Why |
-|------|-----------|----------|-----|
-| Day 15-16 | `09_greedy/` | 8 problems | Proof-based thinking |
-| Day 16-22 | `10_dynamic_programming/` | 30 problems | Biggest weakness — give it a full week |
-
-**DP Breakdown (7 patterns across ~7 days):**
-
-| Days | DP Pattern | Problems |
-|------|-----------|----------|
-| Day 16-17 | 1D DP (Climbing Stairs -> Decode Ways) | #1-5 |
-| Day 17-18 | 2D Grid DP (Unique Paths -> Dungeon Game) | #6-10 |
-| Day 18-19 | Knapsack Family (Partition Sum -> Last Stone) | #11-15 |
-| Day 19-20 | String DP (LCS -> Word Break) | #16-20 |
-| Day 20-21 | LIS Family (LIS -> Russian Doll) | #21-23 |
-| Day 21-22 | Interval DP (Palindrome Partition -> Strange Printer) | #24-27 |
-| Day 22 | Tree DP (Unique BST -> Max Path Sum) | #28-30 |
+| Session | Slot 1: Closures/HOF/Decorators | Slot 2: DSA | Slot 3: Graph |
+|---------|--------------------------------|-------------|---------------|
+| **8** | What is a closure? Scope chain. Variable lookup. (3-4 Qs) | Arrays: 2-3 remaining problems | #1: What is a graph? Nodes + edges |
+| **9** | Closure practical: `nonlocal`, closures in loops, factory functions (3-4 Qs) | Arrays: finish remaining + revision if due | #2: Directed vs Undirected |
+| **10** | Higher-Order Functions: map, filter, reduce from scratch (3-4 Qs) | Binary Search: concept teach + first 2 problems | #3: Adjacency list |
+| **11** | Writing your own HOFs, callbacks, function composition (3-4 Qs) | Binary Search: 2-3 problems | #4: Adjacency matrix |
+| **12** | Decorators basics: @syntax, wrapping, functools.wraps (3-4 Qs) | Binary Search: 2-3 problems | #5: Degree of a node |
+| **13** | Decorators advanced: with args, stacking, class decorators (3-4 Qs) | Binary Search: finish remaining | #6: BFS concept |
+| **14** | Closures + HOF + Decorators capstone exercise (full application) | Linked List: concept teach + first 2 problems | — (capstone takes more time) |
+| **15** | Quiz: 30-40 MCQ + written on Closures/HOF/Decorators | Linked List: 2-3 problems | — |
 
 ---
 
-## Week 4: New Territory + Polish
+## Phase 2: SQL + Linked List/Stacks/Sorting (Sessions 16-23)
 
-| Days | DSA Folder | Problems | Why |
-|------|-----------|----------|-----|
-| Day 23-28 | `11_graphs/` | 20 problems | Never done — build from scratch |
-| Day 29-30 | `12_bits_tries/` | 5 problems | Quick wins, interview favorites |
+> **Concept Track:** SQL & Indexing (35 questions)
+> **DSA Track:** Linked List (12) → Stacks/Queues (10) → Sorting (8)
+> **Graph Track:** Micro-concepts #7 through #12
 
-**Graphs Breakdown (6 sections):**
-
-| Days | Graph Section | Problems |
-|------|-------------|----------|
-| Day 23-24 | BFS Basics | #1-3 |
-| Day 24-25 | DFS Basics | #4-6 |
-| Day 25-26 | Topological Sort | #7-9 |
-| Day 26-27 | Dijkstra / Bellman-Ford | #10-12 |
-| Day 27-28 | Union-Find | #13-15 |
-| Day 28 | Advanced (MST, Bipartite, Clone) | #16-20 |
-
----
-
-## Week 5: Review & Mock
-
-| Day | Activity |
-|-----|----------|
-| Day 31 | Revisit all "needs-revisit" problems from tracker |
-| Day 32 | Timed practice: 2 medium + 1 hard in 90 minutes |
-| Day 33 | System Design mock: full end-to-end |
-| Day 34 | DSA mock: 3 random problems from different categories |
-| Day 35 | Final weak-spot review |
+| Session | Slot 1: SQL & Indexing | Slot 2: DSA | Slot 3: Graph |
+|---------|----------------------|-------------|---------------|
+| **16** | SQL basics: SELECT, WHERE, JOINs, NULL handling (4-5 Qs) | Linked List: continue | #7: DFS concept |
+| **17** | JOINs deep dive: LEFT/RIGHT/FULL/CROSS/SELF + practice (4-5 Qs) | Linked List: continue | #8: BFS vs DFS — when which |
+| **18** | Aggregation: GROUP BY, HAVING, subqueries (4-5 Qs) | Linked List: finish | #9: Connected components |
+| **19** | Window functions: ROW_NUMBER, RANK, LAG, LEAD, running totals (4-5 Qs) | Stacks/Queues: concept + first problems | #10: Cycles |
+| **20** | CTEs, recursive CTEs, temp tables (4-5 Qs) | Stacks/Queues: continue | #11: DAG + Topological sort |
+| **21** | Indexing: B-tree internals, EXPLAIN plans, query optimization (4-5 Qs) | Stacks/Queues: finish | #12: Weighted graphs |
+| **22** | Composite indexes, covering indexes, index pitfalls (3-4 Qs) | Sorting: concept + problems | — |
+| **23** | SQL capstone + quiz | Sorting: finish | — |
 
 ---
 
-## Daily Session Template
+## Phase 3: Rate Limiting + Trees/Heaps (Sessions 24-30)
 
-```
-[2-3 hours total]
+> **Concept Track:** Rate Limiting (27 questions)
+> **DSA Track:** Trees/BST (15) → Heaps (8)
+> **Graph Track:** Start easy graph CODING problems (theory done)
 
-First 30-60 min:  Concept topic (Week 1 only)
-Next 60-90 min:   DSA problems (2-3 per day)
-Last 15 min:      Review what you learned, update tracker
-```
-
----
-
-## Progress Tracking
-
-- **Master tracker:** `things_completed_so_far.md` (root — all 326 questions)
-- **DSA tracker:** `dsa/things_completed_so_far.md` (DSA-specific with LC#)
-- **Rules:** Each folder has its own `rules.md` with teaching persona
-- Updated automatically after every question
+| Session | Slot 1: Rate Limiting | Slot 2: DSA | Slot 3: Extra |
+|---------|----------------------|-------------|---------------|
+| **24** | Rate limiting concepts: why, where, types of limits (3-4 Qs) | Trees: concept teach + traversals | Graph: first easy coding problem |
+| **25** | Token Bucket + Leaky Bucket algorithms (4-5 Qs) | Trees: BST problems | Graph: easy problem |
+| **26** | Fixed Window + Sliding Window algorithms (4-5 Qs) | Trees: continue | Graph: easy problem |
+| **27** | Sliding Window Log + comparison of all 5 algorithms (4-5 Qs) | Trees: finish | Graph: easy problem |
+| **28** | Distributed rate limiting, Redis-based, race conditions (4-5 Qs) | Heaps: concept + problems | Graph: easy problem |
+| **29** | Rate limiting capstone: implement 2-3 algorithms (3-4 Qs) | Heaps: finish | — |
+| **30** | Rate limiting quiz | Recursion/Backtracking: concept + start | — |
 
 ---
 
-## Question Bank Summary
+## Phase 4: System Design + Recursion/Greedy/DP (Sessions 31-42)
 
-| Track | Topic | Total Qs |
-|-------|-------|----------|
-| Concept | OOP | 25 |
-| Concept | SOLID Principles | 26 |
-| Concept | Closures/HOF/Decorators | 33 |
-| Concept | SQL & Indexing | 35 |
-| Concept | Rate Limiting | 27 |
-| Concept | System Design | 27 |
-| DSA | Arrays/Two Pointers | 15 |
-| DSA | Binary Search | 10 |
-| DSA | Linked List | 12 |
-| DSA | Stacks/Queues | 10 |
-| DSA | Sorting | 8 |
-| DSA | Trees & BST | 15 |
-| DSA | Heaps | 8 |
-| DSA | Recursion/Backtracking | 12 |
-| DSA | Greedy | 8 |
-| DSA | Dynamic Programming | 30 |
-| DSA | Graphs | 20 |
-| DSA | Bits/Tries | 5 |
-| **TOTAL** | | **326** |
+> **Concept Track:** System Design (27 questions)
+> **DSA Track:** Recursion/Backtracking (12) → Greedy (8) → DP start (30)
+
+| Session | Slot 1: System Design | Slot 2: DSA |
+|---------|----------------------|-------------|
+| **31** | SD fundamentals: CAP theorem, scaling, load balancing | Recursion/Backtracking: continue |
+| **32** | SD: URL Shortener (full design) | Recursion/Backtracking: finish |
+| **33** | SD: Chat/Messaging System | Greedy: concept + problems |
+| **34** | SD: Rate Limiter (connects to Phase 3!) | Greedy: finish |
+| **35** | SD: Notification System | DP: 1D basics (Climbing Stairs, House Robber) |
+| **36** | SD: News Feed / Timeline | DP: 2D grid (Unique Paths, Min Path Sum) |
+| **37** | SD: Distributed Cache | DP: Knapsack family |
+| **38** | SD: Search Autocomplete | DP: String DP (LCS, Edit Distance) |
+| **39** | SD: Payment System | DP: LIS family |
+| **40** | SD: Video Streaming | DP: Interval DP |
+| **41** | SD capstone: mock design interview | DP: Tree DP + finish |
+| **42** | SD quiz | DP: revision of weak patterns |
+
+---
+
+## Phase 5: Graph Coding + Final Polish (Sessions 43-50)
+
+> **DSA Track:** Graphs coding (20) → Bits/Tries (5)
+> **Concept Track:** Deferred topics (OOP remaining 5, SOLID remaining 18)
+
+| Session | Focus |
+|---------|-------|
+| **43-44** | Graph: BFS problems (3-4) |
+| **45-46** | Graph: DFS problems (3-4) |
+| **47** | Graph: Topological Sort problems |
+| **48** | Graph: Shortest path (Dijkstra/Bellman-Ford) |
+| **49** | Graph: Union-Find + advanced |
+| **50** | Bits/Tries (5 problems) |
+| **51** | OOP deferred: Observer, Decorator, __slots__, Metaclasses, MI pitfalls |
+| **52** | SOLID remaining: quick-fire 18 questions |
+| **53-55** | Mock interviews: DSA + System Design + Behavioral |
+
+---
+
+## Key Rules (for any AI reading this)
+
+1. **3 slots per session. No exceptions.** If DSA takes longer, cut it — don't skip Slot 1.
+2. **Slot 1 (concept) always comes first.** The user's weakness is concepts, not just DSA.
+3. **~4 questions per concept session** is realistic. Not 33 in one day.
+4. **Graph micro-concepts are 10 minutes.** Don't dump all 12 at once.
+5. **Check revision queue** at start. Due revisions happen in Slot 2.
+6. **Track the session number.** Update "Current Status" below after every session.
+7. **If user solved independently** (personal laptop), update trackers but still follow slot structure.
+8. **Teaching style:** See `rules.md` for scoring, intuition-first approach, transfer building.
+9. **DSA rules:** See `dsa/rules.md` for exercise flow, revision system, problem sources.
+
+---
+
+## Current Status
+
+**Phase: 1 — Closures + Arrays/Binary Search**
+**Next Session: 8**
+**Last completed: Session 7 (Day 7, Mar 22, 2026)**
+
+### What's Done So Far
+- Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
+- Session 3: SOLID principles (8/26 done, remaining deferred to Phase 5)
+- Sessions 4-7: DSA Arrays/Two Pointers ONLY — no concept slot (this was the mistake)
+
+### Active Revision Queue
+- Product of Array Except Self (LC #238) — 5/10 — due Mar 25, 2026
