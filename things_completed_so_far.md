@@ -10,11 +10,11 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 0 | 33 | Not started |
+| Closures/HOF/Decorators | 33 | 3 | 30 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 7 | 8 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 9 | 6 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **35** | **291** | |
+| **TOTAL** | **326** | **37** | **289** | |
 
 ---
 
@@ -100,3 +100,17 @@
 - [x] Maximum Subarray / Kadane's (LC #53) | Kadane's Algorithm | Medium | **9/10** | Solved in Python | 1st run all 10 tests passed. 2 approaches: (1) brute force O(n²), (2) Kadane's O(n)/O(1). Running sum + reset to 0 when negative. 1 hint (explained WHY Kadane's works with traced walkthrough). Minor: used `sum` shadowing built-in. Solve time: ~42 min (including intuition discussion). | **Def:** Kadane's = running sum, reset when negative. A negative prefix can never help a future subarray. Track global max as you go. O(n) time, O(1) space.
 - [x] **REVISION** 3Sum (LC #15) | Two Pointers | Medium | **10/10** (was 5/10) | Revision CLEARED | 1st run, 0 hints. Sort + fix i + two-pointer + skip dupes. Perfect execution from understanding, not memory.
 - [x] Subarray Sum Equals K (LC #560) | Prefix Sum + HashMap | Medium | **7/10** | Solved in Python | 2 runs (1st failed on bad test case — my error). New pattern learned: prefix sum property (subarray sum = prefix[j] - prefix[i-1]). Multiple hints needed (prefix sum concept taught, ordering, {0:1} init). Clean use of `.get()`. | **Def:** Prefix sum + hashmap. Store running prefix sums and their frequencies. At each step, check if (prefix_sum - k) exists in map — that count = number of subarrays ending here with sum k. Init map with {0:1}.
+
+### Day 8 — Mar 24, 2026
+
+**Closures (Session 8, Slot 1):**
+- [x] Q1: What is a closure? Scope chain, LEGB | Closures | Mid | Taught | Understood: closure = function + captured variables from enclosing scope. Holds REFERENCE via cell objects on heap, not copy. LEGB = Local → Enclosing → Global → Built-in. Enclosing = where DEFINED, not where CALLED. Own example: API util function with `.then()` chain where callbacks capture `userId`, `method`, `path` from outer scope. | **Def:** A closure is a function that remembers variables from the scope where it was defined, even after that scope has finished executing.
+- [x] Q2: Late binding — closure sees latest value | Closures | Mid | Taught | Correctly predicted `print(20)` when `x` changed from 10 to 20 after inner function was created but before it was called. Reason: closure holds reference to cell, not snapshot of value. | **Def:** Late binding = closure reads the variable's value at CALL time, not at definition time, because it holds a reference.
+- [x] Q3: Closure-in-loop trap + default arg fix | Closures | Advanced | Taught | Predicted `make_adders()` output wrong initially (thought each gets own `i`), then self-corrected after testing that `for i` reuses one variable. Final answer: all print 14 (i=4 after loop). Struggled with fix (tried local var `j=i` — understood it runs at call time). Got default arg fix `def adder(x, ind=i)` with 1 hint (free — new topic). | **Def:** Closures in loops share ONE variable — all see the final value. Fix: default argument `ind=i` freezes value at definition time because defaults are evaluated when `def` executes.
+
+**DSA — Arrays (Session 8, Slot 2):**
+- [x] Best Time to Buy and Sell Stock (LC #121) | Single Pass / Greedy | Easy | **10/10** | Solved in Python | 1st run all 10 tests passed. 0 hints. Approach: track min_price seen so far + compute profit at each step. Initially proposed "find global min then max after it" — caught flaw with [2,7,1,3] counterexample, self-corrected to single-pass greedy. Clean code, minor: function name shadows variable name. Same pattern family as Kadane's (scan + track running state). | **Def:** Track min buy price so far, compute profit at each step, keep running max. One pass O(n), O(1) space. Same greedy scan pattern as Kadane's.
+- [x] Merge Intervals (LC #56) | Sort + Merge | Medium | **8/10** | Solved in Python | 1st run all 10 tests passed. 2 hints (missing sort step, end should use max not just take from i). Rewrote from scratch for deeper understanding — passed again. Sort by start, compare each against last in answer list: if overlap (end >= start) extend with max, else push new. Learned: sort eliminates O(n^2) pair comparisons → O(n log n). Python sort: `arr.sort()` in-place, `sorted()` returns new list. | **Def:** Sort intervals by start. Scan left-to-right: if current overlaps last merged (end >= start), extend end with max. Otherwise push new interval. O(n log n). Pattern: sort + single-pass replaces brute-force all-pairs.
+
+**Graph Micro-concept #3:**
+- [x] Adjacency List | Graph Theory | Taught | Dict where key = node, value = list of neighbors. For undirected graph, every edge appears TWICE (in both nodes' lists). For directed, only once. WhatsApp = undirected (both see each other), Instagram follow = directed (one-way). Connected graph = reach everyone from any node. Disconnected = isolated groups.

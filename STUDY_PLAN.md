@@ -166,15 +166,16 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 ## Current Status
 
 **Phase: 1 — Closures + Arrays/Binary Search**
-**Next Session: 8**
-**Session 8 Progress: Not started**
-**Last completed: Session 7 (Day 7, Mar 22, 2026)**
+**Next Session: 9**
+**Session 9 Progress: Not started**
+**Last completed: Session 8 (Day 8, Mar 24, 2026)**
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
 - Session 3: SOLID principles (8/26 done, remaining deferred to Phase 5)
 - Sessions 4-7: DSA Arrays/Two Pointers ONLY — no concept slot (this was the mistake)
-- Graph micro-concepts #1 and #2: PASSED (WhatsApp example — nodes=contacts, edges=who can message, undirected)
+- Session 8: Closures Slot 1 (Q1-Q3: scope chain, late binding, loop trap) + DSA Slot 2 (Buy/Sell Stock 10/10, Merge Intervals 8/10) + Graph #3 (adjacency list)
+- Graph micro-concepts #1-#3: PASSED (#1-2: nodes/edges, directed/undirected. #3: adjacency list = dict of neighbors)
 
 ### Active Revision Queue
 - Product of Array Except Self (LC #238) — 5/10 — due Mar 25, 2026

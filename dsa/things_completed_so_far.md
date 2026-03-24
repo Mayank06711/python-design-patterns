@@ -8,7 +8,7 @@
 
 | Category | Total | Done | Remaining |
 |----------|-------|------|-----------|
-| Arrays/Two Pointers | 15 | 6 | 9 |
+| Arrays/Two Pointers | 15 | 9 | 6 |
 | Binary Search | 10 | 0 | 10 |
 | Linked List | 12 | 0 | 12 |
 | Stacks/Queues | 10 | 0 | 10 |
@@ -20,7 +20,7 @@
 | Dynamic Programming | 30 | 0 | 30 |
 | Graphs | 20 | 0 | 20 |
 | Bits/Tries | 5 | 0 | 5 |
-| **TOTAL** | **153** | **6** | **147** |
+| **TOTAL** | **153** | **9** | **144** |
 
 ---
 
@@ -47,4 +47,10 @@
 **Arrays & Two Pointers:**
 - [x] Product of Array Except Self (LC #238) | Prefix/Suffix | Medium | **5/10** | Solved in Python | 4+ attempts. Prefix-suffix product + O(1) space optimization.
 - [x] Maximum Subarray / Kadane's (LC #53) | Kadane's | Medium | **9/10** | Solved in Python | 1st run pass. Running sum + reset when negative. 1 hint.
+
+### Day 8 — Mar 24, 2026
+
+**Arrays & Two Pointers:**
+- [x] Best Time to Buy and Sell Stock (LC #121) | Single Pass / Greedy | Easy | **10/10** | Solved in Python | 1st run pass. Track min_price, compute profit at each step. 0 hints. Same pattern as Kadane's.
+- [x] Merge Intervals (LC #56) | Sort + Merge | Medium | **8/10** | Solved in Python | 1st run pass. Sort by start, scan once, compare against last in answer list. 2 hints (missing sort, end should use max). Rewrote from scratch for understanding. | **Def:** Sort intervals by start. Scan left-to-right: if current overlaps last merged (end >= start), extend end with max. Otherwise push new interval. O(n log n).
 

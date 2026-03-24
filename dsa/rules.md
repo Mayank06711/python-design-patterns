@@ -19,10 +19,11 @@
 2. User reads the problem and tests carefully
 
 ### Phase 2: Verbal Breakdown (BEFORE any coding)
-3. User writes their **approach as comments** at the top of the file:
-   - What pattern/technique they'll use and WHY
-   - Step-by-step breakdown of their algorithm
-   - Time and space complexity estimate
+3. User writes their **approach in STEP 1 section** using the 4-part format:
+   - **WHAT:** Restate the problem in one line (own words)
+   - **HOW:** Numbered algorithm steps (specific, not vague)
+   - **EDGE CASES:** What could go wrong?
+   - **COMPLEXITY:** Time O(?), Space O(?)
 4. I evaluate the approach — catch wrong directions BEFORE coding starts
 5. If approach is wrong → hints to redirect (costs marks)
 6. If approach is right → "Go code it"
@@ -80,9 +81,52 @@
 - "Give me another problem where you'd use this same technique" — before moving to next problem
 - Pattern recognition only works if the user can spot the pattern in NEW problems, not just the one taught
 
-## Exercise Format
-- Problem description + tests ONLY — no skeleton code
-- User reads tests, designs the approach (comments first), writes solution from scratch
+## Exercise File Template (MUST follow for every new problem)
+
+Every exercise file MUST use this exact structure:
+
+```python
+"""
+PROBLEM: <Problem Name>
+LeetCode #<number>: https://leetcode.com/problems/<slug>/
+
+<Problem description>
+
+CONSTRAINTS:
+- <constraint 1>
+- <constraint 2>
+
+DIFFICULTY: Easy/Medium/Hard
+TIME LIMIT: 5/8/12 minutes (Easy/Medium/Hard)
+STARTED:
+COMPLETED:
+ATTEMPT: 1
+"""
+
+# ============================================================
+# STEP 1: WRITE YOUR APPROACH HERE AS COMMENTS BEFORE CODING
+# ============================================================
+# 1. WHAT: <Restate problem in one line, your own words>
+# 2. HOW: <Numbered algorithm steps — specific, not vague>
+# 3. EDGE CASES: <What could go wrong?>
+# 4. COMPLEXITY: Time O(?), Space O(?)
+
+
+# ============================================================
+# STEP 2: CODE YOUR SOLUTION
+# ============================================================
+
+
+
+# ============================================================
+# TESTS — DO NOT MODIFY BELOW THIS LINE
+# ============================================================
+```
+
+**Rules:**
+- No skeleton code, no class hints — user designs everything from scratch
+- User fills STEP 1 (approach comments) FIRST → teacher evaluates → THEN user codes STEP 2
+- STARTED/COMPLETED timestamps filled by teacher when user begins/finishes
 - Hints available but cost marks per scoring system
 
 ## Daily Graph Exposure (CRITICAL — starts immediately)
