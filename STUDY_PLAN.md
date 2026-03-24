@@ -138,16 +138,43 @@
 
 ---
 
+## Cross-Laptop Sync Protocol
+
+This user works on **multiple laptops**. Each laptop may have a different AI. Here's how to stay in sync:
+
+### At Session START (every laptop, every time):
+1. `git pull` the latest branch
+2. Read this "Current Status" section — it's the SINGLE SOURCE OF TRUTH
+3. Continue from wherever the status says
+
+### At Session END (every laptop, every time):
+1. Update "Current Status" below (increment session, update slots completed)
+2. `git add` + `git commit` + `git push`
+3. The next laptop that pulls will see the updated state
+
+### Split Sessions (user does Slot 1 on laptop A, Slot 2 on laptop B):
+- If a session is partially done, "Current Status" shows which slots are completed
+- Example: "Session 8: Slot 1 DONE, Slot 2 pending, Slot 3 pending"
+- The next AI picks up from the first incomplete slot
+
+### Conflict Resolution:
+- If two laptops somehow work on the same session, the one that pushes LAST wins
+- Always pull before starting to minimize this risk
+
+---
+
 ## Current Status
 
 **Phase: 1 — Closures + Arrays/Binary Search**
 **Next Session: 8**
+**Session 8 Progress: Not started**
 **Last completed: Session 7 (Day 7, Mar 22, 2026)**
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
 - Session 3: SOLID principles (8/26 done, remaining deferred to Phase 5)
 - Sessions 4-7: DSA Arrays/Two Pointers ONLY — no concept slot (this was the mistake)
+- Graph micro-concepts #1 and #2: PASSED (WhatsApp example — nodes=contacts, edges=who can message, undirected)
 
 ### Active Revision Queue
 - Product of Array Except Self (LC #238) — 5/10 — due Mar 25, 2026
