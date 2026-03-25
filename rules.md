@@ -221,6 +221,7 @@ This applies to ALL sessions, ALL problems. It is a PERMANENT rule.
 - `sum` shadowing the built-in
 
 **Time tracking (not scored, for reference):**
+- **CRITICAL: ALWAYS run a system time check command BEFORE writing any timestamp.** Never guess or assume the time/date. The system date may have crossed midnight.
 - Record system time when exercise is given (STARTED timestamp in exercise file)
 - Record system time when user gets all tests passing (COMPLETED timestamp in exercise file)
 - Calculate and log total solve time (COMPLETED - STARTED)

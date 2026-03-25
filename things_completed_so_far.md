@@ -10,7 +10,7 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 3 | 30 | In progress |
+| Closures/HOF/Decorators | 33 | 6 | 27 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **37** | **289** | |
+| **TOTAL** | **326** | **40** | **286** | |
 
 ---
 
@@ -114,3 +114,16 @@
 
 **Graph Micro-concept #3:**
 - [x] Adjacency List | Graph Theory | Taught | Dict where key = node, value = list of neighbors. For undirected graph, every edge appears TWICE (in both nodes' lists). For directed, only once. WhatsApp = undirected (both see each other), Instagram follow = directed (one-way). Connected graph = reach everyone from any node. Disconnected = isolated groups.
+
+### Day 9 — Mar 25, 2026
+
+**Closures (Session 9, Slot 1):**
+- [x] Q4: nonlocal keyword — UnboundLocalError trap | Closures | Mid | PASSED | Understood: Python decides local vs enclosing at compile time based on assignment. `count += 1` inside inner function → Python treats `count` as local → UnboundLocalError. Fix: `nonlocal count` tells Python to look in enclosing scope. nonlocal = skip L, start from E. global = skip L and E, go to G. Own example: notification timer adjusting delay based on severity. | **Def:** `nonlocal` tells Python a variable belongs to the enclosing scope, not local. Required when REASSIGNING a closure variable. Reading without assignment doesn't need it.
+- [x] Q5: Factory functions — multiplier pattern | Closures | Mid | PASSED | Each call to factory creates a separate closure with its own captured value on heap. `double = multiplier(2)` and `triple = multiplier(3)` have independent `factor` values. Factories beat two-param functions when one param is fixed early and the other comes later at call time. Own example: discount factory — `diwali_sale = discount(30)`, configure once, use many times.
+- [x] Q6: make_accumulator (coding exercise) | Closures | Easy-Medium | **10/10** | 1st run, 0 hints. Factory + nonlocal combined. Clean code: outer sets `running_total`, inner uses `nonlocal` to reassign. Transfer: middleware request timing. | **Def:** Closure factory with mutable state — outer function sets up initial state, inner function modifies it via `nonlocal` and returns updated value. Each factory call = independent closure.
+
+**DSA — Arrays (Session 9, Slot 2):**
+- [x] **REVISION** Product of Array Except Self (LC #238) | Prefix/Suffix | Medium | **10/10** (was 5/10) | ✅ CLEARED | 1st run, 0 hints. Wrote optimal O(n)/O(1) from memory. Listed all 3 approaches (brute → two arrays → single array + running r_prod). Pattern retained. | **Def:** For each index, answer = left product × right product. Build left products forward in ans, compute right products backward with running variable. O(n) time, O(1) extra space.
+
+**Graph Micro-concept #4:**
+- [x] Adjacency Matrix | Graph Theory | PASSED | 2D grid where matrix[i][j] = 1 if edge exists. Undirected → symmetric matrix (if [i][j]=1 then [j][i]=1). Diagonal = 0. Matrix: O(1) edge lookup, O(n) get-all-neighbors, O(n²) space. List: O(degree) edge lookup, O(degree) get-neighbors, O(V+E) space. Matrix = dense graphs, List = sparse graphs.

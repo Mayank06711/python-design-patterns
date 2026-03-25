@@ -54,3 +54,8 @@
 - [x] Best Time to Buy and Sell Stock (LC #121) | Single Pass / Greedy | Easy | **10/10** | Solved in Python | 1st run pass. Track min_price, compute profit at each step. 0 hints. Same pattern as Kadane's.
 - [x] Merge Intervals (LC #56) | Sort + Merge | Medium | **8/10** | Solved in Python | 1st run pass. Sort by start, scan once, compare against last in answer list. 2 hints (missing sort, end should use max). Rewrote from scratch for understanding. | **Def:** Sort intervals by start. Scan left-to-right: if current overlaps last merged (end >= start), extend end with max. Otherwise push new interval. O(n log n).
 
+### Day 9 — Mar 25, 2026
+
+**Revisions:**
+- [x] Product of Array Except Self REVISION (LC #238) | Prefix/Suffix | Medium | **10/10** (was 5/10) | ✅ CLEARED | 1st run, 0 hints. Wrote optimal O(n)/O(1) solution from memory. Pattern retained: left product in ans, running r_prod from right. | **Def:** For each index, answer = product of everything left × product of everything right. Build left products forward, multiply right products backward in one pass. O(n) time, O(1) extra space.
+
