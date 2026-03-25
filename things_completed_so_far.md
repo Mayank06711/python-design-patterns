@@ -10,7 +10,7 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 6 | 27 | In progress |
+| Closures/HOF/Decorators | 33 | 7 | 26 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **40** | **286** | |
+| **TOTAL** | **326** | **41** | **285** | |
 
 ---
 
@@ -127,3 +127,6 @@
 
 **Graph Micro-concept #4:**
 - [x] Adjacency Matrix | Graph Theory | PASSED | 2D grid where matrix[i][j] = 1 if edge exists. Undirected → symmetric matrix (if [i][j]=1 then [j][i]=1). Diagonal = 0. Matrix: O(1) edge lookup, O(n) get-all-neighbors, O(n²) space. List: O(degree) edge lookup, O(degree) get-neighbors, O(V+E) space. Matrix = dense graphs, List = sparse graphs.
+
+**HOF (Session 10, Slot 1):**
+- [x] Q8: my_map, my_filter, my_reduce (coding exercise) | HOF | Medium | **7/10** | 21/21 tests passed. map and filter correct from start. Struggled with reduce: initially called func with 1 arg instead of 2 (map thinking), then double-processed first element, then used truthiness instead of None-check for empty list. 3 hints. | **Def:** HOF = function that takes a function as argument OR returns a function. map = transform every item, filter = keep items passing a test, reduce = fold list into single value by combining accumulator + current item with a two-arg function.
