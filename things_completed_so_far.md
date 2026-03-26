@@ -14,7 +14,7 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 9 | 6 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 10 | 5 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
 | DSA — Linked List | 12 | 0 | 12 | Not started |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **41** | **285** | |
+| **TOTAL** | **326** | **43** | **283** | |
 
 ---
 
@@ -130,3 +130,9 @@
 
 **HOF (Session 10, Slot 1):**
 - [x] Q8: my_map, my_filter, my_reduce (coding exercise) | HOF | Medium | **7/10** | 21/21 tests passed. map and filter correct from start. Struggled with reduce: initially called func with 1 arg instead of 2 (map thinking), then double-processed first element, then used truthiness instead of None-check for empty list. 3 hints. | **Def:** HOF = function that takes a function as argument OR returns a function. map = transform every item, filter = keep items passing a test, reduce = fold list into single value by combining accumulator + current item with a two-arg function.
+
+**DSA — Arrays (Session 10, Slot 2):**
+- [x] Sliding Window Maximum (LC #239) | Sliding Window | Hard | **7/10** | 10/10 brute force O(n*k). 2nd attempt (1st had loop bounds bugs). Identified heap O(n log k) and monotonic deque O(n) approaches conceptually but not comfortable with deque. Added to revision queue (HIGH priority, blocked on deque). | **Def:** Sliding window = fixed-size subarray moving left to right. Brute: scan each window for max. Optimal: monotonic deque maintains candidates in decreasing order, front = current max.
+
+**Graph Micro-concept #5:**
+- [x] Degree of a Node | Graph Theory | PASSED | Degree = number of edges connected to a node. Adjacency list: `len(graph[node])` → O(1). Adjacency matrix: `sum(row)` → O(n). Directed graphs: out-degree = edges going out (row sum / list length), in-degree = edges coming in (column sum / scan all lists O(V+E)).

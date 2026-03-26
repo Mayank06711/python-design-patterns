@@ -31,22 +31,40 @@ CONSTRAINTS:
 DIFFICULTY: Hard
 TIME LIMIT: 12 minutes
 STARTED: 4:25 PM, Mar 25, 2026
-COMPLETED:
-ATTEMPT: 1
+COMPLETED: 2:11 PM, Mar 26, 2026
+ATTEMPT: 2 (1st: 2/10 — loop bounds bugs; 2nd: 10/10)
 """
 
 # ============================================================
 # STEP 1: WRITE YOUR APPROACH HERE AS COMMENTS BEFORE CODING
 # ============================================================
 # 1. WHAT: Question is asking that when there is a array and given an integer K which is actually the size of the window so at a time the window moves like there will be a fixed window which will move on the array from left to extreme right read and inside each window I need to find out the maximum value within that window 
-# 2. HOW: 
-# 3. EDGE CASES:
-# 4. COMPLEXITY:
+# 2. HOW: So there are two possible ways that I could come up one is brute force where we run one loop to traverse till II mean till I is less than N minus K plus one where K is the size of that window and inside that loop we take I and like every time we calculate maximum of each each window and keep updating it That will be big of N into K because inside there will be K loops, Another I can come up with is an K log K
+# 3. EDGE CASES: couldn`t find edge case for my algo
+# 4. COMPLEXITY: 
+# algo 1
+# two one outer loop to move window
+# innner loop find max of each window and save it to ans
+# t.c O(n*k) S.c O(n-k+1) as
 
+# algo 2
+# In this loop what we will be doing We know that let us assume the case three right So when I move by one place K will move like window will move by one leg it discard one element from the window and add one the next one So if we already know the maximum of a window and the next element is coming and the outgoing element is not the maximum of this window then we are we only need compare between the incoming element and the maximum of previous window, Now if the element which is left behind the window he's gone now we have to find a new maximum again in the new window So this is how we will find the maximum of each window 
 
 # ============================================================
 # STEP 2: CODE YOUR SOLUTION
 # ============================================================
+def max_sliding_window(nums, k):
+    if k == 1:
+        return nums
+    ans = []
+    for i in range(len(nums)-k+1):
+        j , maxi = nums[0] , 0
+        while j < i + k-1:
+            new_maxi = max(nums[j],  nums[j+1])
+            maxi = max(new_maxi, maxi)
+            j += 1
+        ans.append(maxi)
+    return ans
 
 
 
