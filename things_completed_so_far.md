@@ -10,13 +10,13 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 7 | 26 | In progress |
+| Closures/HOF/Decorators | 33 | 8 | 25 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 10 | 5 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 11 | 4 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
-| DSA — Linked List | 12 | 0 | 12 | Not started |
+| DSA — Linked List | 12 | 1 | 11 | In progress |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
 | DSA — Sorting | 8 | 0 | 8 | Not started |
 | DSA — Trees & BST | 15 | 0 | 15 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **43** | **283** | |
+| **TOTAL** | **326** | **46** | **280** | |
 
 ---
 
@@ -136,3 +136,14 @@
 
 **Graph Micro-concept #5:**
 - [x] Degree of a Node | Graph Theory | PASSED | Degree = number of edges connected to a node. Adjacency list: `len(graph[node])` → O(1). Adjacency matrix: `sum(row)` → O(n). Directed graphs: out-degree = edges going out (row sum / list length), in-degree = edges coming in (column sum / scan all lists O(V+E)).
+
+### Day 11 — Mar 28, 2026
+
+**Closures/HOF (Session 11, Slot 1):**
+- [x] Q7: Closure over variable vs value (oral) | Closures | Mid | PASSED | Output: `10 20 3`. Closures capture variables, not values. `a` reassigned to 10 (global), `b` reassigned to 20 (enclosing) before `inner()` called. `c=3` is local.
+
+**DSA — Arrays (Session 11, Track A):**
+- [x] Maximum Product Subarray (LC #152) | Kadane's variant | Medium | **5/10** | 12/12 on 4th+ attempt. Many hints. Key: negatives flip min↔max, track both prev_max AND prev_min. 3 candidates per step. Global maxi never decreases. Added to revision (due Mar 31).
+
+**DSA — Linked List (Session 11, Track B1 start):**
+- [x] Reverse Linked List (LC #206) | 3-pointer | Easy | **8/10** | 7/7. Free hint (first LL in Python) + 1 hint (loop condition, null check). Python: `.next` not `->`, return `prev`.

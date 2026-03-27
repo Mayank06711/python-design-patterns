@@ -13,9 +13,9 @@
 
 | Slot | Duration | What | Rule |
 |------|----------|------|------|
-| **Slot 1: Core Concept** | 45-60 min | Current concept topic (see Phase below) | Always comes FIRST. Teach concept → exercise → user gives own example. |
-| **Slot 2: DSA** | 60-90 min | 2-3 problems from current DSA chapter | Check `dsa/revision_queue.md` first — due revisions replace one new problem. |
-| **Slot 3: Graph Micro** | 10-15 min | One micro-concept from `dsa/rules.md` graph table | Last thing in session. ONE concept only. User gives own example to pass. |
+| **Slot 1: Core Concept** | 30-40 min | Current concept topic (closures/HOF/decorators, then SQL, etc.) | Always comes FIRST. Teach concept → exercise → user gives own example. |
+| **Slot 2: DSA (Mixed)** | 60-75 min | 3 problems from TWO tracks (see below) | Check `dsa/revision_queue.md` first — due revisions replace one problem. |
+| **Slot 3: Graph Micro** | 10-15 min | One micro-concept from graph table | Last thing in session. ONE concept only. User gives own example to pass. |
 
 **Session start checklist:**
 1. Pull latest branch
@@ -25,102 +25,107 @@
 
 ---
 
-## Phase 1: Closures + Arrays/Binary Search (Sessions 8-15)
+## DSA Mixed-Topic System (NEW — effective Session 11)
+
+> **Why:** User already practiced arrays, linked lists, trees, stacks, recursion, DP in C++.
+> Interleaved practice builds stronger retention than grinding one topic.
+> Known topics go fast (Python translation), freeing time for harder new patterns.
+
+### Two Parallel Tracks
+
+| Track | Purpose | Difficulty | Speed |
+|-------|---------|-----------|-------|
+| **Track A (Primary)** | New/challenging patterns done in order | Medium-Hard | ~15-20 min/problem |
+| **Track B (Refresh)** | Topics user knows from C++ — Python translation | Medium (start), ramp up | ~8-12 min/problem |
+
+**Each session Slot 2:** 1 Track A + 2 Track B = 3 DSA problems
+(If time is tight or a problem is Hard: 1 Track A + 1 Track B = 2 problems)
+
+### Track A — Primary (go in order)
+
+| Priority | Topic | Problems | Prereqs | Est. Sessions |
+|----------|-------|----------|---------|---------------|
+| 1 | Arrays/Two Pointers (finish) | 5 remaining | — | 2-3 |
+| 2 | Binary Search | 10 | Arrays comfort | 4-5 |
+| 3 | Sorting | 8 | Arrays | 3-4 |
+| 4 | DP | 30 | Recursion from Track B | 12-15 |
+| 5 | Graphs (coding) | 20 | BFS/DFS from micro-concepts | 8-10 |
+| 6 | Bits/Tries | 5 | — | 2 |
+
+### Track B — Refresh (rotate every 2-3 sessions)
+
+| Rotation | Topic | Problems | User's C++ Level | Python Focus |
+|----------|-------|----------|-------------------|-------------|
+| B1 | Linked List | 12 | Practiced | Pointer-free approach, Python idioms |
+| B2 | Stacks/Queues | 10 | Practiced | collections.deque, monotonic patterns |
+| B3 | Trees/BST | 15 | Practiced | Recursive + iterative traversals |
+| B4 | Recursion/Backtracking | 12 | Practiced | Generator patterns, memoization |
+| B5 | Heaps | 8 | Practiced | heapq module, top-K patterns |
+| B6 | Greedy | 8 | Some exposure | Proof of correctness |
+
+**Rotation rule:** Spend 2-3 sessions on each Track B topic (4-6 problems), then rotate to next.
+When Sliding Window Max revision comes due (after B2 deque), do it immediately.
+
+### Concrete Session Plan
+
+| Session | Slot 1: Concept | Track A | Track B | Graph Micro |
+|---------|----------------|---------|---------|-------------|
+| **11** | HOF Q7 done + Q9 curry (oral) | Arrays: 1 problem | Linked List: 2 problems (start B1) | #6: BFS concept |
+| **12** | Decorators basics: @syntax, wrapping | Arrays: 1 problem | Linked List: 2 problems | #7: DFS concept |
+| **13** | Decorators: functools.wraps, metadata | Arrays: 1 problem (finish!) | Linked List: 2 problems | #8: BFS vs DFS |
+| **14** | Decorators: with arguments | Binary Search: 1 problem (start) | Linked List: 2 problems (finish B1 rotation) | #9: Connected components |
+| **15** | Decorators: stacking, class decorators | Binary Search: 1 problem | Stacks/Queues: 2 problems (start B2) | #10: Cycles |
+| **16** | Decorators: advanced + capstone | Binary Search: 1 problem | Stacks/Queues: 2 problems | #11: DAG + Topo sort |
+| **17** | Closures/HOF/Deco quiz | Binary Search: 1 problem | Stacks/Queues: 2 problems (finish B2) | #12: Weighted graphs |
+| **18** | SQL: SELECT, WHERE, JOINs | Binary Search: 1 problem | Trees: 2 problems (start B3) | Graph coding #1 |
+| **19** | SQL: JOINs deep dive | Binary Search: finish | Trees: 2 problems | Graph coding #2 |
+| **20** | SQL: GROUP BY, HAVING, subqueries | Sorting: 1 problem (start) | Trees: 2 problems | Graph coding #3 |
+| ... | ... continues ... | ... | ... | ... |
+
+> Sessions 20+ follow the same pattern: rotate Track B every 2-3 sessions, advance Track A linearly.
+> By Session ~17, Stacks/Queues Track B unlocks Sliding Window Max revision (monotonic deque).
+
+---
+
+## Phase 1 (Current): Closures/HOF/Decorators + Mixed DSA (Sessions 8-17)
 
 > **Concept Track:** Closures / HOF / Decorators (33 questions)
-> **DSA Track:** Finish Arrays (8 left) → Start Binary Search (10)
-> **Graph Track:** Micro-concepts #1 through #6
-
-**We are currently HERE. Session 8 is next.**
-
-| Session | Slot 1: Closures/HOF/Decorators | Slot 2: DSA | Slot 3: Graph |
-|---------|--------------------------------|-------------|---------------|
-| **8** | What is a closure? Scope chain. Variable lookup. (3-4 Qs) | Arrays: 2-3 remaining problems | #1: What is a graph? Nodes + edges |
-| **9** | Closure practical: `nonlocal`, closures in loops, factory functions (3-4 Qs) | Arrays: finish remaining + revision if due | #2: Directed vs Undirected |
-| **10** | Higher-Order Functions: map, filter, reduce from scratch (3-4 Qs) | Binary Search: concept teach + first 2 problems | #3: Adjacency list |
-| **11** | Writing your own HOFs, callbacks, function composition (3-4 Qs) | Binary Search: 2-3 problems | #4: Adjacency matrix |
-| **12** | Decorators basics: @syntax, wrapping, functools.wraps (3-4 Qs) | Binary Search: 2-3 problems | #5: Degree of a node |
-| **13** | Decorators advanced: with args, stacking, class decorators (3-4 Qs) | Binary Search: finish remaining | #6: BFS concept |
-| **14** | Closures + HOF + Decorators capstone exercise (full application) | Linked List: concept teach + first 2 problems | — (capstone takes more time) |
-| **15** | Quiz: 30-40 MCQ + written on Closures/HOF/Decorators | Linked List: 2-3 problems | — |
+> **DSA Track A:** Finish Arrays (5 left) → Binary Search (10)
+> **DSA Track B:** Linked List (B1) → Stacks/Queues (B2)
+> **Graph Track:** Micro-concepts #1 through #12
 
 ---
 
-## Phase 2: SQL + Linked List/Stacks/Sorting (Sessions 16-23)
+## Phase 2: SQL + Mixed DSA (Sessions 18-25)
 
 > **Concept Track:** SQL & Indexing (35 questions)
-> **DSA Track:** Linked List (12) → Stacks/Queues (10) → Sorting (8)
-> **Graph Track:** Micro-concepts #7 through #12
-
-| Session | Slot 1: SQL & Indexing | Slot 2: DSA | Slot 3: Graph |
-|---------|----------------------|-------------|---------------|
-| **16** | SQL basics: SELECT, WHERE, JOINs, NULL handling (4-5 Qs) | Linked List: continue | #7: DFS concept |
-| **17** | JOINs deep dive: LEFT/RIGHT/FULL/CROSS/SELF + practice (4-5 Qs) | Linked List: continue | #8: BFS vs DFS — when which |
-| **18** | Aggregation: GROUP BY, HAVING, subqueries (4-5 Qs) | Linked List: finish | #9: Connected components |
-| **19** | Window functions: ROW_NUMBER, RANK, LAG, LEAD, running totals (4-5 Qs) | Stacks/Queues: concept + first problems | #10: Cycles |
-| **20** | CTEs, recursive CTEs, temp tables (4-5 Qs) | Stacks/Queues: continue | #11: DAG + Topological sort |
-| **21** | Indexing: B-tree internals, EXPLAIN plans, query optimization (4-5 Qs) | Stacks/Queues: finish | #12: Weighted graphs |
-| **22** | Composite indexes, covering indexes, index pitfalls (3-4 Qs) | Sorting: concept + problems | — |
-| **23** | SQL capstone + quiz | Sorting: finish | — |
+> **DSA Track A:** Finish Binary Search → Sorting (8)
+> **DSA Track B:** Trees (B3) → Recursion/Backtracking (B4)
+> **Graph Track:** Start graph CODING problems
 
 ---
 
-## Phase 3: Rate Limiting + Trees/Heaps (Sessions 24-30)
+## Phase 3: Rate Limiting + Mixed DSA (Sessions 26-32)
 
 > **Concept Track:** Rate Limiting (27 questions)
-> **DSA Track:** Trees/BST (15) → Heaps (8)
-> **Graph Track:** Start easy graph CODING problems (theory done)
-
-| Session | Slot 1: Rate Limiting | Slot 2: DSA | Slot 3: Extra |
-|---------|----------------------|-------------|---------------|
-| **24** | Rate limiting concepts: why, where, types of limits (3-4 Qs) | Trees: concept teach + traversals | Graph: first easy coding problem |
-| **25** | Token Bucket + Leaky Bucket algorithms (4-5 Qs) | Trees: BST problems | Graph: easy problem |
-| **26** | Fixed Window + Sliding Window algorithms (4-5 Qs) | Trees: continue | Graph: easy problem |
-| **27** | Sliding Window Log + comparison of all 5 algorithms (4-5 Qs) | Trees: finish | Graph: easy problem |
-| **28** | Distributed rate limiting, Redis-based, race conditions (4-5 Qs) | Heaps: concept + problems | Graph: easy problem |
-| **29** | Rate limiting capstone: implement 2-3 algorithms (3-4 Qs) | Heaps: finish | — |
-| **30** | Rate limiting quiz | Recursion/Backtracking: concept + start | — |
+> **DSA Track A:** DP start (30 problems — longest track)
+> **DSA Track B:** Heaps (B5) → Greedy (B6)
 
 ---
 
-## Phase 4: System Design + Recursion/Greedy/DP (Sessions 31-42)
+## Phase 4: System Design + DP Focus (Sessions 33-45)
 
 > **Concept Track:** System Design (27 questions)
-> **DSA Track:** Recursion/Backtracking (12) → Greedy (8) → DP start (30)
-
-| Session | Slot 1: System Design | Slot 2: DSA |
-|---------|----------------------|-------------|
-| **31** | SD fundamentals: CAP theorem, scaling, load balancing | Recursion/Backtracking: continue |
-| **32** | SD: URL Shortener (full design) | Recursion/Backtracking: finish |
-| **33** | SD: Chat/Messaging System | Greedy: concept + problems |
-| **34** | SD: Rate Limiter (connects to Phase 3!) | Greedy: finish |
-| **35** | SD: Notification System | DP: 1D basics (Climbing Stairs, House Robber) |
-| **36** | SD: News Feed / Timeline | DP: 2D grid (Unique Paths, Min Path Sum) |
-| **37** | SD: Distributed Cache | DP: Knapsack family |
-| **38** | SD: Search Autocomplete | DP: String DP (LCS, Edit Distance) |
-| **39** | SD: Payment System | DP: LIS family |
-| **40** | SD: Video Streaming | DP: Interval DP |
-| **41** | SD capstone: mock design interview | DP: Tree DP + finish |
-| **42** | SD quiz | DP: revision of weak patterns |
+> **DSA Track A:** DP continue (most of the 30 problems here)
+> **DSA Track B:** Rotate back to weak topics for revision
 
 ---
 
-## Phase 5: Graph Coding + Final Polish (Sessions 43-50)
+## Phase 5: Graphs Coding + Final Polish (Sessions 46-55)
 
-> **DSA Track:** Graphs coding (20) → Bits/Tries (5)
+> **DSA Track A:** Graphs coding (20) → Bits/Tries (5)
 > **Concept Track:** Deferred topics (OOP remaining 5, SOLID remaining 18)
-
-| Session | Focus |
-|---------|-------|
-| **43-44** | Graph: BFS problems (3-4) |
-| **45-46** | Graph: DFS problems (3-4) |
-| **47** | Graph: Topological Sort problems |
-| **48** | Graph: Shortest path (Dijkstra/Bellman-Ford) |
-| **49** | Graph: Union-Find + advanced |
-| **50** | Bits/Tries (5 problems) |
-| **51** | OOP deferred: Observer, Decorator, __slots__, Metaclasses, MI pitfalls |
-| **52** | SOLID remaining: quick-fire 18 questions |
-| **53-55** | Mock interviews: DSA + System Design + Behavioral |
+> Mock interviews: DSA + System Design + Behavioral
 
 ---
 
@@ -128,13 +133,14 @@
 
 1. **3 slots per session. No exceptions.** If DSA takes longer, cut it — don't skip Slot 1.
 2. **Slot 1 (concept) always comes first.** The user's weakness is concepts, not just DSA.
-3. **~4 questions per concept session** is realistic. Not 33 in one day.
+3. **~3-4 questions per concept session** is realistic.
 4. **Graph micro-concepts are 10 minutes.** Don't dump all 12 at once.
 5. **Check revision queue** at start. Due revisions happen in Slot 2.
 6. **Track the session number.** Update "Current Status" below after every session.
 7. **If user solved independently** (personal laptop), update trackers but still follow slot structure.
 8. **Teaching style:** See `rules.md` for scoring, intuition-first approach, transfer building.
 9. **DSA rules:** See `dsa/rules.md` for exercise flow, revision system, problem sources.
+10. **Mixed DSA:** Every Slot 2 MUST pull from BOTH Track A and Track B. Never do 3 from one track.
 
 ---
 
@@ -154,7 +160,7 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 
 ### Split Sessions (user does Slot 1 on laptop A, Slot 2 on laptop B):
 - If a session is partially done, "Current Status" shows which slots are completed
-- Example: "Session 8: Slot 1 DONE, Slot 2 pending, Slot 3 pending"
+- Example: "Session 11: Slot 1 DONE, Slot 2 pending, Slot 3 pending"
 - The next AI picks up from the first incomplete slot
 
 ### Conflict Resolution:
@@ -165,17 +171,24 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 
 ## Current Status
 
-**Phase: 1 — Closures + Arrays/Binary Search**
-**Next Session: 10**
-**Last completed: Session 9 (Day 9, Mar 25, 2026)**
+**Phase: 1 — Closures/HOF/Decorators + Mixed DSA**
+**Next Session: 11 (Slot 2B: Linked List Cycle + Slot 3: Graph #6 BFS remaining)**
+**Last completed: Session 11 partial (Day 11, Mar 28, 2026)**
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
 - Session 3: SOLID principles (8/26 done, remaining deferred to Phase 5)
 - Sessions 4-7: DSA Arrays/Two Pointers ONLY — no concept slot (this was the mistake)
-- Session 8: Closures Slot 1 (Q1-Q3: scope chain, late binding, loop trap) + DSA Slot 2 (Buy/Sell Stock 10/10, Merge Intervals 8/10) + Graph #3 (adjacency list)
-- Session 9: Closures Slot 1 (Q4-Q6: nonlocal, factory functions, make_accumulator 10/10) + DSA Slot 2 (Product Except Self REVISION CLEARED 10/10) + Graph #4 (adjacency matrix)
-- Graph micro-concepts #1-#4: PASSED (#1-2: nodes/edges, directed/undirected. #3: adjacency list. #4: adjacency matrix — symmetric for undirected, O(1) edge lookup, O(n²) space)
+- Session 8: Closures (Q1-Q3: scope chain, late binding, loop trap) + DSA (Buy/Sell Stock 10/10, Merge Intervals 8/10) + Graph #3 (adjacency list)
+- Session 9: Closures (Q4-Q6: nonlocal, factory functions, make_accumulator 10/10) + DSA (Product Except Self REVISION CLEARED 10/10) + Graph #4 (adjacency matrix)
+- Session 10: HOF (Q7 closure-over-variable PASSED, Q8 map/filter/reduce 7/10) + DSA (Sliding Window Max 7/10 brute, optimal blocked on deque) + Graph #5 (degree of a node, in/out-degree)
+- Session 11 (partial): Q7 closure-over-variable PASSED + Track A: Max Product Subarray 5/10 (revision due Mar 31) + Track B: Reverse Linked List 8/10
+- Graph micro-concepts #1-#5: PASSED
+
+### DSA Track Status
+- **Track A:** Arrays 11/15 done (4 remaining) → then Binary Search
+- **Track B:** Linked List 1/12 (B1 rotation started)
 
 ### Active Revision Queue
-- None — all revisions cleared!
+- Sliding Window Maximum OPTIMAL — blocked until Stacks/Queues (B2) covers deque (~Session 15-17)
+- Maximum Product Subarray — due Mar 31, 2026
