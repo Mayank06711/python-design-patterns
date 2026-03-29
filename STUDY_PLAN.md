@@ -172,8 +172,8 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 ## Current Status
 
 **Phase: 1 — Closures/HOF/Decorators + Mixed DSA**
-**Next Session: 11 (Slot 2B: Linked List Cycle + Slot 3: Graph #6 BFS remaining)**
-**Last completed: Session 11 partial (Day 11, Mar 28, 2026)**
+**Next Session: 12**
+**Last completed: Session 11 (Day 11-12, Mar 28-29, 2026)**
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
@@ -182,12 +182,12 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 - Session 8: Closures (Q1-Q3: scope chain, late binding, loop trap) + DSA (Buy/Sell Stock 10/10, Merge Intervals 8/10) + Graph #3 (adjacency list)
 - Session 9: Closures (Q4-Q6: nonlocal, factory functions, make_accumulator 10/10) + DSA (Product Except Self REVISION CLEARED 10/10) + Graph #4 (adjacency matrix)
 - Session 10: HOF (Q7 closure-over-variable PASSED, Q8 map/filter/reduce 7/10) + DSA (Sliding Window Max 7/10 brute, optimal blocked on deque) + Graph #5 (degree of a node, in/out-degree)
-- Session 11 (partial): Q7 closure-over-variable PASSED + Track A: Max Product Subarray 5/10 (revision due Mar 31) + Track B: Reverse Linked List 8/10
-- Graph micro-concepts #1-#5: PASSED
+- Session 11: Q7 closure-over-variable PASSED + Track A: Max Product Subarray 5/10 (revision due Mar 31) + Track B: Reverse Linked List 8/10, Linked List Cycle 9/10 + Graph #6 BFS PASSED
+- Graph micro-concepts #1-#6: PASSED
 
 ### DSA Track Status
 - **Track A:** Arrays 11/15 done (4 remaining) → then Binary Search
-- **Track B:** Linked List 1/12 (B1 rotation started)
+- **Track B:** Linked List 2/12 (B1 rotation started)
 
 ### Active Revision Queue
 - Sliding Window Maximum OPTIMAL — blocked until Stacks/Queues (B2) covers deque (~Session 15-17)

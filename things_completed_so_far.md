@@ -16,7 +16,7 @@
 | System Design | 27 | 0 | 27 | Not started |
 | DSA — Arrays/Two Pointers | 15 | 11 | 4 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
-| DSA — Linked List | 12 | 1 | 11 | In progress |
+| DSA — Linked List | 12 | 2 | 10 | In progress |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
 | DSA — Sorting | 8 | 0 | 8 | Not started |
 | DSA — Trees & BST | 15 | 0 | 15 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **46** | **280** | |
+| **TOTAL** | **326** | **48** | **278** | |
 
 ---
 
@@ -147,3 +147,7 @@
 
 **DSA — Linked List (Session 11, Track B1 start):**
 - [x] Reverse Linked List (LC #206) | 3-pointer | Easy | **8/10** | 7/7. Free hint (first LL in Python) + 1 hint (loop condition, null check). Python: `.next` not `->`, return `prev`.
+- [x] Linked List Cycle (LC #141) | Floyd's Tortoise & Hare | Easy | **9/10** | 8/8. Hash map brute first (O(n) space), then Floyd's O(1) space. 1 bug: `or` instead of `and` in while condition (short-circuit logic). 0 hints. | **Def:** Floyd's = slow (1 step) + fast (2 steps). If cycle exists, they MUST meet (gap shrinks by 1 each step). Use `and` for short-circuit safety.
+
+**Graph Micro-concept #6:**
+- [x] BFS (Breadth-First Search) | Graph Theory | PASSED | BFS = explore all neighbors (level by level) before going deeper. Uses QUEUE (FIFO) + visited set. Guarantees shortest path in unweighted graphs. Own example: department notification — CEO tells all VPs (level 1), then VPs tell all Directors (level 2), ripples down level by level.

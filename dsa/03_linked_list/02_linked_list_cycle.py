@@ -28,19 +28,22 @@ CONSTRAINTS:
 
 DIFFICULTY: Easy
 TIME LIMIT: 5 minutes
-STARTED:
-COMPLETED:
-ATTEMPT: 1
+STARTED: 1:30 PM, Mar 29, 2026
+COMPLETED: 2:00 PM, Mar 29, 2026
+ATTEMPT: 1 (hash map first, then Floyd's after or→and fix)
 """
 
 # ============================================================
 # STEP 1: WRITE YOUR APPROACH HERE AS COMMENTS BEFORE CODING
 # ============================================================
-# 1. WHAT:
-# 2. HOW:
-# 3. EDGE CASES:
-# 4. COMPLEXITY:
-
+# 1. WHAT: question want me to find out wether likedlistis cyclic or not
+# 2. HOW: run a loop while loop till head->next != null and inside we will use a hashmap which will store the nodes and in each iteration we check wether the current node already exist in node or not if yes it a cyclic linkedlist.
+# 3. EDGE CASES: empty or only head node is given
+# 4. COMPLEXITY:t.c-> O(n) and s.c->O(n)
+# algo 2 
+# we take twwo pointer slow and fast slow run one step at a time and fast runs two at a time so if its circular so till slow complet one revoltution fast will do twice
+# this way if they ever meet it means it was circular
+#t.c O(N) s.c O(1)
 
 # ============================================================
 # NODE DEFINITION (DO NOT MODIFY)
@@ -54,7 +57,32 @@ class ListNode:
 # ============================================================
 # STEP 2: CODE YOUR SOLUTION
 # ============================================================
-
+def has_cycle_brute(head: ListNode)->bool:
+    if head is None or head.next == None:
+        return False
+    temp = head
+    hash_map = {}
+    hash_map[temp] = 1
+    temp = temp.next
+    while(temp.next):
+        if hash_map.get(temp):
+            return True
+        else:
+            hash_map[temp] = 1
+            temp = temp.next
+    
+    return False
+def has_cycle(head:ListNode)->bool:
+    if head is None or head.next is None:
+        return False
+    slow = head
+    fast = head
+    while(fast != None and fast.next != None):
+        slow = slow.next
+        fast = fast.next.next
+        if(slow == fast):
+            return True
+    return False
 
 
 # ============================================================
