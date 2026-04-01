@@ -14,9 +14,9 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 11 | 4 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 12 | 3 | In progress |
 | DSA — Binary Search | 10 | 0 | 10 | Not started |
-| DSA — Linked List | 12 | 2 | 10 | In progress |
+| DSA — Linked List | 12 | 4 | 8 | In progress |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
 | DSA — Sorting | 8 | 0 | 8 | Not started |
 | DSA — Trees & BST | 15 | 0 | 15 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **48** | **278** | |
+| **TOTAL** | **326** | **51** | **275** | |
 
 ---
 
@@ -151,3 +151,18 @@
 
 **Graph Micro-concept #6:**
 - [x] BFS (Breadth-First Search) | Graph Theory | PASSED | BFS = explore all neighbors (level by level) before going deeper. Uses QUEUE (FIFO) + visited set. Guarantees shortest path in unweighted graphs. Own example: department notification — CEO tells all VPs (level 1), then VPs tell all Directors (level 2), ripples down level by level.
+
+### Day 12 — Apr 1, 2026
+
+**Decorators (Session 12, Slot 1):**
+- [x] Decorators Basics | Decorators | Mid | PASSED | Decorator = HOF + closure + `@` syntax. `@decorator` is sugar for `func = decorator(func)`. Universal pattern: `def wrapper(*args, **kwargs)` forwards all args. Own example: `@timer` for request timing, `@sanitize` for input validation.
+
+**DSA — Backtracking (Session 12, warm-up for Track A):**
+- [x] Generate Permutations (LC #46) | Backtracking | Medium | PASSED (5/5) | Backtracking template: base case → loop choices → pick → recurse → unpick. Visited list tracks picked elements. O(n! * n) to generate all permutations.
+
+**DSA — Arrays (Session 12, Track A):**
+- [x] Next Permutation (LC #31) | Greedy / Lexicographic | Medium | **8/10** | Find break point from right (first ascending), swap with smallest bigger, reverse tail. Lexicographic = number odometer. | **Def:** Next permutation = increment rightmost digit possible, reset everything after to smallest.
+
+**DSA — Linked List (Session 12, Track B continued):**
+- [x] Linked List Cycle II (LC #142) | Floyd's Phase 2 | Medium | **9/10** | After Floyd's detects cycle, reset one pointer to head, move both at speed 1 → meet at cycle start. Math: L = nC - x. | **Def:** Floyd's Cycle II = detect meeting → reset one to head → move both speed 1 → meet at cycle entry.
+- [x] Middle of Linked List (LC #876) | Fast/Slow Pointers | Easy | **10/10** | Fast moves 2x, slow moves 1x. When fast reaches end, slow at middle. 1-pass O(n).
