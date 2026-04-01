@@ -172,8 +172,8 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 ## Current Status
 
 **Phase: 1 — Closures/HOF/Decorators + Mixed DSA**
-**Next Session: 13 (Slot 3 Graph #7 DFS deferred)**
-**Last completed: Session 12 partial (Day 12, Apr 1, 2026)**
+**Next Session: 13**
+**Last completed: Session 12 FULL (Day 12, Apr 1, 2026)**
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
@@ -183,8 +183,8 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 - Session 9: Closures (Q4-Q6: nonlocal, factory functions, make_accumulator 10/10) + DSA (Product Except Self REVISION CLEARED 10/10) + Graph #4 (adjacency matrix)
 - Session 10: HOF (Q7 closure-over-variable PASSED, Q8 map/filter/reduce 7/10) + DSA (Sliding Window Max 7/10 brute, optimal blocked on deque) + Graph #5 (degree of a node, in/out-degree)
 - Session 11: Q7 closure-over-variable PASSED + Track A: Max Product Subarray 5/10 (revision due Mar 31) + Track B: Reverse Linked List 8/10, Linked List Cycle 9/10 + Graph #6 BFS PASSED
-- Session 12 (partial): Decorators basics PASSED + Track A: Next Permutation 8/10 (+ permutation generation warm-up) + Track B: Cycle II 9/10, Middle of LL 10/10 + Graph #7 DFS (deferred)
-- Graph micro-concepts #1-#6: PASSED (#7 deferred to Session 13)
+- Session 12 (complete): Decorators basics PASSED + Track A: Next Permutation 8/10 (+ permutation generation warm-up) + Track B: Cycle II 9/10, Middle of LL 10/10 + Graph #7 DFS PASSED
+- Graph micro-concepts #1-#7: PASSED
 
 ### DSA Track Status
 - **Track A:** Arrays 12/15 done (3 remaining) → then Binary Search

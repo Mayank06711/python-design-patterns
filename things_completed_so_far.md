@@ -10,7 +10,7 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 8 | 25 | In progress |
+| Closures/HOF/Decorators | 33 | 9 | 24 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **51** | **275** | |
+| **TOTAL** | **326** | **52** | **274** | |
 
 ---
 
@@ -166,3 +166,6 @@
 **DSA — Linked List (Session 12, Track B continued):**
 - [x] Linked List Cycle II (LC #142) | Floyd's Phase 2 | Medium | **9/10** | After Floyd's detects cycle, reset one pointer to head, move both at speed 1 → meet at cycle start. Math: L = nC - x. | **Def:** Floyd's Cycle II = detect meeting → reset one to head → move both speed 1 → meet at cycle entry.
 - [x] Middle of Linked List (LC #876) | Fast/Slow Pointers | Easy | **10/10** | Fast moves 2x, slow moves 1x. When fast reaches end, slow at middle. 1-pass O(n).
+
+**Graph Micro-concept #7:**
+- [x] DFS (Depth-First Search) | Graph Theory | PASSED | DFS = go deep first then backtrack. Uses STACK (LIFO) or recursion. Recursion IS DFS — call stack handles it naturally. Use cases: detect cycles, topological sort, find all paths, maze solving. Own example: Finding all connections between two people in social network. | **Def:** DFS explores as far as possible along each branch before backtracking. Stack-based or recursive. Does NOT guarantee shortest path (unlike BFS).
