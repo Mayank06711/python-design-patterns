@@ -169,3 +169,20 @@
 
 **Graph Micro-concept #7:**
 - [x] DFS (Depth-First Search) | Graph Theory | PASSED | DFS = go deep first then backtrack. Uses STACK (LIFO) or recursion. Recursion IS DFS — call stack handles it naturally. Use cases: detect cycles, topological sort, find all paths, maze solving. Own example: Finding all connections between two people in social network. | **Def:** DFS explores as far as possible along each branch before backtracking. Stack-based or recursive. Does NOT guarantee shortest path (unlike BFS).
+
+### Session 13 — Apr 1, 2026
+
+**Decorators (Session 13, Slot 1):**
+- [x] Q10: functools.wraps (coding exercise) | Decorators | Medium | **6/10** | 10/10 tests. Build @cache decorator with metadata preservation. Bug: line 49 uses `.get(key, None)` which checks truthiness, not existence — fails for falsy cached values (0, False, [], ''). Should use `if key in cache_mem:` or `if key not in cache_mem:`. | **Def:** functools.wraps copies metadata (__name__, __doc__, __module__, __annotations__) from original function to wrapper, preserving identity for debugging/logging.
+
+**DSA — Arrays REVISION (Session 13, Slot 2):**
+- [x] **REVISION** Maximum Product Subarray (LC #152) | Kadane's variant | Medium | **10/10** (was 5/10) | ✅ CLEARED | 1st run, 0 hints. Track prev_max AND prev_min (negatives flip). 3 candidates: nums[i], prev_max*nums[i], prev_min*nums[i]. Caught test case error (24 vs 6). | **Def:** Track prev_max and prev_min at each step. New_max = max(nums[i], prev_max*nums[i], prev_min*nums[i]). New_min = min(nums[i], prev_max*nums[i], prev_min*nums[i]). Global max = max across all positions.
+
+**DSA — Arrays (Session 13, Track A):**
+- [x] Trapping Rain Water (LC #42) | Prefix Max Arrays | Hard | **6/10** | 10/10 both brute O(n^2) and optimized O(n). Core formula: water[i] = min(left_max, right_max) - height[i]. Brute: scan left+right for each index. Optimized: precompute left_max[] and right_max[] arrays in 2 passes. Bugs: typo htg/hgt, range step -1 instead of +1, overcomplicated running max initially. Added to revision (due Apr 4, must do O(1) space two-pointer). | **Def:** Water at each position = min(tallest bar to left, tallest bar to right) - bar height. Precompute both max arrays in O(n) to avoid O(n^2) repeated scans.
+
+**DSA — Linked List (Session 13, Track B):**
+- [x] Remove Nth Node From End (LC #19) | Two-pass length | Medium | **9/10** | 10/10 1st run. Two-pass: count length, traverse to (length-n-1), rewire. Edge case: n==length → return head.next. 1 hint (head removal simplification). Follow-up: one-pass with two pointers (gap of n). | **Def:** Find length first, compute position from start = length-n, stop one before to rewire .next. Edge case: removing head when n==length.
+
+**Graph Micro-concept #8:**
+- [x] BFS vs DFS Comparison | Graph Theory | PASSED | BFS = queue, level-by-level, guarantees shortest path (unweighted), O(width) space. DFS = stack/recursion, branch-by-branch, no shortest guarantee, O(depth) space. BFS for: shortest path, level-order, ripple problems. DFS for: cycles, topological sort, all paths, maze/backtracking. Own examples: navigation/maps = BFS (shortest route), LinkedIn connection chains = DFS (deep exploration). Key: both traverse any graph; BFS guarantees shortest, DFS guarantees complete exploration with less memory.
