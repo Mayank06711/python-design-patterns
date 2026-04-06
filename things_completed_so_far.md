@@ -10,13 +10,13 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 9 | 24 | In progress |
+| Closures/HOF/Decorators | 33 | 10 | 23 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 12 | 3 | In progress (+3 matrix files created) |
-| DSA — Binary Search | 10 | 1 | 9 | In progress |
-| DSA — Linked List | 12 | 6 | 6 | In progress |
+| DSA — Arrays/Two Pointers | 19 | 12 | 7 | In progress (+3 matrix created, +4 added from C++ cross-check) |
+| DSA — Binary Search | 10 | 3 | 7 | In progress |
+| DSA — Linked List | 13 | 7 | 6 | In progress (+6 missing from C++ added, +1 Middle bonus) |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
 | DSA — Sorting | 8 | 0 | 8 | Not started |
 | DSA — Trees & BST | 15 | 0 | 15 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **55** | **271** | |
+| **TOTAL** | **332** | **59** | **273** | |
 
 ---
 
@@ -203,3 +203,17 @@
 
 **Graph Micro-concept #9:**
 - [x] Connected Components | Graph Theory | PASSED | A connected component = group of nodes where every node is reachable from every other within the group. Find all: loop through all nodes, start BFS/DFS from each unvisited node — each fresh traversal = one component. Count of fresh BFS/DFS starts = number of components. Own example: Family tree — members within a family are connected, different families are separate components; marriage merges two components (union). | **Def:** Connected component = maximal set of mutually reachable nodes. Find them by starting BFS/DFS from each unvisited node.
+
+### Session 15 — Apr 3, 2026
+
+**Decorators (Session 15, Slot 1):**
+- [x] Decorator Stacking + Class Decorators (exercise 11) | Decorators | Advanced | **8.5/10** | 16/16 tests. Stacking: decorators apply bottom-up (`@A @B def f` = `A(B(f))`), execute top-down. Class decorators: function that takes a class, modifies/wraps it, returns it. `@singleton` class decorator using `__new__` override. 0 hints. | **Def:** Stacking = chain of wrappers, apply bottom-up, execute top-down. Class decorator = function(cls) → modified cls. Common uses: singleton, auto-repr, registry, validation.
+
+**DSA — Binary Search (Session 15, Track A):**
+- [x] Search in Rotated Sorted Array (LC #33) | Binary Search | Medium | **4/10** | 12/12 on 3rd+ attempt. 3 bugs: (1) `while(left < right)` → `<=` (missed single-element), (2) strict `<`/`>` → `<=`/`>=` (missed boundary elements), (3) missing `else` in right-sorted branch (infinite loop). Didn't build intuition for WHY one half is always sorted. Added to revision (due Apr 7). | **Def:** Rotated array has exactly 1 break point. `nums[left] <= nums[mid]` → left half sorted. Check if target in sorted range → search there, else search other half. Single pass O(log n).
+
+**DSA — Linked List (Session 15, Track B):**
+- [x] Merge Two Sorted Lists (LC #21) | Dummy Head + Compare-and-Pick | Easy | **9/10** | 8/8 1st run. Dummy head pattern (create fake node, build merged list by comparing and picking smaller node, return dummy.next). O(n+m) time, O(1) space — rewiring existing nodes, NOT creating new ones. 0 hints. Transfer: Merge Sort's merge step, Merge K Sorted Lists. | **Def:** Dummy head + compare-and-pick: create fake node, at each step pick smaller of two list heads, advance that pointer. After one exhausted, attach remainder. Return dummy.next.
+
+**Graph Micro-concept #10:**
+- [x] Cycle Detection | Graph Theory | PASSED | Undirected: DFS + parent tracking — visiting a non-parent visited node = cycle (back to parent via same edge is NOT a cycle). Directed: 3-state coloring — white (unvisited), gray (in current DFS path), black (fully explored). Gray→gray = back edge = cycle. BFS can detect cycles in undirected graphs but NOT reliably in directed graphs (can't distinguish back edges from cross edges). Kahn's Algorithm (BFS topological sort) can detect cycle existence but not location. Own example: Instagram follow graph (directed cycles possible: A→B→C→A). | **Def:** Undirected = DFS + parent (non-parent visited = cycle). Directed = 3-state DFS (gray→gray = cycle). BFS works for undirected only; Kahn's detects directed cycle existence.

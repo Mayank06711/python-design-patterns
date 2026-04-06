@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Pattern Tree — Interview Prep</title>
+<style>
+  :root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #1c2128;
+    --bg-hover: #21262d;
+    --border: #30363d;
+    --border-light: #3d444d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --blue: #58a6ff;
+    --blue-dim: #1f6feb;
+    --green: #3fb950;
+    --green-bg: #0d2818;
+    --yellow: #d29922;
+    --orange: #f0883e;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --cyan: #39d353;
+    --line-color: #30363d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 32px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+  .header h1 span { color: var(--blue); }
+  .header-sub {
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    margin-top: 2px;
+  }
+
+  /* ── Stats Row ── */
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+  }
+  .stat-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 20px;
+    min-width: 130px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 1.7rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .stat-card .label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+  }
+  .stat-card.green .num { color: var(--green); }
+  .stat-card.blue .num { color: var(--blue); }
+  .stat-card.yellow .num { color: var(--yellow); }
+  .stat-card.purple .num { color: var(--purple); }
+
+  /* ── Controls ── */
+  .controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 14px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-primary);
+    align-items: center;
+  }
+  .ctrl-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .ctrl-group::after {
+    content: '';
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 8px;
+  }
+  .ctrl-group:last-child::after { display: none; }
+  .btn {
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    user-select: none;
+  }
+  .btn:hover { border-color: var(--blue); color: var(--text-primary); }
+  .btn.active { background: var(--blue-dim); border-color: var(--blue); color: #fff; }
+  .search-box {
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    outline: none;
+    width: 200px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  .search-box::placeholder { color: var(--text-muted); }
+  .search-box:focus { border-color: var(--blue); }
+
+  /* ── Main Content ── */
+  .main {
+    padding: 20px 32px 60px;
+    max-width: 1200px;
+  }
+
+  /* ── Overall Progress Bar ── */
+  .overall-progress {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .overall-progress .label-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+  }
+  .overall-progress .label-row span:first-child { color: var(--text-secondary); }
+  .overall-progress .label-row span:last-child { color: var(--green); font-weight: 600; }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-hover);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--green) 100%);
+    transition: width 0.5s ease;
+  }
+
+  /* ── Pattern Node (Root) ── */
+  .pattern-node {
+    margin-bottom: 6px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    transition: border-color 0.2s;
+  }
+  .pattern-node:hover { border-color: var(--border-light); }
+  .pattern-node.has-solved { border-left: 3px solid var(--green); }
+
+  .pattern-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .pattern-header:hover { background: var(--bg-tertiary); }
+
+  .chevron {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+  .pattern-node.collapsed .chevron { transform: rotate(-90deg); }
+
+  .pattern-number {
+    background: var(--bg-hover);
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pattern-name {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .pattern-count {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .pattern-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .pattern-bar-track {
+    width: 70px;
+    height: 5px;
+    background: var(--bg-hover);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .pattern-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .pattern-bar-fill.green { background: var(--green); }
+  .pattern-bar-fill.yellow { background: var(--yellow); }
+  .pattern-bar-fill.blue { background: var(--blue); }
+  .pattern-bar-pct {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    min-width: 28px;
+    text-align: right;
+  }
+
+  .pattern-recognition {
+    padding: 0 16px 0 66px;
+    font-size: 0.73rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .pattern-body {
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    max-height: 5000px;
+    opacity: 1;
+  }
+  .pattern-node.collapsed .pattern-body {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  /* ── Data Structure Branch ── */
+  .ds-branch {
+    margin: 0 12px 8px 36px;
+    border-left: 2px solid var(--line-color);
+    position: relative;
+  }
+  .ds-branch::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: -2px;
+    width: 14px;
+    height: 2px;
+    background: var(--line-color);
+  }
+
+  .ds-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 20px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 6px;
+    margin-left: 12px;
+    transition: background 0.15s;
+  }
+  .ds-header:hover { background: var(--bg-hover); }
+
+  .ds-chevron {
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+    width: 14px;
+    text-align: center;
+  }
+  .ds-branch.collapsed .ds-chevron { transform: rotate(-90deg); }
+
+  .ds-icon {
+    font-size: 0.85rem;
+    width: 20px;
+    text-align: center;
+  }
+
+  .ds-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .ds-count {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .ds-problems {
+    padding: 0 0 4px 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.2s;
+    max-height: 3000px;
+    opacity: 1;
+  }
+  .ds-branch.collapsed .ds-problems {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  /* ── Problem Leaf ── */
+  .problem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 46px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    margin: 1px 12px 1px 12px;
+    position: relative;
+    transition: background 0.12s;
+  }
+  .problem:hover { background: var(--bg-hover); }
+
+  /* Connecting line from DS branch to problem */
+  .problem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background: var(--line-color);
+  }
+  .problem::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--line-color);
+  }
+  .problem:last-child::after {
+    height: 50%;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-dot.solved { background: var(--green); box-shadow: 0 0 6px rgba(63, 185, 80, 0.3); }
+  .status-dot.unsolved { background: var(--border); }
+
+  .parent-tag {
+    background: #1a2332;
+    color: var(--blue);
+    font-size: 0.58rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+
+  .problem-name {
+    flex: 1;
+    color: var(--text-primary);
+    font-weight: 400;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .problem-name a {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 0.73rem;
+    margin-left: 4px;
+  }
+  .problem-name a:hover { text-decoration: underline; }
+
+  .diff-badge {
+    font-size: 0.6rem;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+  }
+  .diff-badge.easy { background: rgba(63, 185, 80, 0.12); color: var(--green); }
+  .diff-badge.medium { background: rgba(240, 136, 62, 0.12); color: var(--orange); }
+  .diff-badge.hard { background: rgba(248, 81, 73, 0.12); color: var(--red); }
+
+  .variant-text {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    margin-top: 28px;
+    padding: 14px 18px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .header, .controls, .main, .stats-row { padding-left: 16px; padding-right: 16px; }
+    .variant-text { display: none; }
+    .pattern-bar-track { width: 50px; }
+    .search-box { width: 140px; }
+    .problem { padding-left: 34px; }
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>DSA Pattern Tree</span> &mdash; Interview Prep</h1>
+  <div class="header-sub">32 patterns &middot; ~215 problems &middot; Pattern &rarr; Data Structure &rarr; Problem</div>
+</div>
+
+<div class="stats-row" id="statsRow"></div>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <button class="btn active" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="btn" data-filter="solved" onclick="setFilter('solved')">Solved</button>
+    <button class="btn" data-filter="unsolved" onclick="setFilter('unsolved')">Unsolved</button>
+  </div>
+  <div class="ctrl-group">
+    <button class="btn" onclick="expandAll()">Expand All</button>
+    <button class="btn" onclick="collapseAll()">Collapse All</button>
+  </div>
+  <div class="ctrl-group">
+    <input type="text" class="search-box" placeholder="Search problems..." oninput="searchProblems(this.value)">
+  </div>
+</div>
+
+<div class="main">
+  <div class="overall-progress" id="overallProgress"></div>
+  <div id="treeContainer"></div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Solved</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--border)"></div> Unsolved</div>
+    <div class="legend-item"><span class="diff-badge easy">Easy</span></div>
+    <div class="legend-item"><span class="diff-badge medium">Medium</span></div>
+    <div class="legend-item"><span class="diff-badge hard">Hard</span></div>
+    <div class="legend-item"><span class="parent-tag">PARENT</span> = Learn this first</div>
+    <div class="legend-item" style="color:var(--text-muted)">Click nodes to expand/collapse</div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// SOLVED PROBLEMS — keyed by a unique identifier (name-based)
+// ═══════════════════════════════════════════════════════════════════
+const SOLVED = new Set([
+  "Two Sum II (sorted)",
+  "Container With Most Water",
+  "3Sum",
+  "Sort Colors (Dutch Flag)",
+  "Trapping Rain Water",
+  "Product Except Self",
+  "Maximum Subarray",
+  "Subarray Sum Equals K",
+  "Best Time to Buy and Sell Stock",
+  "Merge Intervals",
+  "Sliding Window Maximum",
+  "Maximum Product Subarray",
+  "Next Permutation",
+  "Binary Search",
+  "Search Rotated Sorted Array",
+  "Reverse Linked List",
+  "Linked List Cycle",
+  "Linked List Cycle II",
+  "Middle of Linked List",
+  "Remove Nth From End",
+  "Add Two Numbers",
+  "Merge Two Sorted Lists",
+  "Permutations",
+]);
+
+// ═══════════════════════════════════════════════════════════════════
+// DS ICONS for visual differentiation
+// ═══════════════════════════════════════════════════════════════════
+const DS_ICONS = {
+  "Arrays": "\u{1F4CA}",
+  "Linked Lists": "\u{1F517}",
+  "Strings": "\u{1F524}",
+  "Trees": "\u{1F333}",
+  "Graphs": "\u{1F578}\uFE0F",
+  "Matrix": "\u{1F4DD}",
+  "Intervals": "\u{2194}\uFE0F",
+  "Sorted Structures": "\u{1F4C2}",
+  "Answer Space": "\u{1F3AF}",
+  "Advanced": "\u{1F9E0}",
+  "Subsets": "\u{1F4E6}",
+  "Permutations": "\u{1F500}",
+  "Combinations": "\u{1F4CB}",
+  "Constraints": "\u{2699}\uFE0F",
+  "General": "\u{1F4A1}",
+  "2D Arrays": "\u{1F4DD}",
+  "Range [1,n]": "\u{1F522}",
+  "Histogram / Area": "\u{1F4CA}",
+  "Monotonic Deque": "\u{1F4CA}",
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// ALL 32 PATTERNS — every problem from PATTERN_REFERENCE.md
+// Hierarchy: Pattern -> DS Group -> Problems
+// ═══════════════════════════════════════════════════════════════════
+const PATTERNS = [
+  // ── 1. TWO POINTERS ──
+  {
+    id: 1, name: "Two Pointers", total: 12,
+    recognition: 'Sorted array/list + find pair/triplet. OR linked list + cycle/middle/kth.',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Two Sum II (sorted)", link: "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/", lc: 167, diff: "easy", parent: true, variant: "sum too small -> left++, too big -> right--" },
+        { name: "3Sum", link: "https://leetcode.com/problems/3sum/", lc: 15, diff: "medium", variant: "Fix one, two-pointer on rest. Skip duplicates" },
+        { name: "Container With Most Water", link: "https://leetcode.com/problems/container-with-most-water/", lc: 11, diff: "medium", variant: "Move shorter wall inward" },
+        { name: "Trapping Rain Water", link: "https://leetcode.com/problems/trapping-rain-water/", lc: 42, diff: "hard", variant: "Process shorter side; taller guarantees bottleneck" },
+        { name: "Sort Colors (Dutch Flag)", link: "https://leetcode.com/problems/sort-colors/", lc: 75, diff: "medium", variant: "3 pointers: low/mid/high partition" },
+        { name: "Remove Duplicates from Sorted", link: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/", lc: 26, diff: "easy", variant: "Slow=write, fast=read" },
+        { name: "Merge Sorted Array", link: "https://leetcode.com/problems/merge-sorted-array/", lc: 88, diff: "easy", variant: "Fill from end to avoid overwriting" },
+      ]},
+      { ds: "Linked Lists", problems: [
+        { name: "Linked List Cycle", link: "https://leetcode.com/problems/linked-list-cycle/", lc: 141, diff: "easy", variant: "Floyd's: fast=2x, slow=1x" },
+        { name: "Linked List Cycle II", link: "https://leetcode.com/problems/linked-list-cycle-ii/", lc: 142, diff: "medium", variant: "After meeting, reset to head, both speed 1" },
+        { name: "Middle of Linked List", link: "https://leetcode.com/problems/middle-of-the-linked-list/", lc: 876, diff: "easy", variant: "Fast at end -> slow at middle" },
+        { name: "Remove Nth From End", link: "https://leetcode.com/problems/remove-nth-node-from-end-of-list/", lc: 19, diff: "medium", variant: "Create gap of N, walk together" },
+        { name: "Palindrome Linked List", link: "https://leetcode.com/problems/palindrome-linked-list/", lc: 234, diff: "easy", variant: "Find middle -> reverse half -> compare" },
+      ]},
+    ]
+  },
+  // ── 2. SLIDING WINDOW ──
+  {
+    id: 2, name: "Sliding Window", total: 8,
+    recognition: '"subarray/substring of size K" OR "longest/shortest subarray with condition"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Max Sum Subarray Size K", link: "https://www.geeksforgeeks.org/find-maximum-minimum-sum-subarray-size-k/", lc: null, diff: "easy", parent: true, variant: "add incoming, subtract outgoing" },
+        { name: "Sliding Window Maximum", link: "https://leetcode.com/problems/sliding-window-maximum/", lc: 239, diff: "hard", variant: "Monotonic deque maintains decreasing candidates" },
+        { name: "Permutation in String", link: "https://leetcode.com/problems/permutation-in-string/", lc: 567, diff: "medium", variant: "Fixed window len(s1), check char frequency" },
+        { name: "Fruit Into Baskets", link: "https://leetcode.com/problems/fruit-into-baskets/", lc: 904, diff: "medium", variant: "Longest subarray with <=2 distinct" },
+        { name: "Max Consecutive Ones III", link: "https://leetcode.com/problems/max-consecutive-ones-iii/", lc: 1004, diff: "medium", variant: "Longest subarray with <=k zeros" },
+      ]},
+      { ds: "Strings", problems: [
+        { name: "Longest Substring Without Repeating", link: "https://leetcode.com/problems/longest-substring-without-repeating-characters/", lc: 3, diff: "medium", variant: "Expand right, shrink on duplicate (set/map)" },
+        { name: "Minimum Window Substring", link: "https://leetcode.com/problems/minimum-window-substring/", lc: 76, diff: "hard", variant: "Expand to include all chars, shrink to minimize" },
+        { name: "Longest Repeating Char Replacement", link: "https://leetcode.com/problems/longest-repeating-character-replacement/", lc: 424, diff: "medium", variant: "Valid if window - max_freq <= k" },
+      ]},
+    ]
+  },
+  // ── 3. BINARY SEARCH ──
+  {
+    id: 3, name: "Binary Search", total: 11,
+    recognition: 'Sorted data + find element. OR "minimize max" / "maximize min" / "find minimum K such that..."',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Binary Search", link: "https://leetcode.com/problems/binary-search/", lc: 704, diff: "easy", parent: true, variant: "mid = left + (right-left)//2" },
+        { name: "Search Insert Position", link: "https://leetcode.com/problems/search-insert-position/", lc: 35, diff: "easy", variant: "Not found -> left is insert position" },
+        { name: "Find First and Last Position", link: "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/", lc: 34, diff: "medium", variant: "Two BS: leftmost + rightmost" },
+        { name: "Search Rotated Sorted Array", link: "https://leetcode.com/problems/search-in-rotated-sorted-array/", lc: 33, diff: "medium", variant: "Identify sorted half, check if target in it" },
+        { name: "Find Min in Rotated Sorted", link: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/", lc: 153, diff: "medium", variant: "Compare mid with right" },
+        { name: "Find Peak Element", link: "https://leetcode.com/problems/find-peak-element/", lc: 162, diff: "medium", variant: "mid < mid+1 -> peak is right" },
+      ]},
+      { ds: "Answer Space", problems: [
+        { name: "Koko Eating Bananas", link: "https://leetcode.com/problems/koko-eating-bananas/", lc: 875, diff: "medium", variant: "BS on speed [1, max(piles)]" },
+        { name: "Capacity to Ship Packages", link: "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/", lc: 1011, diff: "medium", variant: "BS on capacity [max(w), sum(w)]" },
+        { name: "Split Array Largest Sum", link: "https://leetcode.com/problems/split-array-largest-sum/", lc: 410, diff: "hard", variant: "BS on max sum [max(arr), sum(arr)]" },
+      ]},
+      { ds: "Matrix", problems: [
+        { name: "Search 2D Matrix", link: "https://leetcode.com/problems/search-a-2d-matrix/", lc: 74, diff: "medium", variant: "2D as 1D: row=mid//cols, col=mid%cols" },
+      ]},
+      { ds: "Advanced", problems: [
+        { name: "Median of Two Sorted Arrays", link: "https://leetcode.com/problems/median-of-two-sorted-arrays/", lc: 4, diff: "hard", variant: "BS on partition in smaller array" },
+      ]},
+    ]
+  },
+  // ── 4. PREFIX SUM / PRODUCT ──
+  {
+    id: 4, name: "Prefix Sum / Product", total: 5,
+    recognition: '"sum of subarray i to j" or "number of subarrays with sum = K"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Range Sum Query", link: "https://leetcode.com/problems/range-sum-query-immutable/", lc: 303, diff: "easy", parent: true, variant: "sum(i,j) = prefix[j+1] - prefix[i]" },
+        { name: "Subarray Sum Equals K", link: "https://leetcode.com/problems/subarray-sum-equals-k/", lc: 560, diff: "medium", variant: "prefix_sum + hashmap: count[prefix - k]" },
+        { name: "Product Except Self", link: "https://leetcode.com/problems/product-of-array-except-self/", lc: 238, diff: "medium", variant: "Left prefix x right prefix" },
+        { name: "Contiguous Array (0s/1s)", link: "https://leetcode.com/problems/contiguous-array/", lc: 525, diff: "medium", variant: "Treat 0 as -1, prefix sum" },
+        { name: "Running Sum of 1D Array", link: "https://leetcode.com/problems/running-sum-of-1d-array/", lc: 1480, diff: "easy", variant: "Direct prefix sum" },
+      ]},
+    ]
+  },
+  // ── 5. MONOTONIC STACK / QUEUE ──
+  {
+    id: 5, name: "Monotonic Stack / Queue", total: 8,
+    recognition: '"next greater/smaller element" / "histogram" / "stock span" / "days until warmer"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Next Greater Element I", link: "https://leetcode.com/problems/next-greater-element-i/", lc: 496, diff: "easy", parent: true, variant: "pop when current > top" },
+        { name: "Next Greater Element II (circular)", link: "https://leetcode.com/problems/next-greater-element-ii/", lc: 503, diff: "medium", variant: "Loop twice (i % n)" },
+        { name: "Daily Temperatures", link: "https://leetcode.com/problems/daily-temperatures/", lc: 739, diff: "medium", variant: "Store indices; ans[top] = i - top" },
+        { name: "Online Stock Span", link: "https://leetcode.com/problems/online-stock-span/", lc: 901, diff: "medium", variant: "Count consecutive <= today" },
+        { name: "Largest Rectangle in Histogram", link: "https://leetcode.com/problems/largest-rectangle-in-histogram/", lc: 84, diff: "hard", variant: "Increasing stack; find left/right boundaries" },
+        { name: "Maximal Rectangle", link: "https://leetcode.com/problems/maximal-rectangle/", lc: 85, diff: "hard", variant: "Row-by-row histogram + LC #84" },
+        { name: "Trapping Rain Water (stack)", link: "https://leetcode.com/problems/trapping-rain-water/", lc: 42, diff: "hard", variant: "Alternative to two-pointer approach" },
+        { name: "Sliding Window Maximum (deque)", link: "https://leetcode.com/problems/sliding-window-maximum/", lc: 239, diff: "hard", variant: "Deque: front = max of window" },
+      ]},
+    ]
+  },
+  // ── 6. MERGE INTERVALS ──
+  {
+    id: 6, name: "Merge Intervals", total: 6,
+    recognition: '"overlapping intervals" / "merge" / "meeting rooms"',
+    groups: [
+      { ds: "Intervals", problems: [
+        { name: "Merge Intervals", link: "https://leetcode.com/problems/merge-intervals/", lc: 56, diff: "medium", parent: true, variant: "Sort by start, merge if start <= prev.end" },
+        { name: "Insert Interval", link: "https://leetcode.com/problems/insert-interval/", lc: 57, diff: "medium", variant: "Find overlap, merge, keep rest" },
+        { name: "Non-Overlapping Intervals", link: "https://leetcode.com/problems/non-overlapping-intervals/", lc: 435, diff: "medium", variant: "Greedy: count removals" },
+        { name: "Meeting Rooms", link: "https://leetcode.com/problems/meeting-rooms/", lc: 252, diff: "easy", variant: "Sort, check overlap" },
+        { name: "Meeting Rooms II", link: "https://leetcode.com/problems/meeting-rooms-ii/", lc: 253, diff: "medium", variant: "Min heap of end times" },
+        { name: "Interval List Intersections", link: "https://leetcode.com/problems/interval-list-intersections/", lc: 986, diff: "medium", variant: "Two pointers on two sorted lists" },
+      ]},
+    ]
+  },
+  // ── 7. CYCLIC SORT ──
+  {
+    id: 7, name: "Cyclic Sort", total: 5,
+    recognition: '"find missing/duplicate in range 1 to n"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Missing Number", link: "https://leetcode.com/problems/missing-number/", lc: 268, diff: "easy", parent: true, variant: "Place each number at index = value" },
+        { name: "Find All Duplicates", link: "https://leetcode.com/problems/find-all-duplicates-in-an-array/", lc: 442, diff: "medium", variant: "Negate to mark visited" },
+        { name: "Find All Missing Numbers", link: "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/", lc: 448, diff: "easy", variant: "Place, scan mismatches" },
+        { name: "First Missing Positive", link: "https://leetcode.com/problems/first-missing-positive/", lc: 41, diff: "hard", variant: "Cyclic sort [1,n], ignore out-of-range" },
+        { name: "Set Mismatch", link: "https://leetcode.com/problems/set-mismatch/", lc: 645, diff: "easy", variant: "Find duplicate + missing" },
+      ]},
+    ]
+  },
+  // ── 8. IN-PLACE LINKED LIST REVERSAL ──
+  {
+    id: 8, name: "In-Place LL Reversal", total: 8,
+    recognition: '"reverse linked list" / "reverse between m and n" / "reverse in K-groups"',
+    groups: [
+      { ds: "Linked Lists", problems: [
+        { name: "Reverse Linked List", link: "https://leetcode.com/problems/reverse-linked-list/", lc: 206, diff: "easy", parent: true, variant: "prev=None, swap next" },
+        { name: "Reverse LL II (m to n)", link: "https://leetcode.com/problems/reverse-linked-list-ii/", lc: 92, diff: "medium", variant: "Navigate to m, reverse n-m+1, reconnect" },
+        { name: "Reverse Nodes in K-Group", link: "https://leetcode.com/problems/reverse-nodes-in-k-group/", lc: 25, diff: "hard", variant: "Reverse K at a time" },
+        { name: "Swap Nodes in Pairs", link: "https://leetcode.com/problems/swap-nodes-in-pairs/", lc: 24, diff: "medium", variant: "K=2 special case" },
+        { name: "Palindrome Linked List", link: "https://leetcode.com/problems/palindrome-linked-list/", lc: 234, diff: "easy", variant: "Middle -> reverse half -> compare" },
+        { name: "Reorder List", link: "https://leetcode.com/problems/reorder-list/", lc: 143, diff: "medium", variant: "Middle -> reverse half -> interleave" },
+        { name: "Add Two Numbers", link: "https://leetcode.com/problems/add-two-numbers/", lc: 2, diff: "medium", variant: "Dummy head, carry propagation" },
+        { name: "Merge Two Sorted Lists", link: "https://leetcode.com/problems/merge-two-sorted-lists/", lc: 21, diff: "easy", variant: "Dummy head, compare and link" },
+      ]},
+    ]
+  },
+  // ── 9. BFS ──
+  {
+    id: 9, name: "BFS", total: 9,
+    recognition: '"shortest path" / "minimum steps" / "level order" / "nearest" / "spreading"',
+    groups: [
+      { ds: "Trees", problems: [
+        { name: "BT Level Order Traversal", link: "https://leetcode.com/problems/binary-tree-level-order-traversal/", lc: 102, diff: "medium", parent: true, variant: "queue + level size" },
+        { name: "BT Zigzag Level Order", link: "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/", lc: 103, diff: "medium", variant: "Alternate direction per level" },
+        { name: "Min Depth of Binary Tree", link: "https://leetcode.com/problems/minimum-depth-of-binary-tree/", lc: 111, diff: "easy", variant: "BFS finds min depth faster than DFS" },
+      ]},
+      { ds: "Matrix", problems: [
+        { name: "Rotting Oranges", link: "https://leetcode.com/problems/rotting-oranges/", lc: 994, diff: "medium", variant: "Multi-source BFS from ALL rotten" },
+        { name: "01 Matrix", link: "https://leetcode.com/problems/01-matrix/", lc: 542, diff: "medium", variant: "Multi-source BFS from all 0s" },
+        { name: "Number of Islands", link: "https://leetcode.com/problems/number-of-islands/", lc: 200, diff: "medium", variant: "BFS from each '1', mark visited" },
+        { name: "Shortest Path Binary Matrix", link: "https://leetcode.com/problems/shortest-path-in-binary-matrix/", lc: 1091, diff: "medium", variant: "BFS, 8 directions" },
+      ]},
+      { ds: "Graphs", problems: [
+        { name: "Word Ladder", link: "https://leetcode.com/problems/word-ladder/", lc: 127, diff: "hard", variant: "Each word = node, 1-char diff = edge" },
+        { name: "Open the Lock", link: "https://leetcode.com/problems/open-the-lock/", lc: 752, diff: "medium", variant: "Each combo = node, 8 neighbors" },
+      ]},
+    ]
+  },
+  // ── 10. DFS ──
+  {
+    id: 10, name: "DFS", total: 9,
+    recognition: '"all paths" / "detect cycle" / "connected components" / "tree traversal"',
+    groups: [
+      { ds: "Trees", problems: [
+        { name: "Max Depth of Binary Tree", link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/", lc: 104, diff: "easy", parent: true, variant: "1 + max(left, right)" },
+        { name: "Binary Tree Inorder", link: "https://leetcode.com/problems/binary-tree-inorder-traversal/", lc: 94, diff: "easy", variant: "Left -> Root -> Right" },
+        { name: "Path Sum", link: "https://leetcode.com/problems/path-sum/", lc: 112, diff: "easy", variant: "Subtract, check leaf = 0" },
+        { name: "Path Sum II", link: "https://leetcode.com/problems/path-sum-ii/", lc: 113, diff: "medium", variant: "Track path, backtrack" },
+      ]},
+      { ds: "Matrix", problems: [
+        { name: "Number of Islands", link: "https://leetcode.com/problems/number-of-islands/", lc: 200, diff: "medium", variant: "DFS from each '1'" },
+        { name: "Surrounded Regions", link: "https://leetcode.com/problems/surrounded-regions/", lc: 130, diff: "medium", variant: "DFS from borders first" },
+      ]},
+      { ds: "Graphs", problems: [
+        { name: "Clone Graph", link: "https://leetcode.com/problems/clone-graph/", lc: 133, diff: "medium", variant: "DFS + hashmap (old->new)" },
+        { name: "Course Schedule (cycle)", link: "https://leetcode.com/problems/course-schedule/", lc: 207, diff: "medium", variant: "3-state: unvisited/in-progress/done" },
+        { name: "All Paths Source to Target", link: "https://leetcode.com/problems/all-paths-from-source-to-target/", lc: 797, diff: "medium", variant: "DFS + backtrack (DAG, no visited)" },
+      ]},
+    ]
+  },
+  // ── 11. BACKTRACKING ──
+  {
+    id: 11, name: "Backtracking", total: 13,
+    recognition: '"all possible" / "generate all" / "subsets" / "permutations" / "combinations"',
+    groups: [
+      { ds: "Subsets", problems: [
+        { name: "Subsets", link: "https://leetcode.com/problems/subsets/", lc: 78, diff: "medium", parent: true, variant: "include/exclude each element" },
+        { name: "Subsets II (with dups)", link: "https://leetcode.com/problems/subsets-ii/", lc: 90, diff: "medium", variant: "Sort + skip duplicates" },
+      ]},
+      { ds: "Permutations", problems: [
+        { name: "Permutations", link: "https://leetcode.com/problems/permutations/", lc: 46, diff: "medium", variant: "Track used elements" },
+        { name: "Permutations II (with dups)", link: "https://leetcode.com/problems/permutations-ii/", lc: 47, diff: "medium", variant: "Sort + skip same at same position" },
+        { name: "Next Permutation", link: "https://leetcode.com/problems/next-permutation/", lc: 31, diff: "medium", variant: "Find rightmost ascending, swap, reverse suffix" },
+      ]},
+      { ds: "Combinations", problems: [
+        { name: "Combinations", link: "https://leetcode.com/problems/combinations/", lc: 77, diff: "medium", variant: "Start index prevents revisit" },
+        { name: "Combination Sum (reuse)", link: "https://leetcode.com/problems/combination-sum/", lc: 39, diff: "medium", variant: "Can reuse -> don't increment start" },
+        { name: "Combination Sum II (no reuse)", link: "https://leetcode.com/problems/combination-sum-ii/", lc: 40, diff: "medium", variant: "Sort + skip dups" },
+        { name: "Letter Combos of Phone", link: "https://leetcode.com/problems/letter-combinations-of-a-phone-number/", lc: 17, diff: "medium", variant: "Map digits -> letters" },
+      ]},
+      { ds: "Constraints", problems: [
+        { name: "Palindrome Partitioning", link: "https://leetcode.com/problems/palindrome-partitioning/", lc: 131, diff: "medium", variant: "Check palindrome at each cut" },
+        { name: "N-Queens", link: "https://leetcode.com/problems/n-queens/", lc: 51, diff: "hard", variant: "Track cols, diagonals" },
+        { name: "Word Search", link: "https://leetcode.com/problems/word-search/", lc: 79, diff: "medium", variant: "Matrix DFS + backtrack" },
+        { name: "Generate Parentheses", link: "https://leetcode.com/problems/generate-parentheses/", lc: 22, diff: "medium", variant: "open < n, close < open" },
+      ]},
+    ]
+  },
+  // ── 12. TOPOLOGICAL SORT ──
+  {
+    id: 12, name: "Topological Sort", total: 5,
+    recognition: '"ordering with prerequisites" / "dependency" / "task scheduling"',
+    groups: [
+      { ds: "Graphs", problems: [
+        { name: "Course Schedule", link: "https://leetcode.com/problems/course-schedule/", lc: 207, diff: "medium", parent: true, variant: "Cycle detection via BFS (Kahn's)" },
+        { name: "Course Schedule II", link: "https://leetcode.com/problems/course-schedule-ii/", lc: 210, diff: "medium", variant: "Return actual order" },
+        { name: "Alien Dictionary", link: "https://leetcode.com/problems/alien-dictionary/", lc: 269, diff: "hard", variant: "Build graph from word order" },
+        { name: "Minimum Height Trees", link: "https://leetcode.com/problems/minimum-height-trees/", lc: 310, diff: "medium", variant: "Remove leaves layer by layer" },
+        { name: "Parallel Courses", link: "https://leetcode.com/problems/parallel-courses/", lc: 1136, diff: "medium", variant: "BFS levels = min semesters" },
+      ]},
+    ]
+  },
+  // ── 13. UNION FIND ──
+  {
+    id: 13, name: "Union Find", total: 6,
+    recognition: '"connected components" / "redundant connection" / "are nodes connected?"',
+    groups: [
+      { ds: "Graphs", problems: [
+        { name: "Connected Components", link: "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/", lc: 323, diff: "medium", parent: true, variant: "find(x) + union(x,y)" },
+        { name: "Redundant Connection", link: "https://leetcode.com/problems/redundant-connection/", lc: 684, diff: "medium", variant: "If already connected = redundant" },
+        { name: "Graph Valid Tree", link: "https://leetcode.com/problems/graph-valid-tree/", lc: 261, diff: "medium", variant: "n-1 edges + all connected" },
+        { name: "Accounts Merge", link: "https://leetcode.com/problems/accounts-merge/", lc: 721, diff: "medium", variant: "Union emails of same person" },
+        { name: "Number of Islands (UF)", link: "https://leetcode.com/problems/number-of-islands/", lc: 200, diff: "medium", variant: "Union adjacent land" },
+        { name: "Longest Consecutive Sequence", link: "https://leetcode.com/problems/longest-consecutive-sequence/", lc: 128, diff: "medium", variant: "Union consecutive nums" },
+      ]},
+    ]
+  },
+  // ── 14. TWO HEAPS ──
+  {
+    id: 14, name: "Two Heaps", total: 3,
+    recognition: '"find median" / "split into two parts needing min of one, max of other"',
+    groups: [
+      { ds: "General", problems: [
+        { name: "Find Median from Data Stream", link: "https://leetcode.com/problems/find-median-from-data-stream/", lc: 295, diff: "hard", parent: true, variant: "Max-heap (lower) + min-heap (upper)" },
+        { name: "Sliding Window Median", link: "https://leetcode.com/problems/sliding-window-median/", lc: 480, diff: "hard", variant: "Two heaps + lazy deletion" },
+        { name: "IPO", link: "https://leetcode.com/problems/ipo/", lc: 502, diff: "hard", variant: "Max-heap profits, min-heap capitals" },
+      ]},
+    ]
+  },
+  // ── 15. TOP-K / HEAP ──
+  {
+    id: 15, name: "Top-K / Heap", total: 8,
+    recognition: '"top K" / "K largest" / "K most frequent" / "K closest"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Kth Largest Element", link: "https://leetcode.com/problems/kth-largest-element-in-an-array/", lc: 215, diff: "medium", parent: true, variant: "min-heap of K" },
+        { name: "Top K Frequent Elements", link: "https://leetcode.com/problems/top-k-frequent-elements/", lc: 347, diff: "medium", variant: "Heap by frequency" },
+        { name: "K Closest Points to Origin", link: "https://leetcode.com/problems/k-closest-points-to-origin/", lc: 973, diff: "medium", variant: "Max-heap of K smallest" },
+        { name: "Reorganize String", link: "https://leetcode.com/problems/reorganize-string/", lc: 767, diff: "medium", variant: "Always place most frequent first" },
+      ]},
+      { ds: "Sorted Structures", problems: [
+        { name: "Merge K Sorted Lists", link: "https://leetcode.com/problems/merge-k-sorted-lists/", lc: 23, diff: "hard", variant: "Min-heap of heads" },
+        { name: "Kth Smallest in Sorted Matrix", link: "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/", lc: 378, diff: "medium", variant: "Min-heap, expand right" },
+        { name: "Find K Pairs Smallest Sum", link: "https://leetcode.com/problems/find-k-pairs-with-smallest-sums/", lc: 373, diff: "medium", variant: "Min-heap expansion" },
+        { name: "Sort Characters by Frequency", link: "https://leetcode.com/problems/sort-characters-by-frequency/", lc: 451, diff: "medium", variant: "Max-heap all (freq, char)" },
+      ]},
+    ]
+  },
+  // ── 16. K-WAY MERGE ──
+  {
+    id: 16, name: "K-Way Merge", total: 4,
+    recognition: '"merge K sorted" / "smallest range from K lists"',
+    groups: [
+      { ds: "Sorted Structures", problems: [
+        { name: "Merge K Sorted Lists", link: "https://leetcode.com/problems/merge-k-sorted-lists/", lc: 23, diff: "hard", parent: true, variant: "Min-heap of list heads" },
+        { name: "Kth Smallest in Sorted Matrix", link: "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/", lc: 378, diff: "medium", variant: "Rows as sorted lists" },
+        { name: "Smallest Range Covering K Lists", link: "https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/", lc: 632, diff: "hard", variant: "Track max while heap gives min" },
+      ]},
+      { ds: "Arrays", problems: [
+        { name: "Merge Sorted Array", link: "https://leetcode.com/problems/merge-sorted-array/", lc: 88, diff: "easy", variant: "K=2, fill from end" },
+      ]},
+    ]
+  },
+  // ── 17. KADANE'S / SUBARRAY ──
+  {
+    id: 17, name: "Kadane's / Subarray", total: 4,
+    recognition: '"maximum/minimum subarray sum/product" / "contiguous subarray"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Maximum Subarray", link: "https://leetcode.com/problems/maximum-subarray/", lc: 53, diff: "medium", parent: true, variant: "max(nums[i], curr+nums[i])" },
+        { name: "Maximum Product Subarray", link: "https://leetcode.com/problems/maximum-product-subarray/", lc: 152, diff: "medium", variant: "Track BOTH max AND min" },
+        { name: "Max Sum Circular Subarray", link: "https://leetcode.com/problems/maximum-sum-circular-subarray/", lc: 918, diff: "medium", variant: "max(kadane, total - min_subarray)" },
+        { name: "Longest Turbulent Subarray", link: "https://leetcode.com/problems/longest-turbulent-subarray/", lc: 978, diff: "medium", variant: "Two counters: inc/dec" },
+      ]},
+    ]
+  },
+  // ── 18. GREEDY ──
+  {
+    id: 18, name: "Greedy", total: 8,
+    recognition: '"minimum number of" / scheduling / "can you reach?"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Best Time to Buy and Sell Stock", link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/", lc: 121, diff: "easy", variant: "Track min price, max profit" },
+        { name: "Jump Game", link: "https://leetcode.com/problems/jump-game/", lc: 55, diff: "medium", parent: true, variant: "Track farthest reachable" },
+        { name: "Jump Game II", link: "https://leetcode.com/problems/jump-game-ii/", lc: 45, diff: "medium", variant: "BFS-like range tracking" },
+        { name: "Gas Station", link: "https://leetcode.com/problems/gas-station/", lc: 134, diff: "medium", variant: "If total >= 0, start where cumulative resets" },
+        { name: "Task Scheduler", link: "https://leetcode.com/problems/task-scheduler/", lc: 621, diff: "medium", variant: "Most frequent determines gaps" },
+        { name: "Non-Overlapping Intervals", link: "https://leetcode.com/problems/non-overlapping-intervals/", lc: 435, diff: "medium", variant: "Sort by end, keep earliest" },
+        { name: "Partition Labels", link: "https://leetcode.com/problems/partition-labels/", lc: 763, diff: "medium", variant: "Track last occurrence" },
+        { name: "Assign Cookies", link: "https://leetcode.com/problems/assign-cookies/", lc: 455, diff: "easy", variant: "Sort both, match smallest" },
+      ]},
+    ]
+  },
+  // ── 19. MATRIX TRAVERSAL ──
+  {
+    id: 19, name: "Matrix Traversal", total: 5,
+    recognition: '"spiral order" / "rotate matrix" / "set zeroes" / "diagonal"',
+    groups: [
+      { ds: "2D Arrays", problems: [
+        { name: "Spiral Matrix", link: "https://leetcode.com/problems/spiral-matrix/", lc: 54, diff: "medium", parent: true, variant: "4 boundaries shrink" },
+        { name: "Rotate Image", link: "https://leetcode.com/problems/rotate-image/", lc: 48, diff: "medium", variant: "Transpose + reverse rows" },
+        { name: "Set Matrix Zeroes", link: "https://leetcode.com/problems/set-matrix-zeroes/", lc: 73, diff: "medium", variant: "First row/col as markers" },
+        { name: "Diagonal Traverse", link: "https://leetcode.com/problems/diagonal-traverse/", lc: 498, diff: "medium", variant: "Alternate up-right / down-left" },
+        { name: "Reshape Matrix", link: "https://leetcode.com/problems/reshape-the-matrix/", lc: 566, diff: "easy", variant: "Index math: old[i//c][i%c]" },
+      ]},
+    ]
+  },
+  // ── 20. DIVIDE AND CONQUER ──
+  {
+    id: 20, name: "Divide and Conquer", total: 4,
+    recognition: '"merge sort" / "count inversions" / "closest pair"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Merge Sort (implement)", link: "https://www.geeksforgeeks.org/merge-sort/", lc: null, diff: "medium", parent: true, variant: "Split -> sort halves -> merge" },
+        { name: "Count of Smaller After Self", link: "https://leetcode.com/problems/count-of-smaller-numbers-after-self/", lc: 315, diff: "hard", variant: "Modified merge sort" },
+        { name: "Kth Largest (Quickselect)", link: "https://leetcode.com/problems/kth-largest-element-in-an-array/", lc: 215, diff: "medium", variant: "Partition around pivot, recurse one side" },
+        { name: "Maximum Subarray (D&C)", link: "https://leetcode.com/problems/maximum-subarray/", lc: 53, diff: "medium", variant: "Left max + right max + cross max" },
+      ]},
+    ]
+  },
+  // ── 21. BIT MANIPULATION ──
+  {
+    id: 21, name: "Bit Manipulation", total: 8,
+    recognition: '"single number" / "power of 2" / "counting bits" / "without +/-"',
+    groups: [
+      { ds: "General", problems: [
+        { name: "Single Number", link: "https://leetcode.com/problems/single-number/", lc: 136, diff: "easy", parent: true, variant: "XOR all" },
+        { name: "Single Number II", link: "https://leetcode.com/problems/single-number-ii/", lc: 137, diff: "medium", variant: "Count bits mod 3" },
+        { name: "Number of 1 Bits", link: "https://leetcode.com/problems/number-of-1-bits/", lc: 191, diff: "easy", variant: "n & (n-1) loop" },
+        { name: "Counting Bits", link: "https://leetcode.com/problems/counting-bits/", lc: 338, diff: "easy", variant: "dp[i] = dp[i>>1] + (i&1)" },
+        { name: "Missing Number", link: "https://leetcode.com/problems/missing-number/", lc: 268, diff: "easy", variant: "XOR indices + values" },
+        { name: "Reverse Bits", link: "https://leetcode.com/problems/reverse-bits/", lc: 190, diff: "easy", variant: "Shift and build" },
+        { name: "Power of Two", link: "https://leetcode.com/problems/power-of-two/", lc: 231, diff: "easy", variant: "n > 0 and n & (n-1) == 0" },
+        { name: "Sum Without +/-", link: "https://leetcode.com/problems/sum-of-two-integers/", lc: 371, diff: "medium", variant: "XOR + AND shift" },
+      ]},
+    ]
+  },
+  // ── 22. TRIE ──
+  {
+    id: 22, name: "Trie", total: 5,
+    recognition: '"prefix search" / "autocomplete" / "word dictionary with wildcards"',
+    groups: [
+      { ds: "Strings", problems: [
+        { name: "Implement Trie", link: "https://leetcode.com/problems/implement-trie-prefix-tree/", lc: 208, diff: "medium", parent: true, variant: "Insert/search/startsWith" },
+        { name: "Word Search II", link: "https://leetcode.com/problems/word-search-ii/", lc: 212, diff: "hard", variant: "Trie + board backtracking" },
+        { name: "Add and Search Words", link: "https://leetcode.com/problems/design-add-and-search-words-data-structure/", lc: 211, diff: "medium", variant: "Trie + DFS for '.' wildcards" },
+        { name: "Replace Words", link: "https://leetcode.com/problems/replace-words/", lc: 648, diff: "medium", variant: "Trie of roots" },
+        { name: "Longest Word in Dictionary", link: "https://leetcode.com/problems/longest-word-in-dictionary/", lc: 720, diff: "medium", variant: "BFS through trie" },
+      ]},
+    ]
+  },
+  // ── 23. GRAPH: SHORTEST PATH ──
+  {
+    id: 23, name: "Graph: Shortest Path", total: 4,
+    recognition: '"shortest/cheapest path" in WEIGHTED graph',
+    groups: [
+      { ds: "Graphs", problems: [
+        { name: "Network Delay Time", link: "https://leetcode.com/problems/network-delay-time/", lc: 743, diff: "medium", parent: true, variant: "Classic Dijkstra" },
+        { name: "Cheapest Flights K Stops", link: "https://leetcode.com/problems/cheapest-flights-within-k-stops/", lc: 787, diff: "medium", variant: "Bellman-Ford (K iterations)" },
+        { name: "Path With Min Effort", link: "https://leetcode.com/problems/path-with-minimum-effort/", lc: 1631, diff: "medium", variant: "Dijkstra (weight = max diff)" },
+        { name: "Swim in Rising Water", link: "https://leetcode.com/problems/swim-in-rising-water/", lc: 778, diff: "hard", variant: "Dijkstra or BS + BFS" },
+      ]},
+    ]
+  },
+  // ── 24. DP: 0/1 KNAPSACK ──
+  {
+    id: 24, name: "DP: 0/1 Knapsack", total: 8,
+    recognition: '"choose/don\'t choose" each item + capacity constraint. No repetition.',
+    groups: [
+      { ds: "General", problems: [
+        { name: "0/1 Knapsack", link: "https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/", lc: null, diff: "medium", parent: true, variant: "dp[i][w] = max(skip, take)" },
+        { name: "Subset Sum", link: "https://www.geeksforgeeks.org/subset-sum-problem-dp-25/", lc: null, diff: "medium", variant: "val=wt, target=W" },
+        { name: "Equal Sum Partition", link: "https://leetcode.com/problems/partition-equal-subset-sum/", lc: 416, diff: "medium", variant: "target = totalSum/2" },
+        { name: "Count Subsets with Given Sum", link: "https://www.geeksforgeeks.org/count-of-subsets-with-sum-equal-to-x/", lc: null, diff: "medium", variant: "Count instead of max" },
+        { name: "Min Subset Sum Difference", link: "https://www.geeksforgeeks.org/partition-a-set-into-two-subsets-such-that-the-difference-of-subset-sums-is-minimum/", lc: null, diff: "hard", variant: "Minimize |S1-S2|" },
+        { name: "Target Sum", link: "https://leetcode.com/problems/target-sum/", lc: 494, diff: "medium", variant: "count(sum = (target+total)/2)" },
+        { name: "Last Stone Weight II", link: "https://leetcode.com/problems/last-stone-weight-ii/", lc: 1049, diff: "medium", variant: "Same as min subset diff" },
+        { name: "Ones and Zeroes", link: "https://leetcode.com/problems/ones-and-zeroes/", lc: 474, diff: "medium", variant: "2D knapsack (0s, 1s)" },
+      ]},
+    ]
+  },
+  // ── 25. DP: UNBOUNDED KNAPSACK ──
+  {
+    id: 25, name: "DP: Unbounded Knapsack", total: 6,
+    recognition: '"unlimited supply" / "can reuse" / "coin change" / "rod cutting"',
+    groups: [
+      { ds: "General", problems: [
+        { name: "Unbounded Knapsack", link: "https://www.geeksforgeeks.org/unbounded-knapsack-repetition-items-allowed/", lc: null, diff: "medium", parent: true, variant: "Include -> stay at same item" },
+        { name: "Rod Cutting", link: "https://www.geeksforgeeks.org/cutting-a-rod-dp-13/", lc: null, diff: "medium", variant: "lengths=weights, prices=values" },
+        { name: "Coin Change (min coins)", link: "https://leetcode.com/problems/coin-change/", lc: 322, diff: "medium", variant: "Minimize count" },
+        { name: "Coin Change II (num ways)", link: "https://leetcode.com/problems/coin-change-ii/", lc: 518, diff: "medium", variant: "Count combinations" },
+        { name: "Perfect Squares", link: "https://leetcode.com/problems/perfect-squares/", lc: 279, diff: "medium", variant: "Squares are 'coins'" },
+        { name: "Integer Break", link: "https://leetcode.com/problems/integer-break/", lc: 343, diff: "medium", variant: "Maximize product of parts" },
+      ]},
+    ]
+  },
+  // ── 26. DP: LCS FAMILY ──
+  {
+    id: 26, name: "DP: LCS Family", total: 10,
+    recognition: 'Two strings/sequences + "common" / "convert" / "palindrome subsequence"',
+    groups: [
+      { ds: "Strings", problems: [
+        { name: "Longest Common Subsequence", link: "https://leetcode.com/problems/longest-common-subsequence/", lc: 1143, diff: "medium", parent: true, variant: "match -> 1 + dp[i-1][j-1]" },
+        { name: "Longest Common Substring", link: "https://www.geeksforgeeks.org/longest-common-substring-dp-29/", lc: null, diff: "medium", variant: "Only extend on match" },
+        { name: "Shortest Common Supersequence", link: "https://leetcode.com/problems/shortest-common-supersequence/", lc: 1092, diff: "hard", variant: "len = m + n - LCS" },
+        { name: "Min Delete to Make Strings Equal", link: "https://leetcode.com/problems/delete-operation-for-two-strings/", lc: 583, diff: "medium", variant: "del = m + n - 2*LCS" },
+        { name: "Longest Palindromic Subsequence", link: "https://leetcode.com/problems/longest-palindromic-subsequence/", lc: 516, diff: "medium", variant: "LCS(s, reverse(s))" },
+        { name: "Min Insertions for Palindrome", link: "https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/", lc: 1312, diff: "hard", variant: "len - LPS" },
+        { name: "Edit Distance", link: "https://leetcode.com/problems/edit-distance/", lc: 72, diff: "medium", variant: "Extended LCS with costs" },
+        { name: "Distinct Subsequences", link: "https://leetcode.com/problems/distinct-subsequences/", lc: 115, diff: "hard", variant: "Count s1 as subseq of s2" },
+        { name: "Longest Repeating Subsequence", link: "https://www.geeksforgeeks.org/longest-repeating-subsequence/", lc: null, diff: "medium", variant: "LCS(s, s) with i!=j" },
+        { name: "Is Subsequence", link: "https://leetcode.com/problems/is-subsequence/", lc: 392, diff: "easy", variant: "LCS == len(s)?" },
+      ]},
+    ]
+  },
+  // ── 27. DP: LIS ──
+  {
+    id: 27, name: "DP: LIS", total: 6,
+    recognition: '"longest increasing/decreasing" / "box stacking" / "envelope nesting"',
+    groups: [
+      { ds: "Arrays", problems: [
+        { name: "Longest Increasing Subsequence", link: "https://leetcode.com/problems/longest-increasing-subsequence/", lc: 300, diff: "medium", parent: true, variant: "O(n^2) DP or O(n log n)" },
+        { name: "Number of LIS", link: "https://leetcode.com/problems/number-of-longest-increasing-subsequence/", lc: 673, diff: "medium", variant: "Track count + length" },
+        { name: "Russian Doll Envelopes", link: "https://leetcode.com/problems/russian-doll-envelopes/", lc: 354, diff: "hard", variant: "Sort by width, LIS on height" },
+        { name: "Max Length Pair Chain", link: "https://leetcode.com/problems/maximum-length-of-pair-chain/", lc: 646, diff: "medium", variant: "Greedy or LIS" },
+        { name: "Increasing Triplet Subsequence", link: "https://leetcode.com/problems/increasing-triplet-subsequence/", lc: 334, diff: "medium", variant: "Track first and second smallest" },
+        { name: "Longest String Chain", link: "https://leetcode.com/problems/longest-string-chain/", lc: 1048, diff: "medium", variant: "Sort by length, LIS with predecessor" },
+      ]},
+    ]
+  },
+  // ── 28. DP: MCM / PARTITION ──
+  {
+    id: 28, name: "DP: MCM / Partition", total: 8,
+    recognition: '"minimum cost to merge/split" / "burst balloons" / "partition" / "parenthesize"',
+    groups: [
+      { ds: "General", problems: [
+        { name: "Matrix Chain Multiplication", link: "https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/", lc: null, diff: "hard", parent: true, variant: "Try every partition k in [i,j]" },
+        { name: "Burst Balloons", link: "https://leetcode.com/problems/burst-balloons/", lc: 312, diff: "hard", variant: "Which to burst LAST" },
+        { name: "Palindrome Partitioning II", link: "https://leetcode.com/problems/palindrome-partitioning-ii/", lc: 132, diff: "hard", variant: "Min cuts for all palindromes" },
+        { name: "Boolean Parenthesization", link: "https://www.geeksforgeeks.org/boolean-parenthesization-problem-dp-37/", lc: null, diff: "hard", variant: "Count True evaluations" },
+        { name: "Scramble String", link: "https://leetcode.com/problems/scramble-string/", lc: 87, diff: "hard", variant: "Can s2 be scrambled s1?" },
+        { name: "Min Cost Tree From Leaf", link: "https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/", lc: 1130, diff: "medium", variant: "MCM on merging leaves" },
+        { name: "Super Egg Drop", link: "https://leetcode.com/problems/super-egg-drop/", lc: 887, diff: "hard", variant: "Partition floors" },
+        { name: "Min Cost to Merge Stones", link: "https://leetcode.com/problems/minimum-cost-to-merge-stones/", lc: 1000, diff: "hard", variant: "Merge adjacent" },
+      ]},
+    ]
+  },
+  // ── 29. DP: GRID / PATH ──
+  {
+    id: 29, name: "DP: Grid / Path", total: 6,
+    recognition: '"unique paths" / "minimum path sum" / "grid with obstacles"',
+    groups: [
+      { ds: "Matrix", problems: [
+        { name: "Unique Paths", link: "https://leetcode.com/problems/unique-paths/", lc: 62, diff: "medium", parent: true, variant: "dp[i][j] = dp[i-1][j] + dp[i][j-1]" },
+        { name: "Unique Paths II (obstacles)", link: "https://leetcode.com/problems/unique-paths-ii/", lc: 63, diff: "medium", variant: "Obstacle = 0 paths" },
+        { name: "Minimum Path Sum", link: "https://leetcode.com/problems/minimum-path-sum/", lc: 64, diff: "medium", variant: "Add min(top, left)" },
+        { name: "Triangle", link: "https://leetcode.com/problems/triangle/", lc: 120, diff: "medium", variant: "Bottom-up: min of two below" },
+        { name: "Maximal Square", link: "https://leetcode.com/problems/maximal-square/", lc: 221, diff: "medium", variant: "min(left, top, diag) + 1" },
+        { name: "Dungeon Game", link: "https://leetcode.com/problems/dungeon-game/", lc: 174, diff: "hard", variant: "Work backwards" },
+      ]},
+    ]
+  },
+  // ── 30. DP: FIBONACCI / LINEAR ──
+  {
+    id: 30, name: "DP: Fibonacci / Linear", total: 7,
+    recognition: '"ways to reach step n" / "rob houses" / "decode" / "tiling"',
+    groups: [
+      { ds: "General", problems: [
+        { name: "Climbing Stairs", link: "https://leetcode.com/problems/climbing-stairs/", lc: 70, diff: "easy", parent: true, variant: "dp[n] = dp[n-1] + dp[n-2]" },
+        { name: "House Robber", link: "https://leetcode.com/problems/house-robber/", lc: 198, diff: "medium", variant: "max(dp[i-1], dp[i-2] + nums[i])" },
+        { name: "House Robber II (circular)", link: "https://leetcode.com/problems/house-robber-ii/", lc: 213, diff: "medium", variant: "Two passes: skip first OR last" },
+        { name: "Decode Ways", link: "https://leetcode.com/problems/decode-ways/", lc: 91, diff: "medium", variant: "1-digit + 2-digit choices" },
+        { name: "Min Cost Climbing Stairs", link: "https://leetcode.com/problems/min-cost-climbing-stairs/", lc: 746, diff: "easy", variant: "Add cost to min(prev two)" },
+        { name: "Tribonacci", link: "https://leetcode.com/problems/n-th-tribonacci-number/", lc: 1137, diff: "easy", variant: "3 previous states" },
+        { name: "Delete and Earn", link: "https://leetcode.com/problems/delete-and-earn/", lc: 740, diff: "medium", variant: "Transform to House Robber" },
+      ]},
+    ]
+  },
+  // ── 31. DP: TREES ──
+  {
+    id: 31, name: "DP: Trees", total: 5,
+    recognition: '"diameter" / "max path sum" / "tree with weights"',
+    groups: [
+      { ds: "Trees", problems: [
+        { name: "Diameter of Binary Tree", link: "https://leetcode.com/problems/diameter-of-binary-tree/", lc: 543, diff: "easy", parent: true, variant: "left+right height, return max+1" },
+        { name: "Binary Tree Max Path Sum", link: "https://leetcode.com/problems/binary-tree-maximum-path-sum/", lc: 124, diff: "hard", variant: "node+left+right for answer" },
+        { name: "Longest Same Value Path", link: "https://leetcode.com/problems/longest-univalue-path/", lc: 687, diff: "medium", variant: "Extend only if same value" },
+        { name: "House Robber III", link: "https://leetcode.com/problems/house-robber-iii/", lc: 337, diff: "medium", variant: "Rob this (skip kids) vs skip (rob kids)" },
+        { name: "Sum of Distances in Tree", link: "https://leetcode.com/problems/sum-of-distances-in-tree/", lc: 834, diff: "hard", variant: "Re-rooting technique" },
+      ]},
+    ]
+  },
+  // ── 32. DP: BITMASK ──
+  {
+    id: 32, name: "DP: Bitmask", total: 5,
+    recognition: '"assign items to slots" / "TSP" / n <= 20 (2^n feasible)',
+    groups: [
+      { ds: "General", problems: [
+        { name: "Partition to K Equal Subsets", link: "https://leetcode.com/problems/partition-to-k-equal-sum-subsets/", lc: 698, diff: "medium", variant: "Bitmask tracks used" },
+        { name: "Shortest Path Visiting All Nodes", link: "https://leetcode.com/problems/shortest-path-visiting-all-nodes/", lc: 847, diff: "hard", variant: "BFS + bitmask" },
+        { name: "Can I Win", link: "https://leetcode.com/problems/can-i-win/", lc: 464, diff: "medium", variant: "Bitmask for chosen numbers" },
+        { name: "Matchsticks to Square", link: "https://leetcode.com/problems/matchsticks-to-square/", lc: 473, diff: "medium", variant: "Bitmask or backtracking" },
+        { name: "Min XOR Sum of Two Arrays", link: "https://leetcode.com/problems/minimum-xor-sum-of-two-arrays/", lc: 1879, diff: "hard", variant: "Assign elements optimally" },
+      ]},
+    ]
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// Helpers
+// ═══════════════════════════════════════════════════════════════════
+function isSolved(name) { return SOLVED.has(name); }
+
+function getIcon(ds) { return DS_ICONS[ds] || "\u{1F4C1}"; }
+
+function getDiffClass(d) {
+  if (d === 'easy') return 'easy';
+  if (d === 'medium') return 'medium';
+  return 'hard';
+}
+function getDiffLabel(d) {
+  if (d === 'easy') return 'Easy';
+  if (d === 'medium') return 'Med';
+  return 'Hard';
+}
+
+function countSolved(pattern) {
+  let c = 0;
+  for (const g of pattern.groups) {
+    for (const p of g.problems) {
+      if (isSolved(p.name)) c++;
+    }
+  }
+  return c;
+}
+
+function countTotal(pattern) {
+  let c = 0;
+  for (const g of pattern.groups) c += g.problems.length;
+  return c;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Render Stats
+// ═══════════════════════════════════════════════════════════════════
+function renderStats() {
+  let totalProblems = 0, totalSolved = 0;
+  for (const pat of PATTERNS) {
+    totalProblems += countTotal(pat);
+    totalSolved += countSolved(pat);
+  }
+  const patternsStarted = PATTERNS.filter(p => countSolved(p) > 0).length;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card green"><div class="num">${totalSolved}</div><div class="label">Solved</div></div>
+    <div class="stat-card blue"><div class="num">${totalProblems}</div><div class="label">Total Problems</div></div>
+    <div class="stat-card purple"><div class="num">${PATTERNS.length}</div><div class="label">Patterns</div></div>
+    <div class="stat-card yellow"><div class="num">${patternsStarted}</div><div class="label">Patterns Started</div></div>
+    <div class="stat-card"><div class="num" style="color:var(--text-secondary)">${totalProblems - totalSolved}</div><div class="label">Remaining</div></div>
+  `;
+  // Overall progress bar
+  const pct = totalProblems > 0 ? Math.round((totalSolved / totalProblems) * 100) : 0;
+  document.getElementById('overallProgress').innerHTML = `
+    <div class="label-row"><span>Overall Progress</span><span>${totalSolved} / ${totalProblems} (${pct}%)</span></div>
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Render Tree
+// ═══════════════════════════════════════════════════════════════════
+function renderTree() {
+  const container = document.getElementById('treeContainer');
+  let html = '';
+
+  for (const pat of PATTERNS) {
+    const s = countSolved(pat);
+    const t = countTotal(pat);
+    const pct = t > 0 ? Math.round((s / t) * 100) : 0;
+    const barColor = pct >= 70 ? 'green' : pct >= 30 ? 'yellow' : 'blue';
+    const hasSolved = s > 0 ? ' has-solved' : '';
+
+    html += `<div class="pattern-node collapsed${hasSolved}" data-pattern-id="${pat.id}">`;
+    html += `<div class="pattern-header" onclick="togglePattern(this)">`;
+    html += `<span class="chevron">\u25BC</span>`;
+    html += `<span class="pattern-number">${pat.id}</span>`;
+    html += `<span class="pattern-name">${pat.name}</span>`;
+    html += `<span class="pattern-count">${s}/${t}</span>`;
+    html += `<span class="pattern-bar">`;
+    html += `<span class="pattern-bar-track"><span class="pattern-bar-fill ${barColor}" style="width:${pct}%"></span></span>`;
+    html += `<span class="pattern-bar-pct">${pct}%</span>`;
+    html += `</span>`;
+    html += `</div>`; // end pattern-header
+
+    html += `<div class="pattern-body">`;
+    html += `<div class="pattern-recognition">${pat.recognition}</div>`;
+
+    for (const group of pat.groups) {
+      const gSolved = group.problems.filter(p => isSolved(p.name)).length;
+      const gTotal = group.problems.length;
+
+      html += `<div class="ds-branch" data-ds="${group.ds}">`;
+      html += `<div class="ds-header" onclick="toggleDS(this)">`;
+      html += `<span class="ds-chevron">\u25BC</span>`;
+      html += `<span class="ds-icon">${getIcon(group.ds)}</span>`;
+      html += `<span class="ds-name">${group.ds}</span>`;
+      html += `<span class="ds-count">${gSolved}/${gTotal}</span>`;
+      html += `</div>`; // end ds-header
+
+      html += `<div class="ds-problems">`;
+      for (const p of group.problems) {
+        const solved = isSolved(p.name);
+        const lcLabel = p.lc ? `<a href="${p.link}" target="_blank">#${p.lc}</a>` : `<a href="${p.link}" target="_blank">GFG</a>`;
+        html += `<div class="problem" data-solved="${solved}" data-name="${p.name.toLowerCase()}">`;
+        html += `<span class="status-dot ${solved ? 'solved' : 'unsolved'}"></span>`;
+        if (p.parent) html += `<span class="parent-tag">PARENT</span>`;
+        html += `<span class="problem-name">${p.name} ${lcLabel}</span>`;
+        html += `<span class="diff-badge ${getDiffClass(p.diff)}">${getDiffLabel(p.diff)}</span>`;
+        if (p.variant) html += `<span class="variant-text" title="${p.variant}">${p.variant}</span>`;
+        html += `</div>`; // end problem
+      }
+      html += `</div>`; // end ds-problems
+      html += `</div>`; // end ds-branch
+    }
+
+    html += `</div>`; // end pattern-body
+    html += `</div>`; // end pattern-node
+  }
+
+  container.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Interactions
+// ═══════════════════════════════════════════════════════════════════
+function togglePattern(header) {
+  header.closest('.pattern-node').classList.toggle('collapsed');
+}
+
+function toggleDS(header) {
+  header.closest('.ds-branch').classList.toggle('collapsed');
+}
+
+function expandAll() {
+  document.querySelectorAll('.pattern-node.collapsed').forEach(el => el.classList.remove('collapsed'));
+  document.querySelectorAll('.ds-branch.collapsed').forEach(el => el.classList.remove('collapsed'));
+}
+
+function collapseAll() {
+  document.querySelectorAll('.pattern-node').forEach(el => el.classList.add('collapsed'));
+  document.querySelectorAll('.ds-branch').forEach(el => el.classList.add('collapsed'));
+}
+
+function setFilter(type) {
+  document.querySelectorAll('.btn[data-filter]').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.btn[data-filter="${type}"]`).classList.add('active');
+
+  document.querySelectorAll('.problem').forEach(el => {
+    if (type === 'all') {
+      el.style.display = '';
+    } else if (type === 'solved') {
+      el.style.display = el.dataset.solved === 'true' ? '' : 'none';
+    } else {
+      el.style.display = el.dataset.solved === 'false' ? '' : 'none';
+    }
+  });
+
+  // Hide empty DS branches when filtering
+  document.querySelectorAll('.ds-branch').forEach(branch => {
+    const visible = branch.querySelectorAll('.problem:not([style*="display: none"])');
+    branch.style.display = visible.length > 0 ? '' : 'none';
+  });
+
+  // Hide empty pattern nodes when filtering
+  document.querySelectorAll('.pattern-node').forEach(node => {
+    const visible = node.querySelectorAll('.problem:not([style*="display: none"])');
+    node.style.display = visible.length > 0 ? '' : 'none';
+  });
+}
+
+function searchProblems(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) {
+    document.querySelectorAll('.problem').forEach(el => el.style.display = '');
+    document.querySelectorAll('.ds-branch').forEach(el => el.style.display = '');
+    document.querySelectorAll('.pattern-node').forEach(el => el.style.display = '');
+    return;
+  }
+
+  document.querySelectorAll('.problem').forEach(el => {
+    const name = el.dataset.name || '';
+    el.style.display = name.includes(q) ? '' : 'none';
+  });
+
+  // Hide empty DS branches
+  document.querySelectorAll('.ds-branch').forEach(branch => {
+    const visible = branch.querySelectorAll('.problem:not([style*="display: none"])');
+    branch.style.display = visible.length > 0 ? '' : 'none';
+  });
+
+  // Hide empty patterns, expand those with matches
+  document.querySelectorAll('.pattern-node').forEach(node => {
+    const visible = node.querySelectorAll('.problem:not([style*="display: none"])');
+    if (visible.length > 0) {
+      node.style.display = '';
+      node.classList.remove('collapsed');
+      node.querySelectorAll('.ds-branch').forEach(b => {
+        if (b.style.display !== 'none') b.classList.remove('collapsed');
+      });
+    } else {
+      node.style.display = 'none';
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Init
+// ═══════════════════════════════════════════════════════════════════
+renderStats();
+renderTree();
+</script>
+</body>
+</html>
