@@ -43,47 +43,63 @@
 
 ### Track A — Primary (go in order)
 
-| Priority | Topic | Problems | Prereqs | Est. Sessions |
-|----------|-------|----------|---------|---------------|
-| 1 | Arrays/Two Pointers (finish) | 5 remaining | — | 2-3 |
-| 2 | Binary Search | 10 | Arrays comfort | 4-5 |
-| 3 | Sorting | 8 | Arrays | 3-4 |
-| 4 | DP | 30 | Recursion from Track B | 12-15 |
-| 5 | Graphs (coding) | 20 | BFS/DFS from micro-concepts | 8-10 |
-| 6 | Bits/Tries | 5 | — | 2 |
+| Priority | Topic | Problems | Algo Fundamentals (first session) | Est. Sessions |
+|----------|-------|----------|----------------------------------|---------------|
+| 1 | Arrays/Two Pointers (finish) | 3 remaining (matrix) | — (already covered) | 1-2 |
+| 2 | Binary Search | 10 | Basic BS taught S14. Variants: rotated, answer-space | 4-5 |
+| 3 | Sorting | 8 | **Implement: Merge Sort, Quick Sort, Heap Sort.** Concept: Counting/Bucket Sort | 4-5 |
+| 4 | DP | 30 | **Recursion → Memo → Tabulation pipeline on 0/1 Knapsack parent** | 12-15 |
+| 5 | Graphs (coding) | 20 | **Implement: BFS, DFS, Dijkstra, Topo Sort, Union-Find.** Concept: Bellman-Ford, Kruskal's, Prim's | 10-12 |
+| 6 | Bits/Tries | 5 | XOR properties, Trie implementation | 2 |
 
 ### Track B — Refresh (rotate every 2-3 sessions)
 
-| Rotation | Topic | Problems | User's C++ Level | Python Focus |
-|----------|-------|----------|-------------------|-------------|
-| B1 | Linked List | 12 | Practiced | Pointer-free approach, Python idioms |
-| B2 | Stacks/Queues | 10 | Practiced | collections.deque, monotonic patterns |
-| B3 | Trees/BST | 15 | Practiced | Recursive + iterative traversals |
-| B4 | Recursion/Backtracking | 12 | Practiced | Generator patterns, memoization |
-| B5 | Heaps | 8 | Practiced | heapq module, top-K patterns |
-| B6 | Greedy | 8 | Some exposure | Proof of correctness |
+| Rotation | Topic | Problems | Algo Fundamentals (first session) | Python Focus |
+|----------|-------|----------|----------------------------------|-------------|
+| B1 | Linked List | 12 | Dummy head technique (taught S14) | Pointer-free approach, Python idioms |
+| B2 | Stacks/Queues | 10 | **Monotonic stack/deque pattern.** collections.deque | Monotonic patterns, sliding window max |
+| B3 | Trees/BST | 15 | **Implement: recursive + iterative traversals, BFS level-order** | BST properties, validate BST |
+| B4 | Recursion/Backtracking | 12 | **Backtracking template: base→loop→pick→recurse→unpick** | Generator patterns, memoization |
+| B5 | Heaps | 8 | **heapq module, heapify, Top-K template** | Two-heap technique |
+| B6 | Greedy | 8 | Exchange argument proof technique | Proof of correctness |
 
 **Rotation rule:** Spend 2-3 sessions on each Track B topic (4-6 problems), then rotate to next.
 When Sliding Window Max revision comes due (after B2 deque), do it immediately.
 
+### Pattern Learning Cycle (applied to every new pattern)
+
+```
+1. TEACH: recognition triggers + counter-example + parent problem (10 min)
+2. APPLY: 3-5 problems across sessions, including cross-DS variants
+3. VERIFY: unlabeled problem — user identifies pattern in 2 min
+   → If can't identify → 2 more problems before moving on
+   → Target: 5-7 problems per pattern for solidification
+```
+
 ### Concrete Session Plan
 
-| Session | Slot 1: Concept | Track A | Track B | Graph Micro |
-|---------|----------------|---------|---------|-------------|
-| **11** | HOF Q7 done + Q9 curry (oral) | Arrays: 1 problem | Linked List: 2 problems (start B1) | #6: BFS concept |
-| **12** | Decorators basics: @syntax, wrapping | Arrays: 1 problem | Linked List: 2 problems | #7: DFS concept |
-| **13** | Decorators: functools.wraps, metadata | Arrays: 1 problem (finish!) | Linked List: 2 problems | #8: BFS vs DFS |
-| **14** | Decorators: with arguments | Binary Search: 1 problem (start) | Linked List: 2 problems (finish B1 rotation) | #9: Connected components |
-| **15** | Decorators: stacking, class decorators | Binary Search: 1 problem | Stacks/Queues: 2 problems (start B2) | #10: Cycles |
-| **16** | Decorators: advanced + capstone | Binary Search: 1 problem | Stacks/Queues: 2 problems | #11: DAG + Topo sort |
-| **17** | Closures/HOF/Deco quiz | Binary Search: 1 problem | Stacks/Queues: 2 problems (finish B2) | #12: Weighted graphs |
-| **18** | SQL: SELECT, WHERE, JOINs | Binary Search: 1 problem | Trees: 2 problems (start B3) | Graph coding #1 |
-| **19** | SQL: JOINs deep dive | Binary Search: finish | Trees: 2 problems | Graph coding #2 |
-| **20** | SQL: GROUP BY, HAVING, subqueries | Sorting: 1 problem (start) | Trees: 2 problems | Graph coding #3 |
-| ... | ... continues ... | ... | ... | ... |
+| Session | Slot 1: Concept | Track A | Track B | Graph Micro | Notes |
+|---------|----------------|---------|---------|-------------|-------|
+| **11** | HOF Q7 + Q9 curry | Arrays: 1 | LL: 2 (start B1) | #6: BFS | |
+| **12** | Decorators basics | Arrays: 1 | LL: 2 | #7: DFS | |
+| **13** | Deco: functools.wraps | Arrays: 1 (finish!) | LL: 2 | #8: BFS vs DFS | |
+| **14** | Deco: with arguments | BS: 1 (start) | LL: 1 (finish B1) | #9: Connected comp | ✅ DONE |
+| **15** | Deco: stacking, class deco | BS: 1 + matrix problem | LL: 1 (last B1) + Stack: 1 (start B2) | #10: Cycles | Algo: monotonic stack intro |
+| **16** | Deco: advanced + capstone | BS: 1 | Stack: 2 | #11: DAG + Topo sort | |
+| **17** | Closures/HOF/Deco quiz | BS: 1 | Stack: 2 (finish B2, Sliding Window Max revision!) | #12: Weighted graphs | |
+| **18** | SQL: SELECT, WHERE, JOINs | BS: 1 | Trees: algo fundamentals (implement traversals) | Graph coding #1 | **DRILL SESSION** — Slot 2 = 3 unlabeled mixed problems |
+| **19** | SQL: JOINs deep dive | BS: finish | Trees: 2 | Graph coding #2 | |
+| **20** | SQL: GROUP BY, HAVING | **Sorting: algo fundamentals** (implement Merge/Quick/Heap sort) | Trees: 2 | Graph coding #3 | First sorting session = implement algos |
+| **21** | SQL: subqueries, CTEs | Sorting: 2 problems | Trees: 2 (finish B3) | Graph coding #4 | |
+| **22** | SQL: indexing, EXPLAIN | Sorting: 2 problems | Recursion/BT: 2 (start B4) | Graph coding #5 | **DRILL SESSION** |
+| ... | ... continues ... | ... | ... | ... | Drill every 4th: 26, 30, 34... |
 
-> Sessions 20+ follow the same pattern: rotate Track B every 2-3 sessions, advance Track A linearly.
-> By Session ~17, Stacks/Queues Track B unlocks Sliding Window Max revision (monotonic deque).
+> **Key changes from old plan:**
+> - Algo fundamentals block when each new topic starts (bold in table)
+> - Drill sessions every 4th session starting at Session 18
+> - Pattern coverage tracked in `PATTERN_REFERENCE.md`
+> - Target: 5-7 problems per pattern before moving on
+> - Cross-DS pattern application built into problem selection
 
 ---
 
@@ -172,8 +188,8 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 ## Current Status
 
 **Phase: 1 — Closures/HOF/Decorators + Mixed DSA**
-**Next Session: 13**
-**Last completed: Session 12 FULL (Day 12, Apr 1, 2026)**
+**Next Session: 15**
+**Last completed: Session 14 (Apr 5, 2026)**
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
@@ -184,12 +200,17 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 - Session 10: HOF (Q7 closure-over-variable PASSED, Q8 map/filter/reduce 7/10) + DSA (Sliding Window Max 7/10 brute, optimal blocked on deque) + Graph #5 (degree of a node, in/out-degree)
 - Session 11: Q7 closure-over-variable PASSED + Track A: Max Product Subarray 5/10 (revision due Mar 31) + Track B: Reverse Linked List 8/10, Linked List Cycle 9/10 + Graph #6 BFS PASSED
 - Session 12 (complete): Decorators basics PASSED + Track A: Next Permutation 8/10 (+ permutation generation warm-up) + Track B: Cycle II 9/10, Middle of LL 10/10 + Graph #7 DFS PASSED
-- Graph micro-concepts #1-#7: PASSED
+- Session 13: functools.wraps 6/10 + Max Product REVISION CLEARED 10/10 + Trapping Rain Water 6/10 (brute+optimized) + Remove Nth LL 9/10 (both two-pass and one-pass) + Graph #8 BFS vs DFS PASSED
+- Session 14: Decorators with arguments PASSED (oral) + Trapping Rain Water REVISION CLEARED 8/10 + Binary Search 9/10 (Track A start) + Add Two Numbers 7/10 (Track B) + Graph #9 Connected Components PASSED
+- Graph micro-concepts #1-#9: PASSED
 
 ### DSA Track Status
-- **Track A:** Arrays 12/15 done (3 remaining) → then Binary Search
-- **Track B:** Linked List 4/12 (B1 rotation in progress)
+- **Track A:** Arrays done → Binary Search 1/10 started
+- **Track B:** Linked List 6/12 (B1 rotation in progress)
 
 ### Active Revision Queue
 - Sliding Window Maximum OPTIMAL — blocked until Stacks/Queues (B2) covers deque (~Session 15-17)
-- Maximum Product Subarray — due Mar 31, 2026
+
+### Also Created This Session
+- Matrix problem files: Set Matrix Zeroes (LC #73), Rotate Image (LC #48), Spiral Matrix (LC #54) — to be mixed into future sessions
+- `dsa/PATTERN_REFERENCE.md` — comprehensive 32-pattern, ~200-problem reference with cross-DS branching, LeetCode/GFG links, difficulty tags, parent problems marked

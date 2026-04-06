@@ -14,9 +14,9 @@
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
-| DSA — Arrays/Two Pointers | 15 | 12 | 3 | In progress |
-| DSA — Binary Search | 10 | 0 | 10 | Not started |
-| DSA — Linked List | 12 | 4 | 8 | In progress |
+| DSA — Arrays/Two Pointers | 15 | 12 | 3 | In progress (+3 matrix files created) |
+| DSA — Binary Search | 10 | 1 | 9 | In progress |
+| DSA — Linked List | 12 | 6 | 6 | In progress |
 | DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
 | DSA — Sorting | 8 | 0 | 8 | Not started |
 | DSA — Trees & BST | 15 | 0 | 15 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **326** | **52** | **274** | |
+| **TOTAL** | **326** | **55** | **271** | |
 
 ---
 
@@ -186,3 +186,20 @@
 
 **Graph Micro-concept #8:**
 - [x] BFS vs DFS Comparison | Graph Theory | PASSED | BFS = queue, level-by-level, guarantees shortest path (unweighted), O(width) space. DFS = stack/recursion, branch-by-branch, no shortest guarantee, O(depth) space. BFS for: shortest path, level-order, ripple problems. DFS for: cycles, topological sort, all paths, maze/backtracking. Own examples: navigation/maps = BFS (shortest route), LinkedIn connection chains = DFS (deep exploration). Key: both traverse any graph; BFS guarantees shortest, DFS guarantees complete exploration with less memory.
+
+### Session 14 — Apr 5, 2026
+
+**Decorators (Session 14, Slot 1):**
+- [x] Decorators with Arguments (oral) | Decorators | Advanced | PASSED | 3-level nesting: outer function takes decorator args → returns actual decorator → which returns wrapper. `@repeat(3)` = `repeat(3)` returns decorator, then `@decorator` wraps the function. Own explanation confirmed understanding of why 3 levels needed.
+
+**DSA — Arrays REVISION (Session 14, Slot 2):**
+- [x] **REVISION** Trapping Rain Water O(1) space (LC #42) | Two Pointers | Hard | **8/10** (was 6/10) | ✅ CLEARED | Two-pointer O(1) space: if height[left] <= height[right], process left side (right_max >= height[right] >= height[left], so left is bottleneck). Track left_max/right_max, move shorter side inward. | **Def:** Two-pointer O(1): the shorter side is the bottleneck. If height[left] <= height[right], then right_max >= height[left], so water = left_max - height[left]. Process shorter side, move inward.
+
+**DSA — Binary Search (Session 14, Track A start):**
+- [x] Binary Search (LC #704) | Binary Search | Easy | **9/10** | 10/10. 1 bug: wrote `middle = (right - left)//2` instead of `left + (right - left)//2` — offset concept (distance from left, must add to left). Overflow-safe formula: avoids int overflow in C++/Java. `<=` because both endpoints must be checked. | **Def:** Binary search = halve search space each step. middle = left + (right-left)//2. If target < mid → right = mid-1, if target > mid → left = mid+1. O(log n).
+
+**DSA — Linked List (Session 14, Track B continued):**
+- [x] Add Two Numbers (LC #2) | Dummy Head + Carry | Medium | **7/10** | 10/10. Multiple attempts. Learned dummy head technique (new concept, free hint): create fake node at front, build list after it, return dummy.next. Bugs: (1) initially overwrote result.val without linking nodes, (2) advanced to result.next which was None, (3) missing carry check after loops. | **Def:** Dummy head = create fake node, attach real nodes after it, return dummy.next. For digit addition: process carry at every step, check carry>0 after all loops for extra digit.
+
+**Graph Micro-concept #9:**
+- [x] Connected Components | Graph Theory | PASSED | A connected component = group of nodes where every node is reachable from every other within the group. Find all: loop through all nodes, start BFS/DFS from each unvisited node — each fresh traversal = one component. Count of fresh BFS/DFS starts = number of components. Own example: Family tree — members within a family are connected, different families are separate components; marriage merges two components (union). | **Def:** Connected component = maximal set of mutually reachable nodes. Find them by starting BFS/DFS from each unvisited node.

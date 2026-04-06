@@ -81,6 +81,77 @@
 - "Give me another problem where you'd use this same technique" — before moving to next problem
 - Pattern recognition only works if the user can spot the pattern in NEW problems, not just the one taught
 
+## Algorithm Fundamentals (NEW — effective Session 15)
+
+> **Rule:** Before solving problems in a new topic, TEACH the core algorithms first.
+> Research shows: theory FIRST within each pattern unit, then immediately apply via problems.
+
+### When a new topic starts in Track A, the FIRST session includes:
+
+| Topic | Must Implement From Scratch | Must Understand (concept + complexity) |
+|-------|---------------------------|---------------------------------------|
+| **Sorting** | Merge Sort, Quick Sort, Heap Sort | Counting Sort, Bucket Sort, Radix Sort |
+| **Trees** | Recursive inorder/preorder/postorder, Iterative inorder, BFS level-order | Morris traversal, iterative postorder |
+| **Graphs** | BFS, DFS, Dijkstra's, Topological Sort (Kahn's), Union-Find | Bellman-Ford, Kruskal's, Prim's |
+| **DP** | Recursion → Memoization → Tabulation pipeline on parent problem | Space optimization (rolling array) |
+
+**Flow:** Teach algorithm (10-15 min) → User implements it as a standalone exercise → THEN solve problems using it.
+
+### Already Covered (retroactive):
+- Binary Search: basic algorithm taught in Session 14
+- Two Pointers: taught organically via 3Sum, Sort Colors, Trapping Rain Water
+- Floyd's Fast/Slow: taught via Cycle Detection
+- Kadane's: taught via Maximum Subarray
+- Prefix Sum: taught via Subarray Sum K, Product Except Self
+
+## Pattern Learning Cycle (NEW — effective Session 15)
+
+> **Rule:** Every new pattern follows a 3-step cycle. Just solving 2-3 problems is NOT enough.
+> Research-backed: 5-7 problems per pattern for solidification.
+
+### Step 1: TEACH the pattern (when first encountered)
+- **Recognition triggers:** "When you see X in the problem statement, think pattern Y"
+- **Counter-example:** "This LOOKS like Y but ISN'T because..."
+- **Parent problem:** Solve together (from `PATTERN_REFERENCE.md`)
+
+### Step 2: APPLY (3-5 problems across sessions)
+- Start with obvious applications → progress to disguised variants
+- Cross-DS: same pattern on different data structures (e.g., two pointers on arrays AND linked lists)
+- Track problem count per pattern in `PATTERN_REFERENCE.md`
+
+### Step 3: VERIFY (after 5+ problems in a pattern)
+- Give an UNLABELED problem — user must identify the pattern in 2 min before coding
+- If user can't identify → pattern is NOT learned yet, do 2 more problems
+- Once identified correctly → pattern is solidified
+
+### Pattern Coverage Tracking
+- Maintained at the bottom of `PATTERN_REFERENCE.md`
+- Format: Pattern | Problems Solved | Target (5-7) | Status
+- Teacher checks this when selecting problems — prioritize under-covered patterns
+
+## Pattern Recognition Drills (NEW — effective Session 18)
+
+> **Rule:** Every 4th session, Slot 2 becomes a mixed drill.
+> This builds the interview skill of identifying patterns under pressure.
+
+### How Drills Work
+1. Slot 2 gets 3 unlabeled problems from patterns already covered
+2. For each problem, user has **2 minutes** to:
+   - Name the pattern
+   - Explain WHY (what triggered the recognition)
+3. THEN code the solution (scored normally)
+4. Problems deliberately mix patterns from different topics
+
+### Drill Schedule
+- First drill: Session 18 (by then ~6 patterns covered)
+- Then every 4th session: 22, 26, 30, 34, ...
+- Slot 1 (concept) and Slot 3 (graph) stay unchanged during drills
+
+### Scoring Drills
+- Same /10 scoring per problem
+- BONUS: +1 if pattern identified correctly in under 2 min (no hints)
+- This rewards pattern recognition, not just coding ability
+
 ## Exercise File Template (MUST follow for every new problem)
 
 Every exercise file MUST use this exact structure:
