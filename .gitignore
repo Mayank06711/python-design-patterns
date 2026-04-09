@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .env
 .vscode/
+.claude/
 *.egg-info/
 dist/
 build/

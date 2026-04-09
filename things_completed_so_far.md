@@ -10,14 +10,14 @@
 |-------|----------|------|-----------|--------|
 | OOP | 25 | 20 | 5 | In progress |
 | SOLID Principles | 26 | 8 | 18 | In progress |
-| Closures/HOF/Decorators | 33 | 10 | 23 | In progress |
+| Closures/HOF/Decorators | 33 | 12 | 21 | In progress |
 | SQL & Indexing | 35 | 0 | 35 | Not started |
 | Rate Limiting | 27 | 0 | 27 | Not started |
 | System Design | 27 | 0 | 27 | Not started |
 | DSA — Arrays/Two Pointers | 19 | 12 | 7 | In progress (+3 matrix created, +4 added from C++ cross-check) |
-| DSA — Binary Search | 10 | 3 | 7 | In progress |
-| DSA — Linked List | 13 | 7 | 6 | In progress (+6 missing from C++ added, +1 Middle bonus) |
-| DSA — Stacks/Queues | 10 | 0 | 10 | Not started |
+| DSA — Binary Search | 16 | 3 | 13 | In progress (+6 BS-on-answer added from Striver/NeetCode) |
+| DSA — Linked List | 15 | 7 | 8 | In progress (+3 added: Reverse II, Sort List, Merge k) |
+| DSA — Stacks/Queues | 15 | 1 | 14 | In progress (+5 added: Asteroid, Decode String, Car Fleet, LRU, Max Freq Stack) |
 | DSA — Sorting | 8 | 0 | 8 | Not started |
 | DSA — Trees & BST | 15 | 0 | 15 | Not started |
 | DSA — Heaps | 8 | 0 | 8 | Not started |
@@ -26,7 +26,7 @@
 | DSA — Dynamic Programming | 30 | 0 | 30 | Not started |
 | DSA — Graphs | 20 | 0 | 20 | Not started |
 | DSA — Bits/Tries | 5 | 0 | 5 | Not started |
-| **TOTAL** | **332** | **59** | **273** | |
+| **TOTAL** | **346** | **62** | **284** | |
 
 ---
 
@@ -217,3 +217,16 @@
 
 **Graph Micro-concept #10:**
 - [x] Cycle Detection | Graph Theory | PASSED | Undirected: DFS + parent tracking — visiting a non-parent visited node = cycle (back to parent via same edge is NOT a cycle). Directed: 3-state coloring — white (unvisited), gray (in current DFS path), black (fully explored). Gray→gray = back edge = cycle. BFS can detect cycles in undirected graphs but NOT reliably in directed graphs (can't distinguish back edges from cross edges). Kahn's Algorithm (BFS topological sort) can detect cycle existence but not location. Own example: Instagram follow graph (directed cycles possible: A→B→C→A). | **Def:** Undirected = DFS + parent (non-parent visited = cycle). Directed = 3-state DFS (gray→gray = cycle). BFS works for undirected only; Kahn's detects directed cycle existence.
+
+### Session 16 — Apr 6, 2026
+
+**Decorators Advanced (Session 16, Slot 1):**
+- [x] Q16: @retry with Exponential Backoff (exercise 12) | Decorators | Advanced | **7/10** | 8/8 tests. 4 attempts. Bugs: (1) UnboundLocalError on `delay` — needed `nonlocal delay` (recognized from Session 9 Q4), (2) off-by-one: `attempt=0` with `<=` gave max_attempts+1 iterations — fixed to `attempt=1`, (3) wrong backoff formula `delay += delay*backoff` instead of `delay = delay*backoff`. 3-level nesting: outer takes config → returns decorator → returns wrapper. Transfer: DB connection retries for transient failures. Known issue: `nonlocal delay` mutates shared state across calls; should use local copy. | **Def:** @retry = 3-level nested decorator. Exponential backoff: delay *= backoff each failure. Re-raise last exception after all attempts exhausted.
+- [x] Q17: @memoize Decorator (exercise 13) | Decorators | Medium | **8/10** | 8/8 tests. 2 attempts. Bug: `if cache[key]` tries to ACCESS key (KeyError if missing) instead of checking existence — fixed to `if key in cache:`. Handles falsy values (0, False, '', []) correctly now. Cache exposed via `wrapper.cache = cache`. kwargs handled via `tuple(sorted(kwargs.items()))`. | **Def:** Memoize = cache function results by argument key. Use `key in cache` (not `cache[key]`) to handle falsy cached values. Expose cache via function attribute (functions are first-class objects).
+
+**DSA — Stacks/Queues (Session 16, Slot 2):**
+- [x] Monotonic Stack Pattern (algo fundamental) | Stacks | Taught | PASSED | Recognition triggers: "next greater/smaller element", "previous greater/smaller", "how many days until X". Stack = elements waiting for their answer. Pop when current element resolves them. Each element pushed/popped at most once → O(n). Python stack: list with append/pop/[-1], all O(1). | **Def:** Monotonic stack maintains elements in sorted order. When new element comes, pop everything it "beats". Popped elements get their answer (the current element). O(n) total — each element enters and exits stack exactly once.
+- [x] Daily Temperatures (LC #739) | Monotonic Stack | Medium | **8/10** | 10/10. 2 attempts. Monotonic stack parent problem. Stack stores indices (not values) — when popping, answer = current_index - popped_index. Initial bugs: duplicate push of index 0, complex if/else structure with break. Simplified to clean 3-line inner structure. Also discussed reverse-skip alternative (no stack, uses answer array as skip list). | **Def:** Stack stores indices of days waiting for warmer temperature. When current temp > stack top's temp, pop and compute days = i - popped_index. Push current index. O(n) time, O(n) space.
+
+**Graph Micro-concept #11 (Session 16, Slot 3 — STARTED, NOT COMPLETED):**
+- [ ] DAG + Topological Sort | Graph Theory | STARTED | User requested visual/diagram approach — text-only explanations not memorable enough. Course prerequisites example introduced but not completed. To be finished next session with diagrams.
