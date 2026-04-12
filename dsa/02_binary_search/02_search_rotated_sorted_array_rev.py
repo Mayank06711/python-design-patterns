@@ -1,8 +1,21 @@
 """
-PROBLEM: Search in Rotated Sorted Array
-LeetCode #33: https://leetcode.com/problems/search-in-rotated-sorted-array/
+REVISION: Search in Rotated Sorted Array
+==========================================
 
+LeetCode #33
+Original: Session 15 (Apr 3) — scored 4/10, 3 bugs, heavy hints.
+This is your clean-slate redo.
+
+STARTED:   2026-04-11 17:40:36
+COMPLETED: 2026-04-11 17:54:58
+ATTEMPT:   REVISION — 1st run 12/12 (latent boundary bug on right branch)
+SCORE:     8/10 (Correctness 3 + Time 3 + Hints 1 + Quality 1)
+TIME:      ~7 min / 8 min (Medium) — under budget
+
+PROBLEM:
+--------
 There is an integer array nums sorted in ascending order (with distinct values).
+
 Prior to being passed to your function, nums is possibly rotated at an unknown
 pivot index k (1 <= k < nums.length) such that the resulting array is:
 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed).
@@ -12,56 +25,45 @@ For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 to become [4,5,6,
 Given the array nums after the possible rotation and an integer target,
 return the index of target if it is in nums, or -1 if it is not in nums.
 
-You must write an algorithm with O(log n) runtime complexity.
-
 CONSTRAINTS:
-- 1 <= nums.length <= 5000
-- -10^4 <= nums[i] <= 10^4
-- All values of nums are unique
-- nums is an ascending array that is possibly rotated
-- -10^4 <= target <= 10^4
-
-DIFFICULTY: Medium
-TIME LIMIT: 8 minutes
-STARTED:
-COMPLETED:
-ATTEMPT: 1
+  - 1 <= nums.length <= 5000
+  - -10^4 <= nums[i] <= 10^4
+  - All values of nums are unique
+  - nums is an ascending array that is possibly rotated
+  - O(log n) runtime required. No linear scan.
+  - No peeking at the original file.
 """
+
 
 # ============================================================
 # STEP 1: WRITE YOUR APPROACH HERE AS COMMENTS BEFORE CODING
 # ============================================================
-# 1. WHAT: question want me to return the index of ele which is equal to target
-# 2. HOW: there are two algo: 1: iterate on array and find target return index else -1 , 2: since array is rortated and sorted it means now there are two arrays within one array both soreted and now when we cal the middle we have to check : First we have calculated the middle right now we will check with the middle whether the target is less than or greater than the value at the middle if target is less than middle OK now what should be actually happening we should bring to middle but since the array can be rotated so we know there will be a pivot so we we are not going to find here what I will check we will checked whether the middle is greater than its left value and lesser than its right value If that holds it means till now we are in the position where a race sorted So I will simply left pointer to right because the target was less than valued metal and we need to go right and if but the left value is less than and the right value is also less than middle it means this is the pivot and here there can be two case either we bring left to middle plus one or we bring right to middle minus one so we will in there will be two pass solutions so in first pass we will always make sure that left goes to middle one and in the second pass we will always make sure right goes to middle middle one in this case where middle is the pivot point so there will be 2 pass and we will be able to find the solution
-# 3. EDGE CASES: What can be age each case I don't think my problem cannot handle any edge case but edge case is like arrays already it is not rotated and it can be like when it was rotated but same as the number of elements in the array so this will be the same array
-# 4. COMPLEXITY: Time O(?), Space O(?) 1: O(n) , s.c O(1), 2: 2*log(n) s.c O(1)
+# 1. WHAT:
+# 2. HOW:
+# 3. EDGE CASES:
+# 4. COMPLEXITY: Time O(?), Space O(?)
 
 
 # ============================================================
 # STEP 2: CODE YOUR SOLUTION
 # ============================================================
 def search(nums, target):
-    left, right = 0, len(nums) -1
-    while(left<= right):
+    left, right = 0, len(nums)-1
+    while(left <= right):
         middle = left + (right - left)//2
-        if nums[middle] == target:
+        if target == nums[middle]:
             return middle
-        if nums[left] <= nums[middle]: # left is sorted
-            if target >= nums[left] and target < nums[middle]:
+        if nums[left] <= nums[middle]:# left sorted     
+            if target <= nums[middle] and target >= nums[left]:
                 right = middle - 1
             else:
-                left = middle + 1
-        else: # right sorted
-            if target <= nums[right] and target > nums[middle]: 
+                left = middle + 1 # means it isn right hal
+        else:
+            if target <= nums[right] and target >= nums[middle]:
                 left = middle + 1
             else:
-                right = middle -1
+                right = middle - 1 
     return -1
-
-
-
-
-
 
 # ============================================================
 # TESTS — DO NOT MODIFY BELOW THIS LINE

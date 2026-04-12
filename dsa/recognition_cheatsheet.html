@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Recognition Cheat Sheet</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #151a21;
+    --panel-alt: #1a2029;
+    --border: #2a3444;
+    --text: #e6e6e6;
+    --text-dim: #9ba3b4;
+    --accent: #7dd3fc;
+    --accent-2: #fbbf24;
+    --good: #86efac;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+    color: var(--accent);
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .intro {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    margin: 20px 0 28px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .intro strong { color: var(--text); }
+  h2 {
+    font-size: 18px;
+    margin: 32px 0 12px;
+    color: var(--accent-2);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  th {
+    background: var(--panel-alt);
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--panel-alt); }
+  .trigger {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .trigger em {
+    font-style: normal;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  .pattern {
+    color: var(--accent-2);
+    font-family: var(--mono);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .ds {
+    color: var(--good);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .why {
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  .mini {
+    background: var(--panel);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    white-space: pre;
+    color: var(--text);
+    overflow-x: auto;
+  }
+  .mini .arrow { color: var(--accent); }
+  .mini .pat { color: var(--accent-2); }
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+    text-align: center;
+  }
+  .note {
+    color: var(--accent-2);
+    font-weight: 600;
+  }
+  @media print {
+    body { background: white; color: black; }
+    .wrap { max-width: 100%; }
+    table, .mini, .intro { background: white; color: black; border: 1px solid #ccc; }
+    th { background: #f0f0f0; color: #333; }
+    .pattern { color: #0066cc; }
+    .ds { color: #008000; }
+    .why, .subtitle, .trigger em, footer { color: #555; }
+    tr:hover td { background: white; }
+    h1, h2 { color: #111; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>DSA Recognition Cheat Sheet</h1>
+  <div class="subtitle">Read-the-problem &rarr; pick-the-DS. Under 10 seconds per recognition.</div>
+</header>
+
+<div class="intro">
+  <strong>How to use:</strong> When you read a problem, scan the "Trigger" column for a phrase that matches. That tells you the pattern + DS instantly. The "Why" column is your one-line justification — if you can't repeat it, you don't understand the pattern yet.
+  <br><br>
+  <strong>Drill mode:</strong> Cover the right columns, read the trigger, say the pattern out loud. Get it wrong? Add the misread to your notes.
+</div>
+
+<h2>&sect; Quick Glance (the 8 you must know cold)</h2>
+<div class="mini"><span class="trigger">sliding window + min/max      </span> <span class="arrow">&rarr;</span> <span class="pat">monotonic deque</span>
+<span class="trigger">next greater/smaller          </span> <span class="arrow">&rarr;</span> <span class="pat">monotonic stack</span>
+<span class="trigger">top k / k-th                  </span> <span class="arrow">&rarr;</span> <span class="pat">heap (size k)</span>
+<span class="trigger">median of stream              </span> <span class="arrow">&rarr;</span> <span class="pat">two heaps</span>
+<span class="trigger">BFS / level order             </span> <span class="arrow">&rarr;</span> <span class="pat">deque (no "monotonic")</span>
+<span class="trigger">LIFO / undo / matching parens </span> <span class="arrow">&rarr;</span> <span class="pat">stack</span>
+<span class="trigger">FIFO / buffering              </span> <span class="arrow">&rarr;</span> <span class="pat">deque (used as queue)</span>
+<span class="trigger">priority scheduling           </span> <span class="arrow">&rarr;</span> <span class="pat">heap</span></div>
+
+<h2>&sect; Full Recognition Table</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 34%;">When the problem says…</th>
+      <th style="width: 18%;">Pattern</th>
+      <th style="width: 14%;">Data Structure</th>
+      <th style="width: 34%;">Why (1 line)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="trigger">"sliding window + min/max" / "max in every window of size k"</td>
+      <td class="pattern">Monotonic Deque</td>
+      <td class="ds">deque</td>
+      <td class="why">Dominated elements are dead; keep a decreasing queue so front = max in O(1).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"next greater / smaller element" / "days until a warmer day"</td>
+      <td class="pattern">Monotonic Stack</td>
+      <td class="ds">stack</td>
+      <td class="why">Pop while current beats stack top — each element pushed/popped once &rarr; O(n).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"top k" / "k-th largest / smallest" / "closest k points"</td>
+      <td class="pattern">Top-K Heap</td>
+      <td class="ds">min-heap of size k</td>
+      <td class="why">Heap top gives the threshold in O(1); kick out loser on overflow &rarr; O(n log k).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"median of a stream" / "running median"</td>
+      <td class="pattern">Two Heaps</td>
+      <td class="ds">max-heap + min-heap</td>
+      <td class="why">Two heap tops ARE the two middle elements; balance sizes &rarr; O(log n) insert, O(1) query.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"level order" / "BFS on tree or grid" / "shortest path in unweighted graph"</td>
+      <td class="pattern">BFS</td>
+      <td class="ds">deque (plain)</td>
+      <td class="why">Layer-by-layer expansion; FIFO guarantees shortest-first.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"LIFO" / "undo" / "balanced parens" / "nested expression"</td>
+      <td class="pattern">Stack</td>
+      <td class="ds">stack</td>
+      <td class="why">Most-recent-first access = stack's definition.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"FIFO queue" / "producer-consumer" / "buffering"</td>
+      <td class="pattern">Plain Queue</td>
+      <td class="ds">deque</td>
+      <td class="why">O(1) append + popleft.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"scheduling by priority" / "job with smallest deadline" / "Dijkstra"</td>
+      <td class="pattern">Priority Queue</td>
+      <td class="ds">heap</td>
+      <td class="why">Always need the min/max of a <em>changing</em> set &rarr; heap's one job.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"merge k sorted lists / streams"</td>
+      <td class="pattern">K-Way Merge</td>
+      <td class="ds">min-heap of k heads</td>
+      <td class="why">Heap picks the smallest head across all k lists in O(log k).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"subarray / substring of fixed or variable size" + "sum / count / distinct"</td>
+      <td class="pattern">Sliding Window</td>
+      <td class="ds">two pointers</td>
+      <td class="why">Window slides, state updates incrementally — avoids recomputation.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"find a pair in sorted array" / "3Sum" / "container with most water"</td>
+      <td class="pattern">Two Pointers</td>
+      <td class="ds">two pointers</td>
+      <td class="why">Sorted order lets you decide which pointer to move &rarr; O(n).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"cycle in linked list" / "middle of LL" / "palindrome LL"</td>
+      <td class="pattern">Fast / Slow Pointers</td>
+      <td class="ds">two pointers</td>
+      <td class="why">Speed differential collapses O(n&sup2;) traversal to O(n).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"reverse linked list" / "reverse in groups of k"</td>
+      <td class="pattern">In-Place LL Reversal</td>
+      <td class="ds">pointers</td>
+      <td class="why">Flip <code>next</code> with 3 local variables; no extra memory.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"search in sorted / rotated / monotonic"</td>
+      <td class="pattern">Binary Search</td>
+      <td class="ds">&mdash;</td>
+      <td class="why">Halve the search space each step &rarr; O(log n).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"minimize max / maximize min such that condition holds"</td>
+      <td class="pattern">Binary Search on Answer</td>
+      <td class="ds">&mdash;</td>
+      <td class="why">Monotonic predicate on answer space &rarr; binary search the answer itself.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"range sum" / "range XOR" / "count subarrays with sum K"</td>
+      <td class="pattern">Prefix Sum + Hashmap</td>
+      <td class="ds">array + dict</td>
+      <td class="why">Precompute cumulative &rarr; range query in O(1); hashmap counts complements.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"intervals overlap / merge / insert"</td>
+      <td class="pattern">Merge Intervals</td>
+      <td class="ds">sort + sweep</td>
+      <td class="why">Sort by start; sweep with running end &rarr; greedy merge.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"missing / duplicate in 1..n"</td>
+      <td class="pattern">Cyclic Sort</td>
+      <td class="ds">array swap</td>
+      <td class="why">Index is the key — put <code>nums[i]</code> at position <code>nums[i]-1</code> in O(n).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"all paths" / "connected components" / "tree traversal with state"</td>
+      <td class="pattern">DFS</td>
+      <td class="ds">recursion / stack</td>
+      <td class="why">Go deep, backtrack on dead ends — natural for exhaustive exploration.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"generate all subsets / permutations / combinations"</td>
+      <td class="pattern">Backtracking</td>
+      <td class="ds">recursion</td>
+      <td class="why">Choose &rarr; recurse &rarr; un-choose; explores the decision tree.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"task / course ordering with dependencies" / "schedule with prerequisites"</td>
+      <td class="pattern">Topological Sort</td>
+      <td class="ds">graph + queue</td>
+      <td class="why">DAG + in-degree queue processes nodes only after all prereqs done.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"friend circles" / "accounts merge" / "group dynamically"</td>
+      <td class="pattern">Union Find</td>
+      <td class="ds">DSU</td>
+      <td class="why">Near-O(1) union + find with path compression + rank.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"max subarray sum" / "best time to buy/sell (one txn)"</td>
+      <td class="pattern">Kadane's</td>
+      <td class="ds">running sum</td>
+      <td class="why">Reset when running sum goes negative — greedy O(n).</td>
+    </tr>
+    <tr>
+      <td class="trigger">"choose items with weight / cost limit to max value"</td>
+      <td class="pattern">0/1 Knapsack DP</td>
+      <td class="ds">2D dp</td>
+      <td class="why">Each item: take or skip — classic decision DP.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"unlimited copies of each item (coin change)"</td>
+      <td class="pattern">Unbounded Knapsack DP</td>
+      <td class="ds">1D dp</td>
+      <td class="why">Same decision but item stays available &rarr; 1D roll.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"longest common / edit distance / regex match"</td>
+      <td class="pattern">LCS Family DP</td>
+      <td class="ds">2D dp</td>
+      <td class="why">Compare <code>s1[i]</code> vs <code>s2[j]</code> — match or not &rarr; 2D grid.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"longest increasing subseq" / "Russian doll envelopes"</td>
+      <td class="pattern">LIS DP</td>
+      <td class="ds">1D dp / patience</td>
+      <td class="why">O(n&sup2;) DP or O(n log n) patience sorting.</td>
+    </tr>
+    <tr>
+      <td class="trigger">"shortest path weighted" / "single source shortest"</td>
+      <td class="pattern">Dijkstra</td>
+      <td class="ds">min-heap + graph</td>
+      <td class="why">Greedy relax — works on non-negative weights.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>&sect; The "Heap vs Monotonic Deque" Confusion</h2>
+<div class="intro" style="border-left-color: var(--accent-2);">
+  <span class="note">Common mistake:</span> confusing "top k" (heap) with "max in window of size k" (monotonic deque). They look similar because both say "k".
+  <br><br>
+  <strong>The difference is:</strong>
+  <ul style="margin: 8px 0 0; padding-left: 20px;">
+    <li><strong>Top-K</strong> — no window, no sliding. Look at ALL elements, pick the k best. &rarr; <span class="pattern">heap</span></li>
+    <li><strong>Sliding window extremum</strong> — there's a window of size k that slides across the array. Elements enter and leave in a fixed order. &rarr; <span class="pattern">monotonic deque</span></li>
+  </ul>
+  <br>
+  <strong>The tell:</strong> does the word <em>"window"</em> or <em>"every subarray of size k"</em> appear? If yes &rarr; monotonic deque. If no &rarr; heap.
+</div>
+
+<h2>&sect; Quick Drill (answer without looking)</h2>
+<ol style="color: var(--text-dim); font-size: 14px;">
+  <li>"Find the shortest path from room A to room B in an unweighted maze." &rarr; <em>?</em></li>
+  <li>"Given a stock price array, find the maximum profit from one buy and one sell." &rarr; <em>?</em></li>
+  <li>"Return the k most frequent words in a document." &rarr; <em>?</em></li>
+  <li>"Given stream of numbers, return the running median after each insert." &rarr; <em>?</em></li>
+  <li>"Find the longest substring without repeating characters." &rarr; <em>?</em></li>
+  <li>"For each day, how many days until a warmer day?" &rarr; <em>?</em></li>
+  <li>"Minimum swaps to make two strings equal." &rarr; <em>?</em></li>
+  <li>"Number of connected components in a friend graph." &rarr; <em>?</em></li>
+</ol>
+<details style="margin-top: 12px;">
+  <summary style="color: var(--accent); cursor: pointer; font-size: 14px;">Show answers</summary>
+  <ol style="color: var(--good); font-size: 14px; margin-top: 8px;">
+    <li>BFS (deque)</li>
+    <li>Kadane's (running sum)</li>
+    <li>Top-K heap (min-heap of size k on frequency)</li>
+    <li>Two heaps (max + min)</li>
+    <li>Sliding window (variable size) + hash set</li>
+    <li>Monotonic stack</li>
+    <li>Backtracking / DP (not a cheat-sheet entry — edit distance variant)</li>
+    <li>Union Find (or DFS/BFS)</li>
+  </ol>
+</details>
+
+<footer>
+  Generated from <code>PATTERN_REFERENCE.md</code> &middot; Session 17 &middot; Apr 9, 2026
+  <br>
+  Open directly: <code>dsa/recognition_cheatsheet.html</code>
+</footer>
+
+</div>
+</body>
+</html>

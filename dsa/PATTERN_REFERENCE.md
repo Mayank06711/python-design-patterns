@@ -59,6 +59,49 @@ DSA Patterns
 
 ---
 
+## 0. RECOGNITION CHEAT SHEET (read-the-problem → pick-the-DS)
+
+> **Purpose:** When you read a problem, the phrasing should *trigger* the right pattern in under 10 seconds.
+> This table maps problem phrases to the pattern + data structure + a one-line WHY.
+> Grow this table every session — any time you misrecognize a problem, add the misread → correct mapping here.
+>
+> For the full pattern body (variants, parent problems, etc.), jump to the section link.
+
+| When the problem says… | Pattern | DS | Why (one line) | Section |
+|---|---|---|---|---|
+| "sliding window + min/max" / "max in every window of size k" | Monotonic Deque | deque | Dominated elements are dead; keep a decreasing queue so front = max in O(1) | [§5](#5-monotonic-stack--queue-8-problems) |
+| "next greater/smaller element" / "days until warmer" | Monotonic Stack | stack | Pop while current beats stack top — each element pushed/popped once → O(n) | [§5](#5-monotonic-stack--queue-8-problems) |
+| "top k" / "k-th largest/smallest" / "closest k points" | Top-K Heap | min-heap of size k | Heap top gives the threshold in O(1); kick out loser on overflow → O(n log k) | [§15](#15-top-k-elements--heap-8-problems) |
+| "median of a stream" / "running median" | Two Heaps | max-heap + min-heap | Two heap tops ARE the two middle elements; balance sizes → O(log n) insert, O(1) query | [§14](#14-two-heaps-3-problems) |
+| "level order" / "BFS on tree or grid" / "shortest path in unweighted graph" | BFS | deque (plain) | Layer-by-layer expansion; FIFO guarantees shortest-first | [§9](#9-bfs-9-problems) |
+| "LIFO" / "undo" / "balanced parens" / "nested expression" | Stack | stack | Most-recent-first access = stack's definition | [§5](#5-monotonic-stack--queue-8-problems) |
+| "FIFO queue" / "producer-consumer" / "buffering" | Plain Queue | deque | O(1) append + popleft | [§5](#5-monotonic-stack--queue-8-problems) |
+| "scheduling by priority" / "job with smallest deadline" / "Dijkstra" | Priority Queue | heap | Always need the min/max of a *changing* set → heap's one job | [§15](#15-top-k-elements--heap-8-problems) |
+| "merge k sorted lists/streams" | K-Way Merge | min-heap of k heads | Heap picks the smallest head across all k lists in O(log k) | [§16](#16-k-way-merge-4-problems) |
+| "subarray/substring of fixed/variable size" + "sum/count/distinct" | Sliding Window | two pointers | Window slides, state updates incrementally — avoids recomputation | [§2](#2-sliding-window-8-problems) |
+| "find a pair in sorted array" / "3Sum" / "container with most water" | Two Pointers | two pointers | Sorted order lets you decide which pointer to move → O(n) | [§1](#1-two-pointers-12-problems) |
+| "cycle in linked list" / "middle of LL" / "palindrome LL" | Fast/Slow Pointers | two pointers | Speed differential collapses O(n²) traversal to O(n) | [§1](#1-two-pointers-12-problems) |
+| "reverse linked list" / "reverse in groups of k" | In-Place LL Reversal | pointers | Flip `next` with 3 local variables; no extra memory | [§8](#8-in-place-linked-list-reversal-6-problems) |
+| "search in sorted / rotated / monotonic" | Binary Search | — | Halve the search space each step → O(log n) | [§3](#3-binary-search-11-problems) |
+| "minimize max / maximize min such that condition holds" | Binary Search on Answer | — | Monotonic predicate on answer space → binary search the answer itself | [§3](#3-binary-search-11-problems) |
+| "range sum" / "range XOR" / "count subarrays with sum K" | Prefix Sum + Hashmap | array + dict | Precompute cumulative → range query in O(1); hashmap counts complements | [§4](#4-prefix-sum--product-5-problems) |
+| "intervals overlap / merge / insert" | Merge Intervals | sort + sweep | Sort by start; sweep with running end → greedy merge | [§6](#6-merge-intervals-6-problems) |
+| "missing / duplicate in 1..n" | Cyclic Sort | array swap | Index is the key — put `nums[i]` at position `nums[i]-1` in O(n) | [§7](#7-cyclic-sort-5-problems) |
+| "all paths" / "connected components" / "tree traversal with state" | DFS | recursion/stack | Go deep, backtrack on dead ends — natural for trees and exhaustive exploration | [§10](#10-dfs-9-problems) |
+| "generate all subsets/permutations/combinations" | Backtracking | recursion | Choose → recurse → un-choose; explores the decision tree | [§11](#11-backtracking--subsetspermscombos-12-problems) |
+| "task/course ordering with dependencies" / "schedule with prerequisites" | Topological Sort | graph + queue | DAG + in-degree queue processes nodes only after all prereqs done | [§12](#12-topological-sort-5-problems) |
+| "friend circles" / "accounts merge" / "group dynamically" | Union Find | DSU | Near-O(1) union + find with path compression + rank | [§13](#13-union-find-6-problems) |
+| "max subarray sum" / "best time to buy/sell (one txn)" | Kadane's | running sum | Reset when running sum goes negative — greedy O(n) | [§17](#17-kadanes--subarray-4-problems) |
+| "choose items with limit (weight/cost) to max value" | 0/1 Knapsack DP | 2D dp | Each item: take or skip — classic decision DP | [§24](#24-dp-01-knapsack-8-problems) |
+| "unlimited copies of each item (coin change)" | Unbounded Knapsack DP | 1D dp | Same decision but item stays available → 1D roll | [§25](#25-dp-unbounded-knapsack-6-problems) |
+| "longest common / edit distance / regex match" | LCS Family DP | 2D dp | Compare `s1[i]` vs `s2[j]` — match or not → 2D grid | [§26](#26-dp-lcs-family-10-problems) |
+| "longest increasing subseq" / "Russian doll envelopes" | LIS DP | 1D dp / patience | O(n²) DP or O(n log n) patience sorting | [§27](#27-dp-lis-6-problems) |
+| "shortest path weighted" / "single source shortest" | Dijkstra | min-heap + graph | Greedy relax — works on non-negative weights | [§23](#23-graph-shortest-path-4-problems) |
+
+**Recognition drill (self-test):** Cover the "Pattern" column, read the trigger, say the pattern out loud. If you miss one, add a note in the Why column until it sticks.
+
+---
+
 ## 1. TWO POINTERS (12 problems)
 
 > **Recognition:** Sorted array/list + find pair/triplet. OR linked list + cycle/middle/kth.
