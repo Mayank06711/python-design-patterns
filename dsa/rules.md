@@ -4,6 +4,27 @@
 
 ---
 
+## Per-Session Problem Count (EFFECTIVE SESSION 18 — user directive Apr 12, 2026)
+
+**Every DSA session = 8 problems from the SAME pattern.** No cross-pattern mixing.
+
+### Distribution
+- **3 Easy** (build confidence, warm up the pattern)
+- **3 Medium** (apply the pattern to real problems)
+- **2 Hard** (push the pattern to its limit)
+
+### Rules
+1. **Single-pattern focus.** If we're on Mono Stack, all 8 are Mono Stack. If we're on Linked List, all 8 are Linked List. Never mix.
+2. **If a pattern has fewer than 3 strict "Easy" LC problems** (e.g., Mono Stack, DP, Graphs), take the easiest 3 available regardless of LC tag. Don't force the tag.
+3. **Hards can spill into the next session** as "previous pattern hards" if time runs out. They still count toward that pattern's bank.
+4. **Slot 1 (concept) and Slot 3 (graph micro) stay untouched** — the user said "can't leave those other things". Only Slot 2 volume changed.
+5. **Tracker must be updated after every problem.** Visibility = motivation.
+
+### Why this exists
+Before this rule, sessions had 2-3 cross-pattern problems, which felt slow and prevented pattern solidification. User said: "I don't feel like I didn't practice too much... I was not able to solve the easy problem". 8 same-pattern problems per session = enough reps to feel the pattern before moving on.
+
+---
+
 ## File Conventions
 - Language: **Both Python and C++** for every problem
 - Python: Solve locally with tests (scored) → paste on LeetCode

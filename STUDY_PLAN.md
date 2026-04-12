@@ -342,8 +342,11 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 ## Current Status
 
 **Phase: 1 — Closures/HOF/Decorators + Mixed DSA**
-**Next Session: 16 (continued — Slot 3 incomplete)**
-**Last completed: Session 16 partial (Apr 6, 2026) — Slots 1-2 done, Slot 3 started**
+**Next Session: 18**
+**Last completed: Session 17 complete (Apr 9 + Apr 11-12, 2026) — split across 3 days due to meetings**
+
+### NEW RULE (effective Session 18, per user directive Apr 12)
+**DSA Slot 2 = 8 problems from the SAME pattern only.** 3 Easy + 3 Medium + 2 Hard. Never mix patterns. See [dsa/rules.md](dsa/rules.md).
 
 ### What's Done So Far
 - Sessions 1-2: OOP foundations (20/25 done, 5 deferred to Phase 5)
@@ -358,7 +361,8 @@ This user works on **multiple laptops**. Each laptop may have a different AI. He
 - Session 14: Decorators with arguments PASSED (oral) + Trapping Rain Water REVISION CLEARED 8/10 + Binary Search 9/10 (Track A start) + Add Two Numbers 7/10 (Track B) + Graph #9 Connected Components PASSED
 - Session 15: Deco stacking + class deco 8.5/10 + Search Rotated Array 4/10 (revision due Apr 7) + Merge Two Sorted Lists 9/10 + Graph #10 Cycles PASSED
 - Session 16 (partial): @retry 7/10 + @memoize 8/10 + Monotonic Stack taught + Daily Temperatures 8/10 + Graph #11 DAG/Topo Sort STARTED (needs visual approach)
-- Graph micro-concepts #1-#10: PASSED, #11 in progress
+- Session 17 (split Apr 9 + Apr 11-12): MyDeque 7/10 + SWM optimal revision 7/10 CLEARED + Rotated Array revision 8/10 CLEARED + NGE I 7/10 + NGE II 9/10 + Graph #12 Weighted Graphs PASSED (guitar/Hz example)
+- Graph micro-concepts #1-#10, #12: PASSED, #11 still in progress
 
 ### DSA Track Status
 - **Track A:** Arrays done → Binary Search 2/10 (basic BS + rotated array) — Track A problem skipped this session due to time

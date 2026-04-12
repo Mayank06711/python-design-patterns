@@ -230,3 +230,17 @@
 
 **Graph Micro-concept #11 (Session 16, Slot 3 — STARTED, NOT COMPLETED):**
 - [ ] DAG + Topological Sort | Graph Theory | STARTED | User requested visual/diagram approach — text-only explanations not memorable enough. Course prerequisites example introduced but not completed. To be finished next session with diagrams.
+
+### Session 17 — Apr 9 + Apr 11-12, 2026 (split across 3 days due to meetings)
+
+**DSA — Stacks/Queues (Session 17, Track B):**
+- [x] MyDeque from Scratch | DLL | Advanced | **7/10** | 10/10. 4 attempts. Dummy head/tail doubly linked list pattern. Key learnings: standard insert-between-A-and-B beats shift-dummy trick; dummies never hold values; __iter__ off-by-one trap; __bool__ inversion. | **Def:** Doubly linked list with dummy head + tail sentinels. append/pop/peek both ends O(1) via direct pointers. Used as foundation for Sliding Window Max optimal.
+- [x] Sliding Window Maximum OPTIMAL REVISION (LC #239) | Monotonic Deque | Hard | **7/10** | ✅ CLEARED. 12/12 tests using own MyDeque. 4-step loop: evict dominated (back) → append → evict window (front) → record. Multiple approach bugs caught pre-coding. | **Def:** Monotonic deque holds candidate indices. Back = dominance eviction (nums[peek_right()] ≤ nums[i]). Front = window eviction (peek_left() ≤ i-k) + answer (nums[peek_left()] when i≥k-1). O(n) amortized.
+- [x] Next Greater Element I (LC #496) | Monotonic Stack | Easy | **7/10** | 10/10 tests. Mono stack on nums2 + value→next_greater dict + O(1) lookup for nums1. Hints needed for bridge concept. | **Def:** Decreasing mono stack: pop when nums2[i] > stack top, record nums2[i] as answer. Build value→answer dict. Query nums1 via dict lookup. O(n+m).
+- [x] Next Greater Element II (LC #503) | Monotonic Stack + Circular | Medium | **9/10** | 10/10 1st run. Best score this session. Circular twist: 2n loop, real=i%n, push only during first pass (i<n). Free hint on circular indexing (brand-new concept). | **Def:** Extend mono stack to circular array by iterating 2*n times. Real index = i%n. Push only during first pass; pop during both. O(n) time/space.
+
+**DSA — Binary Search (Session 17, Track A):**
+- [x] Search in Rotated Sorted Array REVISION (LC #33) | Binary Search | Medium | **8/10** (was 4/10) | ✅ CLEARED. 12/12 first run, ~7 min (under 8-min budget). Fresh file approach — no peeking at original. Latent bug: strict `<` in right-branch boundary check (should be `<=`). | **Def:** Rotated array has exactly 1 pivot; one half is always sorted. Left-sorted check: nums[left]<=nums[mid]. If target in sorted range, binary search there; else search other half. O(log n).
+
+**Graph Micro-concept #12:**
+- [x] Weighted Graphs | Graph Theory | PASSED | Weighted edge = edge carrying a number (cost/distance/time/price). Stored as adjacency list of (neighbor, weight) tuples. BFS insufficient for shortest path (fewer-hops ≠ shorter); needs Dijkstra (positive weights) or Bellman-Ford (with negatives). Own example: Music — nodes=notes, edges=transitions, weight=frequency change in Hz (G=196Hz, D=293Hz → edge weight 97). Valid unit + meaning. | **Def:** Weighted graph = edges carry numeric weight with unit/meaning. Adjacency list of (neighbor, weight) tuples. Dijkstra for positive weights, Bellman-Ford for negatives.
