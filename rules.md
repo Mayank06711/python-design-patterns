@@ -75,7 +75,7 @@ Each folder activates a different teaching persona. Stay in character.
 4. **Guide** — If stuck, give hints not answers. Use Socratic method (see Rule 4a and 4b).
 5. **Review** — After solution, discuss edge cases, time/space complexity
 6. **Connect** — "How is this similar to X we did before?"
-7. **Track** — UPDATE `things_completed_so_far.md` immediately
+7. **Track mentally** — Keep a running log in your head (score, hints, timestamps). Do NOT touch tracker files mid-session (see Rule 13).
 
 ## Rule 4a: Approach Evaluation (NEVER SKIP)
 
@@ -228,3 +228,43 @@ This applies to ALL sessions, ALL problems. It is a PERMANENT rule.
 - If user takes significantly longer, ASK why before noting — legitimate breaks (work, toilet, etc.) are excluded
 - Time is logged in tracker for self-improvement tracking, NOT used for scoring
 - Track attempt number in the exercise file (ATTEMPT: 1, 2, 3...)
+
+## Rule 13: Batch Logging at Session End Only (CRITICAL — effective Session 18)
+
+> User directive (Apr 12, 2026): "I have only one request to you can we do this logging things once a session completes because I don't feel like you keep starting this doing and I keep waiting so it takes time once we are done with some sessions we will do this"
+
+**Mid-session logging breaks flow. Batch everything at session end.**
+
+### During a session — ALLOWED:
+- Create exercise files (problem + tests)
+- Read files for context
+- Run code / tests
+- Give hints (Socratic)
+- Score problems VERBALLY (out loud to the user, not in files)
+- Update STARTED/COMPLETED timestamps INSIDE the exercise file (those are local, not tracker-wide)
+
+### During a session — NOT ALLOWED:
+- Touching `things_completed_so_far.md` (either master or DSA-specific)
+- Touching `dsa/revision_queue.md`
+- Touching `STUDY_PLAN.md` current status
+- Touching `dsa/PATTERN_REFERENCE.md`
+- `git add` / `git commit` / `git push`
+
+### At session END (when user says "done" / "stop" / "session complete" / similar):
+Do ALL of these in ONE batch:
+1. Update `dsa/things_completed_so_far.md` with every problem from the session
+2. Update master `things_completed_so_far.md` to mirror
+3. Update `dsa/revision_queue.md` — mark cleared revisions, add any problem ≤ 6/10 to the queue
+4. Update `STUDY_PLAN.md` current status (increment session number, update "Last completed")
+5. Update `dsa/PATTERN_REFERENCE.md` pattern coverage counts (if tracked)
+6. `git add` the specific changed files (never `git add -A`)
+7. ONE commit with a session summary message
+8. `git push` to the day-branch
+
+### Exceptions — log immediately when:
+- User EXPLICITLY says "log this" / "save this" / "update the tracker"
+- A revision is CLEARED (update revision queue immediately so it doesn't get forgotten — this is a ≤30-second edit)
+- The session spans multiple calendar days AND the user is about to stop for the day (not session end, but day end)
+
+### Why this rule exists
+Mid-session logging created a pattern where the user was waiting on me to update files between problems. That killed momentum. Interview prep needs rapid problem-to-problem flow, not admin between every question. Admin is an end-of-session activity.
